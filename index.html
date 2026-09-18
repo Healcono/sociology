@@ -1,0 +1,3137 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جامعه‌شناسی سلامت | پلتفرم آموزشی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   PALETTE — Deep Persian Navy · Crimson · Turquoise · Gold · Ivory
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --navy:#0b1425;
+  --navy-2:#111f38;
+  --navy-3:#1a2b4a;
+  --crimson:#a81f34;
+  --crimson-2:#7d1526;
+  --crimson-soft:rgba(168,31,52,.18);
+  --turquoise:#2eb8b0;
+  --turquoise-2:#1d8a84;
+  --turquoise-soft:rgba(46,184,176,.15);
+  --ivory:#f6efdd;
+  --ivory-2:#efe6cf;
+  --gold:#c9a227;
+  --gold-2:#e3c25a;
+  --gold-soft:rgba(201,162,39,.16);
+  --plaster:#e8dfc8;
+  --plaster-dark:#cfc4a8;
+
+  --glass-bg:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
+  --glass-brd:1px solid rgba(201,162,39,.28);
+  --glass-brd-2:1px solid rgba(46,184,176,.22);
+
+  --shadow-deep:0 24px 60px -20px rgba(0,0,0,.75);
+  --shadow-gold:0 0 0 1px rgba(201,162,39,.18),0 18px 50px -22px rgba(201,162,39,.35);
+
+  --radius:22px;
+  --radius-sm:14px;
+
+  --font:'Vazirmatn',system-ui,-apple-system,sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--navy);
+  color:var(--ivory);
+  line-height:1.95;
+  font-size:15.5px;
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* ═══════════ PERSIAN BACKGROUND — layered geometry ═══════════ */
+.bg-layer{position:fixed;inset:0;pointer-events:none;z-index:0}
+
+.bg-layer::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 90% 60% at 15% 0%,rgba(46,184,176,.10),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 90% 10%,rgba(168,31,52,.10),transparent 55%),
+    radial-gradient(ellipse 80% 60% at 50% 100%,rgba(201,162,39,.07),transparent 60%),
+    linear-gradient(180deg,#0b1425 0%,#101d33 40%,#0d1729 100%);
+}
+
+/* tile-inspired grid */
+.bg-layer::after{
+  content:'';position:absolute;inset:0;opacity:.35;
+  background-image:
+    linear-gradient(rgba(201,162,39,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,162,39,.045) 1px,transparent 1px),
+    linear-gradient(rgba(46,184,176,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(46,184,176,.03) 1px,transparent 1px);
+  background-size:120px 120px,120px 120px,30px 30px,30px 30px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 40%,#000 30%,transparent 100%);
+}
+
+/* Persian floral / carpet medallion pattern */
+.persian-pattern{
+  position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23c9a227' stroke-width='.7' opacity='.14'%3E%3Cpath d='M120 12 L128 40 L156 48 L128 56 L120 84 L112 56 L84 48 L112 40 Z'/%3E%3Cpath d='M120 156 L128 184 L156 192 L128 200 L120 228 L112 200 L84 192 L112 184 Z'/%3E%3Cpath d='M12 120 L40 128 L48 156 L56 128 L84 120 L56 112 L48 84 L40 112 Z'/%3E%3Cpath d='M156 120 L184 128 L192 156 L200 128 L228 120 L200 112 L192 84 L184 112 Z'/%3E%3Ccircle cx='120' cy='120' r='26'/%3E%3Ccircle cx='120' cy='120' r='38' stroke-dasharray='4 7'/%3E%3Cpath d='M120 82 C132 96 132 108 120 120 C108 108 108 96 120 82 Z'/%3E%3Cpath d='M120 158 C132 144 132 132 120 120 C108 132 108 144 120 158 Z'/%3E%3Cpath d='M82 120 C96 108 108 108 120 120 C108 132 96 132 82 120 Z'/%3E%3Cpath d='M158 120 C144 108 132 108 120 120 C132 132 144 132 158 120 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:240px 240px;
+}
+
+/* ═══════════ SCROLL PROGRESS ═══════════ */
+#scroll-bar{
+  position:fixed;top:0;right:0;height:3px;width:0%;z-index:999;
+  background:linear-gradient(90deg,var(--crimson),var(--gold),var(--turquoise));
+  box-shadow:0 0 12px rgba(201,162,39,.6);
+  transition:width .12s linear;
+}
+
+/* ═══════════ HEADER ═══════════ */
+header{
+  position:relative;z-index:5;
+  padding:80px 24px 56px;
+  text-align:center;
+  overflow:hidden;
+}
+header .crest{
+  width:96px;height:96px;margin:0 auto 26px;
+  position:relative;
+}
+header .crest svg{width:100%;height:100%;filter:drop-shadow(0 6px 22px rgba(201,162,39,.4))}
+
+header .ornament-line{
+  width:min(560px,86%);height:1px;margin:0 auto 26px;
+  background:linear-gradient(90deg,transparent,rgba(201,162,39,.6),var(--turquoise),rgba(201,162,39,.6),transparent);
+  position:relative;
+}
+header .ornament-line::before,
+header .ornament-line::after{
+  content:'◆';position:absolute;top:50%;transform:translateY(-50%);
+  color:var(--gold);font-size:9px;background:var(--navy);padding:0 8px;
+}
+header .ornament-line::before{right:calc(50% - 8px)}
+header .ornament-line::after{display:none}
+
+header h1{
+  font-size:clamp(2rem,5.4vw,3.4rem);
+  font-weight:800;
+  letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--ivory) 0%,var(--gold-2) 45%,var(--turquoise) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1.35;
+  margin-bottom:14px;
+}
+header .subtitle{
+  color:rgba(246,239,221,.68);
+  font-size:clamp(.95rem,2vw,1.15rem);
+  font-weight:300;
+  max-width:680px;margin:0 auto 8px;
+}
+header .subtitle b{color:var(--turquoise);font-weight:600}
+header .meta-pills{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:30px;
+}
+.pill{
+  padding:7px 18px;border-radius:100px;font-size:.78rem;font-weight:500;
+  background:var(--glass-bg);border:var(--glass-brd);
+  backdrop-filter:blur(14px);color:var(--gold-2);
+  letter-spacing:.3px;
+}
+.pill.tq{border-color:rgba(46,184,176,.35);color:var(--turquoise)}
+.pill.cr{border-color:rgba(168,31,52,.4);color:#e88a9a}
+
+/* ═══════════ NAV ═══════════ */
+nav{
+  position:sticky;top:0;z-index:100;
+  padding:12px 20px;
+  background:rgba(11,20,37,.72);
+  backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border-bottom:1px solid rgba(201,162,39,.16);
+  display:flex;justify-content:center;gap:6px;flex-wrap:wrap;
+}
+nav a{
+  color:rgba(246,239,221,.75);text-decoration:none;
+  font-size:.82rem;font-weight:500;padding:8px 16px;border-radius:100px;
+  transition:.3s;border:1px solid transparent;white-space:nowrap;
+}
+nav a:hover,nav a.active{
+  color:var(--gold-2);background:var(--gold-soft);
+  border-color:rgba(201,162,39,.3);
+}
+nav a.tq:hover{color:var(--turquoise);background:var(--turquoise-soft);border-color:rgba(46,184,176,.3)}
+
+/* ═══════════ MAIN ═══════════ */
+main{position:relative;z-index:5;max-width:1080px;margin:0 auto;padding:0 20px 100px}
+
+.section-head{
+  display:flex;align-items:center;gap:18px;margin:70px 0 34px;
+}
+.section-head .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,162,39,.45),transparent)}
+.section-head h2{
+  font-size:clamp(1.3rem,3.2vw,1.9rem);font-weight:700;
+  color:var(--ivory);white-space:nowrap;
+  display:flex;align-items:center;gap:12px;
+}
+.section-head h2 .dot{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--turquoise);box-shadow:0 0 14px var(--turquoise);
+  flex-shrink:0;
+}
+.section-head h2 .dot.gold{background:var(--gold);box-shadow:0 0 14px var(--gold)}
+.section-head h2 .dot.crimson{background:var(--crimson);box-shadow:0 0 14px var(--crimson)}
+
+/* ═══════════ LESSON ACCORDION ═══════════ */
+.lessons{display:flex;flex-direction:column;gap:14px}
+
+.lesson{
+  border-radius:var(--radius);
+  background:var(--glass-bg);
+  border:var(--glass-brd);
+  backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  overflow:hidden;
+  transition:box-shadow .45s,border-color .45s,transform .45s;
+  position:relative;
+}
+.lesson::before{
+  content:'';position:absolute;top:0;right:0;width:3px;height:100%;
+  background:linear-gradient(180deg,var(--gold),var(--turquoise),var(--crimson));
+  opacity:.55;transition:.4s;
+}
+.lesson:hover{border-color:rgba(201,162,39,.45);box-shadow:var(--shadow-gold)}
+.lesson.open{border-color:rgba(46,184,176,.5);box-shadow:0 0 0 1px rgba(46,184,176,.22),0 26px 60px -26px rgba(46,184,176,.35)}
+.lesson.open::before{opacity:1;width:4px}
+
+.lesson-head{
+  width:100%;background:none;border:none;cursor:pointer;
+  padding:22px 26px 22px 22px;
+  display:flex;align-items:center;gap:20px;text-align:right;
+  font-family:var(--font);color:inherit;
+  transition:background .3s;
+}
+.lesson-head:hover{background:rgba(201,162,39,.05)}
+
+.lesson-num{
+  flex-shrink:0;width:52px;height:52px;border-radius:16px;
+  display:grid;place-items:center;
+  font-weight:800;font-size:1.05rem;
+  background:linear-gradient(145deg,rgba(201,162,39,.18),rgba(168,31,52,.12));
+  border:1px solid rgba(201,162,39,.4);
+  color:var(--gold-2);
+  position:relative;
+  transition:.4s;
+}
+.lesson.open .lesson-num{
+  background:linear-gradient(145deg,rgba(46,184,176,.25),rgba(201,162,39,.12));
+  border-color:rgba(46,184,176,.55);color:var(--turquoise);
+  box-shadow:0 0 22px rgba(46,184,176,.3);
+}
+
+.lesson-titles{flex:1;min-width:0}
+.lesson-titles h3{
+  font-size:1.03rem;font-weight:600;color:var(--ivory);
+  margin-bottom:4px;transition:color .3s;
+}
+.lesson.open .lesson-titles h3{color:var(--gold-2)}
+.lesson-meta{
+  font-size:.74rem;color:rgba(246,239,221,.5);font-weight:400;
+  display:flex;align-items:center;gap:8px;
+}
+.lesson-meta .sep{width:4px;height:4px;border-radius:50%;background:var(--turquoise);opacity:.6}
+
+.lesson-toggle{
+  flex-shrink:0;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(201,162,39,.35);
+  display:grid;place-items:center;color:var(--gold);
+  font-size:1.2rem;font-weight:300;transition:.45s;
+  background:rgba(201,162,39,.06);
+}
+.lesson.open .lesson-toggle{
+  transform:rotate(135deg);
+  background:rgba(46,184,176,.15);border-color:var(--turquoise);color:var(--turquoise);
+}
+
+.lesson-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .65s cubic-bezier(.4,0,.2,1);
+}
+.lesson-inner{
+  padding:0 26px 30px 22px;
+  border-top:1px solid rgba(201,162,39,.12);
+  margin:0 0 0 0;padding-top:24px;
+}
+
+/* content typography */
+.lesson-inner h4{
+  font-size:.95rem;font-weight:700;color:var(--turquoise);
+  margin:22px 0 10px;display:flex;align-items:center;gap:9px;
+}
+.lesson-inner h4::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 8px var(--gold);flex-shrink:0;
+}
+.lesson-inner p{
+  color:rgba(246,239,221,.82);font-size:.9rem;margin-bottom:12px;
+  text-align:justify;
+}
+.lesson-inner ul{list-style:none;margin:10px 0 16px;padding:0}
+.lesson-inner ul li{
+  position:relative;padding-right:22px;margin-bottom:8px;
+  font-size:.88rem;color:rgba(246,239,221,.78);
+}
+.lesson-inner ul li::before{
+  content:'◆';position:absolute;right:0;top:2px;
+  color:var(--gold);font-size:.6rem;
+}
+.lesson-inner strong{color:var(--gold-2);font-weight:600}
+.lesson-inner em{color:var(--turquoise);font-style:normal;font-weight:500}
+
+.callout{
+  margin:18px 0;padding:18px 20px;border-radius:var(--radius-sm);
+  background:linear-gradient(135deg,rgba(46,184,176,.09),rgba(201,162,39,.05));
+  border-right:3px solid var(--turquoise);
+  font-size:.86rem;color:rgba(246,239,221,.85);
+}
+.callout .callout-title{
+  display:block;font-weight:700;color:var(--turquoise);
+  margin-bottom:8px;font-size:.82rem;
+  display:flex;align-items:center;gap:8px;
+}
+.callout .callout-title::before{content:'❖';color:var(--gold)}
+
+.callout.gold{
+  background:linear-gradient(135deg,rgba(201,162,39,.1),rgba(168,31,52,.05));
+  border-right-color:var(--gold);
+}
+.callout.gold .callout-title{color:var(--gold-2)}
+
+.objectives{
+  background:rgba(168,31,52,.08);
+  border:1px solid rgba(168,31,52,.25);
+  border-radius:var(--radius-sm);
+  padding:16px 20px;margin-bottom:18px;
+}
+.objectives .obj-title{
+  font-size:.78rem;font-weight:700;color:#e88a9a;
+  margin-bottom:10px;display:flex;align-items:center;gap:8px;
+}
+.objectives .obj-title::before{content:'◈'}
+.objectives ul li{font-size:.84rem;margin-bottom:6px}
+.objectives ul li::before{color:var(--crimson);content:'›';font-size:1rem;font-weight:700}
+
+/* ═══════════ QUIZ ═══════════ */
+.quiz-intro{
+  text-align:center;margin-bottom:40px;
+  padding:34px 28px;border-radius:var(--radius);
+  background:var(--glass-bg);border:var(--glass-brd);
+  backdrop-filter:blur(20px);
+}
+.quiz-intro h3{font-size:1.25rem;color:var(--gold-2);margin-bottom:10px;font-weight:700}
+.quiz-intro p{color:rgba(246,239,221,.7);font-size:.88rem;max-width:560px;margin:0 auto 20px}
+
+.score-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:10px 24px;border-radius:100px;
+  background:linear-gradient(135deg,rgba(201,162,39,.15),rgba(46,184,176,.1));
+  border:1px solid rgba(201,162,39,.35);
+  font-weight:700;color:var(--ivory);font-size:.9rem;
+}
+.score-badge .num{color:var(--gold-2);font-size:1.15rem}
+
+.quiz-list{display:flex;flex-direction:column;gap:16px;counter-reset:q}
+
+.q-card{
+  border-radius:var(--radius);
+  background:var(--glass-bg);
+  border:var(--glass-brd);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  padding:24px 26px;
+  transition:.4s;
+}
+.q-card.answered{border-color:rgba(46,184,176,.4)}
+.q-card.correct{border-color:rgba(46,184,176,.55);box-shadow:0 0 0 1px rgba(46,184,176,.2)}
+.q-card.wrong{border-color:rgba(168,31,52,.55);box-shadow:0 0 0 1px rgba(168,31,52,.2)}
+
+.q-text{
+  font-size:.93rem;font-weight:600;color:var(--ivory);
+  margin-bottom:16px;line-height:1.85;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.q-text .q-num{
+  flex-shrink:0;width:30px;height:30px;border-radius:9px;
+  display:grid;place-items:center;font-size:.78rem;font-weight:800;
+  background:rgba(201,162,39,.14);border:1px solid rgba(201,162,39,.35);
+  color:var(--gold-2);
+}
+
+.q-options{display:flex;flex-direction:column;gap:9px}
+.q-opt{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 16px;border-radius:12px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(246,239,221,.08);
+  cursor:pointer;transition:.25s;
+  font-size:.86rem;color:rgba(246,239,221,.82);
+  line-height:1.7;
+}
+.q-opt:hover{
+  background:rgba(201,162,39,.07);
+  border-color:rgba(201,162,39,.28);
+}
+.q-opt input{display:none}
+.q-opt .marker{
+  flex-shrink:0;width:22px;height:22px;border-radius:50%;
+  border:1.5px solid rgba(201,162,39,.4);
+  display:grid;place-items:center;font-size:.68rem;font-weight:700;
+  color:var(--gold-2);margin-top:2px;transition:.3s;
+  background:rgba(201,162,39,.06);
+}
+.q-opt.selected{
+  background:rgba(46,184,176,.1);
+  border-color:rgba(46,184,176,.5);
+}
+.q-opt.selected .marker{
+  background:var(--turquoise);color:var(--navy);
+  border-color:var(--turquoise);
+}
+.q-opt.correct-ans{
+  background:rgba(46,184,176,.16)!important;
+  border-color:var(--turquoise)!important;
+}
+.q-opt.correct-ans .marker{
+  background:var(--turquoise);color:var(--navy);border-color:var(--turquoise);
+}
+.q-opt.wrong-ans{
+  background:rgba(168,31,52,.16)!important;
+  border-color:var(--crimson)!important;
+}
+.q-opt.wrong-ans .marker{
+  background:var(--crimson);color:var(--ivory);border-color:var(--crimson);
+}
+.q-opt.disabled{pointer-events:none;opacity:.75}
+
+.q-feedback{
+  margin-top:16px;padding:14px 18px;border-radius:12px;
+  font-size:.83rem;line-height:1.85;
+  display:none;animation:fadeUp .4s ease;
+}
+.q-feedback.show{display:block}
+.q-feedback.ok{
+  background:rgba(46,184,176,.1);
+  border-right:3px solid var(--turquoise);
+  color:rgba(246,239,221,.88);
+}
+.q-feedback.no{
+  background:rgba(168,31,52,.1);
+  border-right:3px solid var(--crimson);
+  color:rgba(246,239,221,.88);
+}
+.q-feedback .fb-title{font-weight:700;display:block;margin-bottom:6px}
+.q-feedback.ok .fb-title{color:var(--turquoise)}
+.q-feedback.no .fb-title{color:#e88a9a}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══════════ FOOTER ═══════════ */
+footer{
+  position:relative;z-index:5;
+  text-align:center;padding:60px 24px 50px;
+  border-top:1px solid rgba(201,162,39,.14);
+  margin-top:60px;
+}
+footer .f-ornament{
+  width:120px;height:20px;margin:0 auto 22px;
+  background:
+    radial-gradient(circle at 50% 50%,var(--gold) 1.5px,transparent 2px),
+    radial-gradient(circle at 20% 50%,var(--turquoise) 1px,transparent 1.5px),
+    radial-gradient(circle at 80% 50%,var(--crimson) 1px,transparent 1.5px);
+  background-size:40px 20px;background-repeat:repeat-x;
+  opacity:.6;
+}
+footer p{font-size:.78rem;color:rgba(246,239,221,.4);line-height:2}
+footer p b{color:var(--gold-2);font-weight:600}
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media(max-width:640px){
+  header{padding:56px 18px 40px}
+  .lesson-head{padding:18px 18px 18px 16px;gap:14px}
+  .lesson-num{width:44px;height:44px;border-radius:13px;font-size:.9rem}
+  .lesson-titles h3{font-size:.92rem}
+  .lesson-inner{padding:0 18px 24px 16px;padding-top:20px}
+  .q-card{padding:18px}
+  .section-head h2{font-size:1.1rem}
+  nav{padding:10px 12px;gap:4px}
+  nav a{font-size:.72rem;padding:6px 11px}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="persian-pattern"></div>
+<div id="scroll-bar"></div>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header>
+  <div class="crest">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#c9a227"/>
+          <stop offset="1" stop-color="#2eb8b0"/>
+        </linearGradient>
+      </defs>
+      <path d="M50 6 C58 22 58 32 50 44 C42 32 42 22 50 6 Z" stroke="url(#g1)" stroke-width="1.6" fill="none"/>
+      <path d="M50 94 C42 78 42 68 50 56 C58 68 58 78 50 94 Z" stroke="url(#g1)" stroke-width="1.6" fill="none"/>
+      <path d="M6 50 C22 42 32 42 44 50 C32 58 22 58 6 50 Z" stroke="url(#g1)" stroke-width="1.6" fill="none"/>
+      <path d="M94 50 C78 58 68 58 56 50 C68 42 78 42 94 50 Z" stroke="url(#g1)" stroke-width="1.6" fill="none"/>
+      <circle cx="50" cy="50" r="9" stroke="#c9a227" stroke-width="1.4" fill="rgba(201,162,39,.12)"/>
+      <circle cx="50" cy="50" r="16" stroke="#2eb8b0" stroke-width=".8" stroke-dasharray="3 5" opacity=".7"/>
+      <circle cx="50" cy="50" r="24" stroke="#a81f34" stroke-width=".6" opacity=".5"/>
+    </svg>
+  </div>
+  <div class="ornament-line"></div>
+  <h1>جامعه‌شناسی سلامت</h1>
+  <p class="subtitle">جزوه درسی ویژه دانشجویان <b>آموزش بهداشت</b> — مقطع کارشناسی ارشد</p>
+  <p class="subtitle">دوره آموزشی <b>۱۷ جلسه‌ای</b> شامل اهداف آموزشی، متن علمی-کاربردی، مثال‌های واقعی و آزمون خودارزیابی</p>
+  <div class="meta-pills">
+    <span class="pill">۱۷ جلسه</span>
+    <span class="pill tq">۴۰ سوال تستی</span>
+    <span class="pill cr">بازخورد فوری</span>
+    <span class="pill">طراحی ایرانی</span>
+  </div>
+</header>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <a href="#lessons" class="active">جلسات آموزشی</a>
+  <a href="#quiz" class="tq">آزمون ارزیابی</a>
+  <a href="#lessons">مفهوم سلامت اجتماعی</a>
+  <a href="#lessons">نظریه‌ها</a>
+  <a href="#lessons">نظام سلامت</a>
+</nav>
+
+<main>
+
+<!-- ═══════════ LESSONS ═══════════ -->
+<section id="lessons">
+  <div class="section-head">
+    <span class="line"></span>
+    <h2><span class="dot gold"></span> جلسات آموزشی</h2>
+    <span class="line"></span>
+  </div>
+
+  <div class="lessons" id="lessonsContainer">
+
+    <!-- 01 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۰۱</span>
+        <div class="lesson-titles">
+          <h3>مفهوم و جایگاه سلامت اجتماعی</h3>
+          <span class="lesson-meta"><span>فصل یکم</span><span class="sep"></span><span>دروس ۱ و ۲</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>تبیین تعریف سلامت اجتماعی و تمایز آن از سلامت جسمی و روانی</li>
+              <li>آشنایی با ابعاد پنج‌گانه سلامت اجتماعی از دیدگاه کییز</li>
+              <li>شناخت عوامل تعیین‌کننده اجتماعی سلامت (SDH) و مدل دالگرن-وایت‌هد</li>
+              <li>توانایی تحلیل یک مسئله سلامت جامعه با رویکرد جامعه‌شناختی</li>
+            </ul>
+          </div>
+
+          <h4>۱. مفهوم و جایگاه سلامت اجتماعی</h4>
+          <p>سازمان بهداشت جهانی در سال ۱۹۴۸ سلامت را «حالتی از رفاه کامل جسمی، روانی و اجتماعی و نه صرفاً فقدان بیماری یا نقص عضو» تعریف کرد. این تعریف نخستین بار بُعد اجتماعی را به‌صورت رسمی در کنار ابعاد زیستی و روانی قرار داد و زمینه‌ساز شکل‌گیری الگوی زیستی-روانی-اجتماعی (Bio-Psycho-Social Model) شد که در برابر الگوی زیست‌پزشکی سنتی (Biomedical Model) علم کرد.</p>
+          <p>سلامت اجتماعی به توانایی فرد در ایفای نقش‌های اجتماعی مورد انتظار، برقراری روابط رضایت‌بخش با دیگران، سازگاری با هنجارها و ارزش‌های جامعه و مشارکت مؤثر در زندگی جمعی اشاره دارد.</p>
+
+          <h4>ابعاد پنج‌گانه سلامت اجتماعی از دیدگاه کییز</h4>
+          <ul>
+            <li><strong>انسجام اجتماعی</strong> (Social Coherence): درک فرد از جهان اجتماعی به‌عنوان امری معنادار و قابل فهم.</li>
+            <li><strong>پذیرش اجتماعی</strong> (Social Acceptance): نگرش مثبت به دیگران و اعتماد به طبیعت انسان‌ها.</li>
+            <li><strong>مشارکت اجتماعی</strong> (Social Contribution): احساس فرد مبنی بر اینکه عضوی مفید برای جامعه است.</li>
+            <li><strong>شکوفایی اجتماعی</strong> (Social Actualization): باور به رشد و بهبود مستمر جامعه و نهادها.</li>
+            <li><strong>انطباق اجتماعی</strong> (Social Integration): احساس تعلق و پیوند با جامعه و گروه‌های مرجع.</li>
+          </ul>
+
+          <div class="callout">
+            <span class="callout-title">تفاوت کلیدی سلامت اجتماعی با سلامت روانی</span>
+            سلامت روانی عمدتاً به تجربه درونی فرد (شادکامی، اضطراب، رضایت از زندگی) می‌پردازد، حال آنکه سلامت اجتماعی رابطه فرد را با ساختار و کارکردهای جامعه می‌سنجد. فردی می‌تواند از نظر روانی نسبتاً سالم باشد اما به دلیل انزوا، طرد یا بی‌اعتمادی نسبت به نهادها، از سلامت اجتماعی پایینی برخوردار باشد.
+          </div>
+
+          <h4>۲. عوامل تعیین‌کننده اجتماعی سلامت (SDH)</h4>
+          <p>به شرایطی گفته می‌شود که افراد در آن‌ها متولد می‌شوند، رشد می‌کنند، زندگی می‌کنند، کار می‌کنند و سالخورده می‌شوند و این شرایط عمدتاً توسط توزیع قدرت، درآمد و منابع در سطوح جهانی، ملی و محلی شکل می‌گیرد. مدل معروف «رنگین کمان» دال گرن و وایت‌هد (۱۹۹۱) این عوامل را در لایه‌های تودرتو نشان می‌دهد:</p>
+          <ul>
+            <li><strong>هسته مرکزی:</strong> عوامل زیستی ثابت مانند سن، جنس و وراثت</li>
+            <li><strong>لایه اول:</strong> سبک زندگی فردی (تغذیه، فعالیت بدنی، مصرف دخانیات)</li>
+            <li><strong>لایه دوم:</strong> شبکه‌های اجتماعی و حمایت اجتماعی (خانواده، دوستان، همسایگان)</li>
+            <li><strong>لایه سوم:</strong> شرایط زندگی و کار شامل مسکن، اشتغال، آموزش، دسترسی به خدمات بهداشتی-درمانی و آب و فاضلاب</li>
+            <li><strong>لایه بیرونی:</strong> شرایط کلان اقتصادی، فرهنگی و محیطی جامعه</li>
+          </ul>
+
+          <div class="callout gold">
+            <span class="callout-title">مثال کاربردی</span>
+            مطالعه معروف «شهر گلاسکو» در اسکاتلند نشان داد فاصله جغرافیایی تنها چند کیلومتر بین محله «کالتون» (فقیرنشین) و «لنزی» (مرفه) با اختلاف نزدیک به ۱۴ سال در امید به زندگی مردان همراه است؛ این تفاوت را نمی‌توان با عوامل ژنتیکی یا دسترسی صرف به پزشک توضیح داد، بلکه باید آن را در تفاوت شرایط مسکن، اشتغال، تغذیه، آلودگی و انسجام اجتماعی جست‌وجو کرد.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۰۲</span>
+        <div class="lesson-titles">
+          <h3>شاخص‌ها و معیارهای سلامت اجتماعی و رویکردهای نظری</h3>
+          <span class="lesson-meta"><span>فصل یکم</span><span class="sep"></span><span>دروس ۳ و ۴</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>آشنایی با شاخص‌های کمّی و کیفی سنجش سلامت اجتماعی</li>
+              <li>توانایی تمایز بین شاخص‌های عینی و ذهنی</li>
+              <li>آشنایی با رویکردهای نظری اصلی (کارکردگرایی، تضادگرایی، تفسیری)</li>
+              <li>کاربست شاخص‌ها در ارزیابی برنامه‌های سلامت جامعه</li>
+            </ul>
+          </div>
+
+          <h4>۱. شاخص‌ها و معیارهای سلامت اجتماعی</h4>
+          <p><strong>الف) شاخص‌های عینی (Objective):</strong> داده‌های قابل اندازه‌گیری مستقل از قضاوت فرد، مانند نرخ مرگ‌ومیر، امید به زندگی، نرخ بیکاری، ضریب جینی، نرخ جرم و بزهکاری، میزان طلاق، دسترسی به مسکن و شاخص توسعه انسانی (HDI).</p>
+          <p><strong>ب) شاخص‌های ذهنی (Subjective):</strong> ادراک و ارزیابی خود افراد از کیفیت روابط اجتماعی و پیوند با جامعه، مانند مقیاس سلامت اجتماعی کییز (SWB Scale) و شاخص‌های سرمایه اجتماعی.</p>
+
+          <h4>۲. رویکردهای نظری در مطالعه سلامت اجتماعی</h4>
+          <ul>
+            <li><strong>کارکردگرایی (Functionalism):</strong> سلامت را پیش‌شرط عملکرد صحیح نظام اجتماعی می‌داند؛ تالکوت پارسونز با مفهوم «نقش بیمار» (Sick Role) نشان داد جامعه از فرد بیمار انتظار دارد نقش‌های عادی خود را موقتاً کنار بگذارد اما در پی درمان باشد.</li>
+            <li><strong>تضادگرایی (Conflict Theory):</strong> سلامت و بیماری را محصول نابرابری در توزیع قدرت و منابع اقتصادی می‌داند؛ صنعت پزشکی و دارویی می‌تواند در خدمت منافع طبقاتی خاص عمل کند.</li>
+            <li><strong>تفسیری/کنش متقابل نمادین (Symbolic Interactionism):</strong> بر معنای ذهنی بیماری، برچسب اجتماعی (Stigma) و نحوه ساخت اجتماعی مفهوم «بیمار بودن» تمرکز دارد.</li>
+          </ul>
+
+          <div class="callout">
+            <span class="callout-title">مثال کاربردی</span>
+            در ارزیابی یک برنامه ملی «شهر سالم»، تنها گزارش کاهش نرخ مرگ‌ومیر (شاخص عینی) کافی نیست؛ باید از ساکنان پرسیده شود که آیا احساس تعلق بیشتری به محله خود دارند یا اعتمادشان به نهادهای محلی افزایش یافته. در برخی طرح‌های بازآفرینی شهری، با وجود بهبود زیرساخت فیزیکی، ساکنان قدیمی به دلیل گران شدن مسکن و مهاجرت اجباری، احساس از خودبیگانگی و کاهش انسجام اجتماعی کرده‌اند.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۰۳</span>
+        <div class="lesson-titles">
+          <h3>تحولات تاریخی-تطبیقی فرهنگ و نهادهای سلامت و درمان</h3>
+          <span class="lesson-meta"><span>فصل دوم</span><span class="sep"></span><span>دروس ۵ و ۶</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>آشنایی با سیر تحول تاریخی نهادهای درمانی از جامعه سنتی تا مدرن</li>
+              <li>توانایی مقایسه تطبیقی نظام‌های سلامت در فرهنگ‌های مختلف</li>
+              <li>تحلیل تأثیر تحولات فرهنگی بر ساختار درمان</li>
+              <li>شناخت رابطه دوسویه فرهنگ و نظام پزشکی</li>
+            </ul>
+          </div>
+
+          <h4>۱. سیر تطور نهادهای سلامت و درمان</h4>
+          <p>در جوامع سنتی، درمان عمدتاً در چارچوب نظام‌های اعتقادی-مذهبی و از طریق شفاهندگان بومی (طبیبان سنتی، رمالان، روحانیون) انجام می‌شد و بیماری اغلب تبیینی ماوراءالطبیعی داشت. با گذار به دوران مدرن، فرایند «پزشکی‌شدن» (Medicalization) رخ داد که طی آن تبیین و کنترل رفتارها و مسائل انسانی به‌تدریج از حوزه دین و اخلاق به حوزه علم پزشکی منتقل شد.</p>
+          <p>موج بعدی، شکل‌گیری نهادهای رسمی سلامت بود: بیمارستان‌های عمومی، دانشکده‌های پزشکی مدرن، نظام‌های بیمه اجتماعی (نخستین‌بار در آلمان بیسمارک در دهه ۱۸۸۰) و در نهایت نظام‌های پزشکی ملی مانند NHS بریتانیا در ۱۹۴۸.</p>
+
+          <h4>۲. مطالعه تطبیقی و اثرات تغییرات فرهنگی</h4>
+          <ul>
+            <li><strong>چین:</strong> طب سنتی چینی (TCM) همچنان در کنار پزشکی مدرن رسمیت دارد و در نظام سلامت دولتی ادغام شده است.</li>
+            <li><strong>اسکاندیناوی:</strong> فرهنگ برابری‌خواهانه به شکل‌گیری نظام‌های سلامت همگانی با پوشش جهانی انجامیده است.</li>
+            <li><strong>ایالات متحده:</strong> فرهنگ فردگرایی و بازار آزاد، نظام سلامت مبتنی بر بیمه خصوصی را تقویت کرده است.</li>
+          </ul>
+
+          <div class="callout gold">
+            <span class="callout-title">مثال کاربردی — تغییر الگوی زایمان در ایران</span>
+            زایمان که پیش‌تر عمدتاً در منزل و با کمک ماما انجام می‌شد، به‌تدریج به بیمارستان و مطب پزشک متخصص منتقل شد؛ هم‌زمان در سال‌های اخیر با افزایش آگاهی و نقد رویکرد کاملاً پزشکی، جنبش «زایمان طبیعی» و بازگشت نسبی به نقش ماما به‌عنوان واکنشی فرهنگی به پزشکی‌شدن افراطی شکل گرفته است.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۰۴</span>
+        <div class="lesson-titles">
+          <h3>نظریه‌ها و الگوهای توسعه سیستم‌های سلامت و درمان</h3>
+          <span class="lesson-meta"><span>فصل دوم</span><span class="sep"></span><span>درس ۷</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>آشنایی با الگوهای اصلی طراحی نظام‌های سلامت در جهان</li>
+              <li>توانایی مقایسه الگوی بیوریج، بیسمارک، بازار آزاد و ملی-یکپارچه</li>
+              <li>شناخت معیارهای ارزیابی عملکرد نظام‌های سلامت (WHO Health Systems Framework)</li>
+              <li>تحلیل جایگاه نظام سلامت ایران در این طبقه‌بندی</li>
+            </ul>
+          </div>
+
+          <h4>۱. الگوهای کلاسیک نظام‌های سلامت</h4>
+          <ul>
+            <li><strong>الگوی بیوریج (Beveridge):</strong> تأمین مالی از محل مالیات عمومی، ارائه خدمات عمدتاً توسط دولت، پوشش همگانی رایگان. نمونه: NHS بریتانیا، اسپانیا، اسکاندیناوی.</li>
+            <li><strong>الگوی بیسمارک (Bismarck):</strong> تأمین مالی از طریق بیمه‌های اجتماعی اجباری با مشارکت کارفرما و کارگر، ارائه‌دهندگان می‌توانند خصوصی باشند. نمونه: آلمان، فرانسه، ژاپن.</li>
+            <li><strong>الگوی بیمه ملی (National Health Insurance):</strong> بیمه‌گر واحد دولتی، ارائه‌دهندگان خصوصی. نمونه: کانادا، کره جنوبی.</li>
+            <li><strong>الگوی بازار آزاد (Out-of-Pocket):</strong> هزینه درمان عمدتاً مستقیماً توسط بیمار پرداخت می‌شود؛ در کشورهای کم‌درآمد غالب است و نابرابری دسترسی را تشدید می‌کند.</li>
+          </ul>
+
+          <h4>۲. چارچوب ارزیابی نظام سلامت WHO</h4>
+          <p>سازمان بهداشت جهانی نظام سلامت را متشکل از شش «بلوک ساختمانی» (Building Blocks) می‌داند: ۱) ارائه خدمات ۲) نیروی انسانی سلامت ۳) نظام اطلاعات سلامت ۴) دسترسی به داروها و فناوری‌های ضروری ۵) تأمین مالی سلامت ۶) رهبری و حکمرانی. عملکرد مطلوب هر شش بلوک برای دستیابی به «پوشش همگانی سلامت» (Universal Health Coverage) ضروری است.</p>
+          <p>نظام سلامت ایران ترکیبی از عناصر بیسمارکی (بیمه‌های اجتماعی نظیر تأمین اجتماعی) و بیوریجی (شبکه بهداشتی درمانی دولتی، به‌ویژه در مناطق روستایی از طریق خانه‌های بهداشت) است؛ طرح تحول نظام سلامت (از ۱۳۹۳) با هدف کاهش پرداخت از جیب مردم و افزایش پوشش بیمه‌ای اجرا شد.</p>
+
+          <div class="callout">
+            <span class="callout-title">مثال کاربردی</span>
+            مقایسه یک بیمار مبتلا به دیابت در سه کشور: در بریتانیا (الگوی بیوریج) بدون پرداخت مستقیم قابل‌توجه در NHS ویزیت می‌شود؛ در آلمان (الگوی بیسمارک) هزینه از طریق بیمه اجباری تأمین می‌شود اما می‌تواند پزشک خصوصی خود را انتخاب کند؛ در کشوری فاقد پوشش بیمه‌ای فراگیر، همان بیمار ممکن است به دلیل هزینه بالای انسولین، درمان را نیمه‌کاره رها کند.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۰۵</span>
+        <div class="lesson-titles">
+          <h3>کارکردگرایی پارسونز و نقش بیمار</h3>
+          <span class="lesson-meta"><span>فصل پنجم</span><span class="sep"></span><span>دروس ۱۷ و ۱۸</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>تبیین عمیق‌تر نظریه کارکردگرایی پارسونز و مفهوم نقش بیمار</li>
+              <li>آشنایی با نقد رابرت مرتون بر کارکردگرایی ساده</li>
+              <li>تبیین نظریه کنش متقابل نمادین و کاربرد آن در تحلیل برچسب‌زنی بیماری</li>
+              <li>توانایی تحلیل یک تجربه بیماری با استفاده از دو رویکرد فوق</li>
+            </ul>
+          </div>
+
+          <h4>۱. کارکردگرایی در حوزه سلامت</h4>
+          <p>تالکوت پارسونز (۱۹۵۱) در کتاب «نظام اجتماعی» بیماری را نوعی «انحراف اجتماعی» تلقی کرد که در صورت عدم مدیریت می‌تواند کارکرد نظام اجتماعی را مختل کند. او مفهوم «نقش بیمار» (Sick Role) را با چهار مؤلفه صورت‌بندی کرد:</p>
+          <ul>
+            <li>بیمار از مسئولیت نقش‌های عادی معاف است</li>
+            <li>بیمار مسئول ابتلای خود به بیماری تلقی نمی‌شود</li>
+            <li>بیمار موظف است بخواهد بهبود یابد</li>
+            <li>بیمار موظف است به دنبال کمک تخصصی (پزشک) باشد و همکاری کند</li>
+          </ul>
+          <p>منتقدانی چون رابرت مرتون یادآور شدند که این الگو بیشتر برای بیماری‌های حاد و کوتاه‌مدت مصداق دارد و در بیماری‌های مزمن کاربرد محدودی دارد.</p>
+
+          <h4>۲. کنش متقابل نمادین و برچسب‌زنی بیماری</h4>
+          <p>رویکرد کنش متقابل نمادین (با ریشه در آثار جورج هربرت مید و ارونگ گافمن) بر معنایی تمرکز دارد که افراد در تعاملات روزمره به بیماری، بدن و هویت خود می‌دهند. مفهوم کلیدی این رویکرد، «انگ اجتماعی» (Stigma) است که گافمن (۱۹۶۳) آن را «ویژگی بی‌اعتبارکننده‌ای که هویت اجتماعی فرد را خدشه‌دار می‌کند» تعریف کرد.</p>
+
+          <div class="callout gold">
+            <span class="callout-title">مثال کاربردی — بیمار مبتلا به HIV/AIDS</span>
+            علی‌رغم آنکه از نظر پزشکی با درمان مناسب می‌توانند زندگی عادی داشته باشند (نقش بیمار موفق)، اما انگ اجتماعی شدید می‌تواند آن‌ها را از اشتغال، ازدواج و روابط خانوادگی محروم کند؛ این نشان می‌دهد مبارزه با بیماری تنها یک اقدام پزشکی نیست بلکه نیازمند مداخله جامعه‌شناختی برای کاهش انگ است.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۰۶</span>
+        <div class="lesson-titles">
+          <h3>تضادگرایی، ساخت‌گرایی اجتماعی و دیدگاه اسلامی سلامت</h3>
+          <span class="lesson-meta"><span>فصل پنجم</span><span class="sep"></span><span>دروس ۱۹ و ۲۰</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>تبیین نظریه تضادگرایی و مفهوم پزشکی‌زدگی به‌مثابه ابزار کنترل اجتماعی</li>
+              <li>آشنایی با نظریه ساخت‌گرایی اجتماعی بیماری</li>
+              <li>آشنایی با اصول و مبانی دیدگاه اسلامی نسبت به سلامت و بیماری</li>
+              <li>توانایی تحلیل انتقادی نقش صنعت پزشکی و دارویی از منظر تضاد منافع</li>
+            </ul>
+          </div>
+
+          <h4>۱. تضادگرایی و پزشکی‌زدگی</h4>
+          <p>ایوان ایلیچ در کتاب «نمسیس پزشکی» (۱۹۷۵) مفهوم «پزشکی‌زدگی جامعه» (Iatrogenesis) را مطرح کرد و استدلال کرد که نهاد پزشکی مدرن نه تنها گاه به جای بهبود، آسیب می‌رساند (ایاتروژنیک بالینی)، بلکه با تعریف روزافزون شرایط عادی زندگی به‌عنوان «بیماری»، وابستگی مردم به نظام پزشکی را افزایش می‌دهد (ایاتروژنیک اجتماعی) و توان خوددرمانی جوامع را تضعیف می‌کند (ایاتروژنیک فرهنگی).</p>
+
+          <h4>۲. ساخت‌گرایی اجتماعی</h4>
+          <p>رویکرد ساخت‌گرایی اجتماعی استدلال می‌کند که مفهوم «بیماری» صرفاً واقعیتی زیستی-عینی نیست، بلکه در فرایندهای اجتماعی، فرهنگی و تاریخی «ساخته» می‌شود. مثال کلاسیک آن، تغییر طبقه‌بندی همجنس‌گرایی از «اختلال روانی» (تا ۱۹۷۳ در DSM) به وضعیتی غیربیماری‌گونه است.</p>
+
+          <h4>۳. دیدگاه اسلامی سلامت</h4>
+          <p>دیدگاه اسلامی به سلامت، نگاهی جامع (هولیستیک) و متوازن ارائه می‌دهد که سلامت جسم، روان، معنویت و روابط اجتماعی را در پیوند با یکدیگر می‌بیند. اصولی مانند «الوقایة خیر من العلاج» (پیشگیری بهتر از درمان)، تأکید بر رعایت اعتدال در تغذیه، اهمیت طهارت و بهداشت فردی، حرمت ایداء نفس و مسئولیت اجتماعی در قبال سلامت دیگران از جمله مبانی این نگرش‌اند.</p>
+
+          <div class="callout">
+            <span class="callout-title">مثال کاربردی — بیماری‌سازی یائسگی</span>
+            بحث درباره بیماری‌سازی یائسگی یا ناباروری را می‌توان هم‌زمان از منظر تضادگرایانه (منافع صنعت دارو) و ساخت‌گرایانه (بازتعریف اجتماعی مرز طبیعی/بیمارگونه) تحلیل کرد.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۰۷</span>
+        <div class="lesson-titles">
+          <h3>سازمان بهداشت جهانی و سازمان‌های متولی سلامت</h3>
+          <span class="lesson-meta"><span>فصل ششم</span><span class="sep"></span><span>دروس ۲۱ و ۲۲</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>آشنایی با تاریخچه، ساختار و کارکردهای سازمان بهداشت جهانی (WHO)</li>
+              <li>شناخت اهداف کلان WHO از جمله اهداف توسعه پایدار مرتبط با سلامت (SDG3)</li>
+              <li>آشنایی با ساختار وزارت بهداشت به‌عنوان متولی سلامت در سطح ملی</li>
+              <li>توانایی تحلیل نقش هماهنگ‌کننده نهادهای بین‌المللی سلامت در بحران‌های جهانی</li>
+            </ul>
+          </div>
+
+          <h4>۱. سازمان بهداشت جهانی (WHO)</h4>
+          <p>سازمان بهداشت جهانی در تاریخ ۷ آوریل ۱۹۴۸ (که هرساله به‌عنوان روز جهانی بهداشت گرامی داشته می‌شود) به‌عنوان یکی از آژانس‌های تخصصی سازمان ملل متحد و با مقر اصلی در ژنو سوئیس تأسیس شد. مأموریت اصلی این سازمان «دستیابی همه مردم جهان به بالاترین سطح ممکن سلامت» است.</p>
+          <p>ساختار WHO شامل مجمع جهانی بهداشت (رکن تصمیم‌گیری اصلی)، هیئت اجرایی و دبیرخانه با دفاتر منطقه‌ای شش‌گانه (از جمله دفتر منطقه مدیترانه شرقی که ایران عضو آن است) می‌باشد.</p>
+          <p>از مهم‌ترین دستاوردهای تاریخی WHO می‌توان به ریشه‌کنی آبله (۱۹۸۰)، برنامه گسترده ایمن‌سازی (EPI)، مبارزه با فلج اطفال و تدوین فهرست داروهای ضروری اشاره کرد. در حال حاضر، سلامت به‌عنوان هدف سوم از اهداف توسعه پایدار سازمان ملل (SDG3) در دستور کار جهانی قرار دارد.</p>
+
+          <h4>۲. متولیان سلامت در سطح کشورها</h4>
+          <p>در ایران، «وزارت بهداشت، درمان و آموزش پزشکی» (که ویژگی منحصربه‌فرد آن ادغام سه کارکرد ارائه خدمت، آموزش پزشکی و پژوهش در یک وزارتخانه از سال ۱۳۶۴ است) مسئولیت سیاست‌گذاری کلان، مدیریت دانشگاه‌های علوم پزشکی، شبکه بهداشتی-درمانی کشور و نظارت بر امور دارو و غذا را بر عهده دارد.</p>
+
+          <div class="callout gold">
+            <span class="callout-title">مثال کاربردی — بحران کووید-۱۹</span>
+            در جریان همه‌گیری کووید-۱۹، WHO با اعلام وضعیت اضطراری بهداشت عمومی بین‌المللی (PHEIC) و سپس اعلام پاندمی، چارچوب هماهنگی جهانی (از جمله برنامه COVAX برای توزیع عادلانه واکسن) را فعال کرد؛ هم‌زمان در ایران، وزارت بهداشت با تشکیل ستاد ملی مقابله با کرونا، سیاست‌های قرنطینه، غربالگری و واکسیناسیون را در سطح ملی هماهنگ کرد.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۰۸</span>
+        <div class="lesson-titles">
+          <h3>سازمان‌های داخلی و نهادهای غیردولتی متولی سلامت</h3>
+          <span class="lesson-meta"><span>فصل ششم</span><span class="sep"></span><span>دروس ۲۳ و ۲۴</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>شناخت سازمان‌ها و نهادهای مرتبط با سلامت در داخل کشورها</li>
+              <li>آشنایی با نقش و کارکرد سازمان‌های غیردولتی (NGO) در حوزه سلامت</li>
+              <li>تحلیل مزایا و محدودیت‌های مشارکت بخش غیردولتی در سلامت عمومی</li>
+              <li>توانایی شناسایی فرصت‌های همکاری میان بخش دولتی و غیردولتی</li>
+            </ul>
+          </div>
+
+          <h4>۱. سازمان‌های داخلی مرتبط با سلامت</h4>
+          <ul>
+            <li><strong>سازمان بیمه سلامت ایران و سازمان تأمین اجتماعی:</strong> متولیان اصلی پوشش بیمه‌ای درمان</li>
+            <li><strong>سازمان غذا و دارو:</strong> مسئول نظارت بر ثبت، کیفیت و قیمت‌گذاری دارو و مواد غذایی</li>
+            <li><strong>سازمان نظام پزشکی:</strong> نهاد صنفی-حرفه‌ای ناظر بر اخلاق حرفه‌ای و صلاحیت پزشکان</li>
+            <li><strong>کمیته امداد و سازمان بهزیستی:</strong> فعالیت در حوزه سلامت اجتماعی گروه‌های آسیب‌پذیر</li>
+          </ul>
+
+          <h4>۲. نهادهای غیردولتی و غیرانتفاعی سلامت</h4>
+          <p>نمونه‌های بین‌المللی برجسته: پزشکان بدون مرز (MSF) در مناطق جنگی و بحرانی، صلیب سرخ و هلال‌احمر بین‌المللی در بحران‌های انسانی و بلایای طبیعی، و بنیاد گیتس به‌عنوان یکی از بزرگ‌ترین حامیان مالی برنامه‌های واکسیناسیون و ریشه‌کنی بیماری‌های گرمسیری.</p>
+          <p>در ایران نیز نهادهایی مانند هلال احمر، انجمن‌های حمایت از بیماران خاص (تالاسمی، ام‌اس) و سمن‌های فعال در کاهش آسیب اعتیاد نقش مهمی در تکمیل خدمات دولتی ایفا می‌کنند. مزیت اصلی این نهادها انعطاف‌پذیری، سرعت واکنش و نزدیکی به جامعه هدف است؛ اما محدودیت‌هایی مانند وابستگی به کمک‌های مالی نامنظم و پوشش جغرافیایی محدود نیز وجود دارد.</p>
+
+          <div class="callout">
+            <span class="callout-title">مثال کاربردی — برنامه کنترل تالاسمی</span>
+            وزارت بهداشت مسئولیت غربالگری ژنتیکی پیش از ازدواج را بر عهده دارد، اما انجمن تالاسمی ایران (نهاد غیردولتی) نقش تکمیلی در حمایت روانی-اجتماعی از بیماران و خانواده‌ها، آگاهی‌بخشی عمومی و حمایت مالی محدود ایفا می‌کند. نمونه بین‌المللی مشابه، مشارکت گاوی (GAVI) — ائتلافی از دولت‌ها، WHO، یونیسف و بخش خصوصی — در تأمین واکسن برای کودکان کشورهای کم‌درآمد است.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۰۹</span>
+        <div class="lesson-titles">
+          <h3>سلول‌های بنیادی، صنعت داروسازی و طب اسلامی</h3>
+          <span class="lesson-meta"><span>فصل هفتم</span><span class="sep"></span><span>دروس ۲۵ تا ۲۷</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>آشنایی با کاربردهای سلول‌های بنیادی در پزشکی نوین و ملاحظات اجتماعی-اخلاقی</li>
+              <li>شناخت روند تولید داروهای جدید و پیشرفت‌های صنعت داروسازی</li>
+              <li>آشنایی با سهم طب اسلامی/سنتی در پیشرفت پزشکی امروز</li>
+              <li>توانایی تحلیل جامعه‌شناختی پذیرش اجتماعی فناوری‌های نوین پزشکی</li>
+            </ul>
+          </div>
+
+          <h4>۱. سلول‌های بنیادی و صنعت داروسازی</h4>
+          <p>سلول‌های بنیادی (Stem Cells) به دلیل توانایی خودبازآفرینی و تمایز به انواع مختلف سلول‌ها، پتانسیل بالایی برای درمان بیماری‌های صعب‌العلاج مانند سرطان‌های خون، بیماری‌های عصبی (پارکینسون، ضایعات نخاعی) و ترمیم بافت‌های تخریب‌شده دارند. ایران در این حوزه، به‌ویژه در پژوهشگاه رویان، جایگاه قابل‌توجهی در سطح منطقه کسب کرده است.</p>
+          <p>صنعت داروسازی جهانی طی دهه‌های اخیر با ظهور داروهای زیستی (Biologics)، ایمونوتراپی سرطان و واکسن‌های مبتنی بر mRNA دگرگون شده است. روند طولانی و پرهزینه تحقیق و توسعه دارو (۱۰ تا ۱۵ سال و میلیاردها دلار) توضیح می‌دهد چرا قیمت داروهای نوآورانه اغلب بسیار بالاست.</p>
+
+          <h4>۲. سهم طب اسلامی در پزشکی امروز</h4>
+          <p>طب اسلامی از طریق دانشمندانی مانند محمد بن زکریای رازی (کاشف تفاوت سرخک و آبله) و ابن‌سینا (نویسنده «قانون در طب») سهم بسزایی در شکل‌گیری پزشکی علمی مدرن داشته است. امروزه برخی گیاهان دارویی و اصول تغذیه‌ای طب سنتی ایرانی موضوع پژوهش‌های علمی جدید قرار گرفته‌اند؛ رویکردی که با عنوان «طب مکمل مبتنی بر شواهد» شناخته می‌شود و باید با احتیاط از «طب جایگزین غیرعلمی و بدون شواهد» متمایز شود.</p>
+
+          <div class="callout gold">
+            <span class="callout-title">مثال کاربردی</span>
+            پیوند سلول‌های بنیادی مغز استخوان برای درمان لوسمی (سرطان خون) امروزه یک درمان استاندارد و نجات‌بخش است؛ اما هزینه بالای این درمان و نابرابری دسترسی، پرسش‌های عدالت در سلامت را برجسته می‌کند. در نمونه‌ای دیگر، توسعه سریع واکسن‌های mRNA کووید-۱۹ نشان داد پیشرفت علمی به‌تنهایی تضمین‌کننده عدالت نیست و نیازمند سیاست‌گذاری فعال است.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۱۰</span>
+        <div class="lesson-titles">
+          <h3>فقر و سلامت کودکان و سالمندان</h3>
+          <span class="lesson-meta"><span>فصل هشتم</span><span class="sep"></span><span>دروس ۲۹ و ۳۰</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>تحلیل مکانیسم‌های اثرگذاری فقر بر سلامت کودکان در دوران حساس رشد</li>
+              <li>آشنایی با نظریه «مسیر زندگی» (Life Course) در تبیین اثرات دیرپای فقر</li>
+              <li>شناخت چالش‌های سلامت سالمندان کم‌درآمد و پدیده «فقر سالمندی»</li>
+              <li>توانایی طراحی مداخلات آموزش بهداشت متناسب با گروه‌های آسیب‌پذیر سنی</li>
+            </ul>
+          </div>
+
+          <h4>۱. فقر و سلامت کودکان</h4>
+          <p>دوران کودکی، به‌ویژه هزار روز اول زندگی (از بارداری تا دو سالگی)، دوره‌ای حساس و برگشت‌ناپذیر برای رشد مغزی و جسمی است. کودکانی که در خانوارهای کم‌درآمد متولد می‌شوند، در معرض خطر بیشتری برای سوءتغذیه (به‌ویژه کوتاه‌قدی/Stunting)، تأخیر رشد شناختی، بیماری‌های عفونی مکرر و کم‌دسترسی به مراقبت‌های اولیه سلامت قرار دارند.</p>
+          <p>نظریه «مسیر زندگی» (Life Course Theory) نشان می‌دهد محرومیت‌های دوران کودکی می‌توانند از طریق مکانیسم «برنامه‌ریزی زیستی» (Biological Programming) اثرات بلندمدتی بر سلامت بزرگسالی بگذارند؛ فرضیه بارکر (Barker Hypothesis) نشان داد کودکانی که با وزن پایین متولد می‌شوند، در بزرگسالی خطر بیشتری برای دیابت نوع دو و بیماری‌های قلبی-عروقی دارند.</p>
+
+          <h4>۲. فقر و سلامت سالمندان</h4>
+          <p>سالمندان کم‌درآمد با ترکیبی از چالش‌ها مواجه‌اند: کاهش درآمد پس از بازنشستگی، افزایش هزینه‌های درمانی ناشی از چندبیماری هم‌زمان (Multimorbidity)، انزوای اجتماعی و ناتوانی جسمی. پدیده «فقر سالمندی» (Elderly Poverty) به‌ویژه در جوامعی که به سرعت در حال سالمندشدن جمعیت هستند (مانند ایران) اهمیت راهبردی می‌یابد.</p>
+
+          <div class="callout">
+            <span class="callout-title">مثال کاربردی</span>
+            مطالعات طولی در کشورهایی مانند بریتانیا (کوهورت تولد ۱۹۴۶) نشان داد کودکان کم‌درآمد در سن ۶۰ سالگی نرخ بالاتری از بیماری‌های قلبی و افت شناختی نسبت به همسالان مرفه‌تر خود داشتند. در نمونه داخلی، برنامه غذای گرم مدارس در مناطق محروم ایران با هدف کاهش سوءتغذیه کودکان و اثرات بلندمدت آن بر رشد و یادگیری طراحی شده است.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 11 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۱۱</span>
+        <div class="lesson-titles">
+          <h3>تأثیر فقر و نابرابری‌های اجتماعی بر بیماران خاص</h3>
+          <span class="lesson-meta"><span>فصل هشتم</span><span class="sep"></span><span>دروس ۳۱ و ۳۲</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>شناخت چالش‌های خاص بیماران مبتلا به بیماری‌های صعب‌العلاج و خاص در شرایط فقر</li>
+              <li>تحلیل رابطه نابرابری اقتصادی-اجتماعی با سلامت عمومی جامعه در سطح کلان</li>
+              <li>آشنایی با مفهوم «فرضیه درآمد نسبی» و «فرضیه محیط روان‌اجتماعی» ویلکینسون</li>
+              <li>توانایی تحلیل سیاست‌های حمایتی برای کاهش بار مضاعف بیماری در اقشار کم‌درآمد</li>
+            </ul>
+          </div>
+
+          <h4>۱. فقر و بیماران خاص</h4>
+          <p>«بیماران خاص» در نظام سلامت ایران به بیمارانی اطلاق می‌شود که نیازمند درمان‌های پرهزینه، مستمر و طولانی‌مدت هستند، مانند بیماران دیالیزی، پیوند اعضا، تالاسمی، هموفیلی، ام‌اس و برخی سرطان‌ها. هزینه مستقیم و غیرمستقیم بالای درمان می‌تواند خانواده را به سمت «فقر ناشی از بیماری» (Medical Impoverishment) سوق دهد.</p>
+
+          <h4>۲. نابرابری اجتماعی و سلامت کل جامعه</h4>
+          <p>ریچارد ویلکینسون و کیت پیکت در کتاب «سطح روح» (The Spirit Level, 2009) با تحلیل داده‌های کشورهای توسعه‌یافته نشان دادند جوامع با نابرابری درآمدی بالاتر، در طیف وسیعی از شاخص‌های سلامت و اجتماعی — از جمله امید به زندگی، سلامت روان، خشونت، بارداری نوجوانان و اعتماد اجتماعی — عملکرد بدتری دارند. این یافته زیربنای «فرضیه درآمد نسبی» (Relative Income Hypothesis) است.</p>
+          <p>«فرضیه محیط روان‌اجتماعی» مکانیسم تبیینی این پدیده است: در جوامع با نابرابری بالا، مقایسه اجتماعی مداوم، استرس مزمن ناشی از رتبه اجتماعی پایین، کاهش اعتماد و انسجام اجتماعی، مسیرهای زیستی (افزایش کورتیزول) و رفتاری (افزایش مصرف مواد، خشونت) را فعال می‌کند.</p>
+
+          <div class="callout gold">
+            <span class="callout-title">مثال کاربردی</span>
+            مقایسه ژاپن (نابرابری پایین) با ایالات متحده (نابرابری بالا) نشان می‌دهد ژاپن با وجود ثروت ملی کمتر، در بسیاری شاخص‌های سلامت اجتماعی عملکرد بهتری دارد. در سطح داخلی، بیمار دیالیزی روستایی که علاوه بر هزینه درمان، باید هفته‌ای سه‌بار مسافت طولانی تا نزدیک‌ترین مرکز دیالیز را طی کند، هم بار مالی و هم بار روانی-اجتماعی مضاعفی تحمل می‌کند.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 12 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۱۲</span>
+        <div class="lesson-titles">
+          <h3>مافیای دارو و پزشکی تجارتی</h3>
+          <span class="lesson-meta"><span>فصل نهم</span><span class="sep"></span><span>دروس ۳۳ و ۳۴</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>شناخت مفهوم و مصادیق «مافیای دارو» و شبکه‌های غیرقانونی توزیع دارو</li>
+              <li>تحلیل پیامدهای اجتماعی و سلامتی داروهای تقلبی و قاچاق</li>
+              <li>آشنایی با مفهوم «پزشکی تجارتی» (Commercialized Medicine) و پیامدهای آن</li>
+              <li>توانایی نقد جامعه‌شناختی کالایی‌شدن سلامت</li>
+            </ul>
+          </div>
+
+          <h4>۱. مافیای دارو</h4>
+          <p>«مافیای دارو» به شبکه‌های سازمان‌یافته غیرقانونی گفته می‌شود که از طریق قاچاق، احتکار، تولید و توزیع داروهای تقلبی یا فاقد مجوز، سود کلانی کسب می‌کنند و مستقیماً جان و سلامت بیماران را به خطر می‌اندازند. طبق برآوردهای WHO، در برخی کشورهای کم‌درآمد تا ۱۰ درصد از داروهای موجود در بازار می‌توانند تقلبی یا زیراستاندارد باشند.</p>
+          <p>عوامل زمینه‌ساز: کمبود دارو در بازار رسمی (تحریم، مشکلات ارزی یا سوءمدیریت توزیع)، سود بسیار بالای دارو نسبت به هزینه تولید تقلبی، ضعف نظارتی در برخی نقاط زنجیره توزیع، و تقاضای فوری بیماران خاص. پیامدها: شکست درمان، مقاومت دارویی (به‌ویژه آنتی‌بیوتیک‌های تقلبی)، مسمومیت و حتی مرگ.</p>
+
+          <h4>۲. پزشکی تجارتی</h4>
+          <p>«پزشکی تجارتی» به روندی اشاره دارد که در آن سلامت و درمان به‌جای حق پایه انسانی یا خدمت عمومی، به‌عنوان کالایی برای کسب سود در بازار عمل می‌کند. این پدیده در قالب‌های متعددی بروز می‌یابد: افزایش ویزیت‌ها و آزمایش‌های غیرضروری برای افزایش درآمد، رشد بی‌رویه بخش خصوصی درمانی بدون نظارت کافی، تبلیغات پزشکی گمراه‌کننده، و اولویت‌دادن به درمان‌های پرسود (مانند جراحی‌های زیبایی) به‌جای خدمات پیشگیرانه.</p>
+
+          <div class="callout">
+            <span class="callout-title">مثال کاربردی</span>
+            در جریان کمبود برخی داروهای بیماران خاص (مانند داروهای سرطانی یا هورمونی) در ایران طی سال‌های تحریم، گزارش‌های متعددی از فروش این داروها با قیمت چندبرابری در بازار غیررسمی و حتی ورود اقلام تقلبی منتشر شد. در نمونه‌ای دیگر، رشد چشمگیر و گاه بدون ضابطه کلینیک‌های زیبایی در کلان‌شهرها — در حالی که بسیاری از مناطق کشور با کمبود پزشک متخصص در تخصص‌های ضروری مواجه‌اند — نمونه‌ای از توزیع نامتوازن منابع پزشکی است.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 13 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۱۳</span>
+        <div class="lesson-titles">
+          <h3>تبلیغات دارویی، تعارض منافع و تشخیص بیش‌ازحد</h3>
+          <span class="lesson-meta"><span>فصل نهم</span><span class="sep"></span><span>دروس ۳۵ و ۳۶</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>تحلیل نقش تبلیغات دارویی در شکل‌دهی تصمیمات پزشکان و بیماران</li>
+              <li>آشنایی با مفهوم تعارض منافع (Conflict of Interest)</li>
+              <li>شناخت پدیده تشخیص و درمان غیرضروری (Overdiagnosis / Overtreatment)</li>
+              <li>توانایی ارزیابی نقادانه اطلاعات دارویی و پزشکی ارائه‌شده به عموم</li>
+            </ul>
+          </div>
+
+          <h4>۱. تبلیغات دارویی و تعارض منافع</h4>
+          <p>صنعت داروسازی جهانی سالانه میلیاردها دلار صرف بازاریابی و تبلیغات می‌کند که در بسیاری کشورها (به‌ویژه آمریکا که تبلیغات مستقیم به مصرف‌کننده — DTC Advertising — در آن قانونی است) شامل تبلیغات تلویزیونی، حمایت مالی از کنفرانس‌های پزشکی، هدایا و سفرهای علمی برای پزشکان، و تأمین مالی «مطالعات» تبلیغاتی است.</p>
+          <p>مفهوم «تعارض منافع» به وضعیتی اشاره دارد که در آن منافع مالی یا شخصی یک پزشک یا پژوهشگر می‌تواند بر قضاوت حرفه‌ای بی‌طرفانه او اثر بگذارد. بسیاری از نظام‌های سلامت امروزه با قوانین شفافیت (افشای پرداخت‌های صنعت به پزشکان) تلاش می‌کنند این تعارض منافع را مدیریت کنند.</p>
+
+          <h4>۲. تشخیص و درمان غیرضروری</h4>
+          <p>«تشخیص بیش‌ازحد» (Overdiagnosis) به شناسایی و برچسب‌زدن حالتی به‌عنوان بیماری اشاره دارد که هرگز موجب علامت یا آسیبی در طول عمر فرد نمی‌شد (مانند برخی موارد سرطان پروستات یا تیروئید با رشد بسیار کند)؛ این پدیده با «درمان غیرضروری» (Overtreatment) همراه می‌شود که هزینه، عوارض جانبی و اضطراب غیرضروری برای بیمار به همراه دارد.</p>
+          <p>عوامل مؤثر: پزشکی تدافعی (Defensive Medicine)، فشار مالی نظام‌های پرداخت مبتنی بر «کارانه» (Fee-for-Service)، گسترش دامنه تعریف بیماری‌ها، و انتظار برخی بیماران برای دریافت آزمایش یا دارو.</p>
+
+          <div class="callout gold">
+            <span class="callout-title">مثال کاربردی — غربالگری PSA</span>
+            بحث معروف غربالگری سرطان پروستات با آزمایش PSA در بسیاری کشورهای غربی نمونه کلاسیک تشخیص بیش‌ازحد است: مطالعات نشان دادند بسیاری از مردانی که تومور پروستات کندرشد در آن‌ها کشف شد، هرگز در طول عمر خود از آن سرطان علامت‌دار نمی‌شدند، اما عوارض جانبی درمان (بی‌اختیاری ادرار، اختلال نعوظ) را متحمل شدند. جنبش «Choosing Wisely» توسط انجمن‌های تخصصی پزشکی برای کاهش این نوع مداخلات غیرضروری راه‌اندازی شد.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 14 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۱۴</span>
+        <div class="lesson-titles">
+          <h3>سیاست‌گذاری سلامت در سطح ملی و جهانی</h3>
+          <span class="lesson-meta"><span>فصل دهم</span><span class="sep"></span><span>دروس ۳۷ و ۳۸</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>شناخت ساختار سیاست‌گذاری سلامت در ایران</li>
+              <li>آشنایی با نهادهای بین‌المللی و منطقه‌ای مؤثر بر سیاست‌گذاری سلامت</li>
+              <li>تحلیل تعامل سه‌سطحی ملی-منطقه‌ای-جهانی در سیاست‌گذاری سلامت</li>
+              <li>توانایی ارزیابی نقش «سلامت در همه سیاست‌ها»</li>
+            </ul>
+          </div>
+
+          <h4>۱. سیاست‌گذاری سلامت در ایران</h4>
+          <p>نظام سلامت ایران، شبکه‌ای چندلایه از نهادهای دولتی و غیردولتی است. در سطح دولتی: وزارت بهداشت (سیاست‌گذاری و اجرا)، سازمان برنامه و بودجه (تخصیص منابع مالی)، وزارت رفاه و تأمین اجتماعی (سیاست‌گذاری بیمه‌ای)، سازمان بیمه سلامت و سازمان تأمین اجتماعی (تأمین مالی خرد خدمات)، سازمان غذا و دارو، سازمان نظام پزشکی، و شوراهای بالادستی مانند شورای عالی سلامت و امنیت غذایی قرار دارند.</p>
+          <p>کارکرد اصلی شورای عالی سلامت، اعمال رویکرد «سلامت در همه سیاست‌ها» (Health in All Policies) است: یعنی این باور که تصمیمات وزارتخانه‌های دیگر (مسکن، حمل‌ونقل، آموزش، اقتصاد) نیز بر سلامت جامعه اثر می‌گذارند و باید هماهنگ با اهداف سلامت باشند.</p>
+
+          <h4>۲. سیاست‌گذاری سلامت در سطح جهانی</h4>
+          <p>سیاست‌گذاری سلامت در سطح جهانی عمدتاً از طریق نهادهای چندجانبه مانند سازمان بهداشت جهانی، صندوق جهانی مبارزه با ایدز/سل/مالاریا (Global Fund)، و ابزارهای الزام‌آور حقوقی مانند «مقررات بهداشتی بین‌المللی» (IHR 2005) شکل می‌گیرد. IHR کشورهای عضو را ملزم می‌کند ظرفیت‌های اصلی شناسایی و گزارش‌دهی رویدادهای سلامت عمومی با پتانسیل بین‌المللی را توسعه دهند.</p>
+
+          <div class="callout">
+            <span class="callout-title">مثال کاربردی — بحران پناهندگان</span>
+            در بحران آوارگان و پناهندگان منطقه (مانند بحران پناهندگان افغان و عراقی در ایران)، هماهنگی میان وزارت بهداشت ایران، کمیساریای عالی پناهندگان سازمان ملل (UNHCR) و WHO برای ارائه خدمات بهداشتی پایه، واکسیناسیون کودکان پناهنده و کنترل بیماری‌های واگیر، نمونه‌ای عینی از تعامل سه‌سطحی ملی-منطقه‌ای-جهانی سیاست‌گذاری سلامت است.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 15 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۱۵</span>
+        <div class="lesson-titles">
+          <h3>چرخه سیاست‌گذاری سلامت و ارزیابی آن</h3>
+          <span class="lesson-meta"><span>فصل دهم</span><span class="sep"></span><span>دروس ۳۹ و ۴۰</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>آشنایی با مراحل چرخه سیاست‌گذاری سلامت</li>
+              <li>شناخت رویکرد «سیاست‌گذاری مبتنی بر شواهد»</li>
+              <li>تحلیل تجربه سند تحول نظام سلامت ایران و چالش‌های آن</li>
+              <li>توانایی ارزیابی اثر واقعی مداخلات سیاستی</li>
+            </ul>
+          </div>
+
+          <h4>۱. چرخه سیاست‌گذاری سلامت</h4>
+          <p>مراحل کلی چرخه سیاست‌گذاری سلامت عبارت‌اند از: شناسایی مسئله، تدوین دستور کار، تدوین گزینه‌ها، تصمیم‌گیری، اجرا، پایش و ارزیابی. این چرخه می‌تواند تکرار و بازنگری شود.</p>
+          <p>«سیاست‌گذاری مبتنی بر شواهد» (Evidence-Based Policy Making) بر اتخاذ تصمیمات سیاستی بر پایه داده‌ها و شواهد علمی معتبر — به‌جای صرفاً فشار سیاسی یا منافع گروه‌های خاص — تأکید دارد.</p>
+
+          <h4>۲. تجربه سند تحول نظام سلامت ایران</h4>
+          <p>سند تحول نظام سلامت از سال ۱۳۹۳ با اهداف کاهش پرداخت از جیب مردم، ارتقای کیفیت خدمات بستری و توسعه پزشک خانواده اجرا شد. با وجود موفقیت‌های اولیه، فشار مالی سنگین بر بودجه دولت و پایداری ناکافی منابع، از محدودیت‌های اصلی این طرح در ارزیابی‌ها بود.</p>
+          <p>طرح «پزشک خانواده و نظام ارجاع» نیز با هدف بهبود دسترسی به خدمات اولیه سلامت و کاهش مراجعات غیرضروری به سطوح تخصصی طراحی شد. ارزیابی‌های میدانی نشان داد در مناطقی که این طرح با تخصیص منابع کافی و پایش مستمر همراه بود، شاخص‌های مراقبت‌های اولیه بهبود یافت؛ اما در برخی مناطق به دلیل کمبود پزشک یا ضعف زیرساخت ارجاع، اثربخشی طرح محدودتر بود.</p>
+
+          <div class="callout gold">
+            <span class="callout-title">نکته کلیدی</span>
+            موفقیت یک سیاست سلامت نه‌تنها به طراحی خوب آن، بلکه به کیفیت اجرا و تخصیص منابع در سطح محلی نیز وابسته است. سیاست‌گذاری سلامت باید فرایندی «پویا و قابل بازنگری» تلقی شود؛ زیرا شرایط اجرا و پیامدهای بلندمدت می‌توانند نیاز به اصلاح سیاست را آشکار کنند.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 16 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۱۶</span>
+        <div class="lesson-titles">
+          <h3>بیماری‌های غیرواگیر و باورهای عامیانه سلامت</h3>
+          <span class="lesson-meta"><span>فصل دهم</span><span class="sep"></span><span>دروس ۴۱ و ۴۲</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>شناخت بار جهانی بیماری‌های غیرواگیر و مقاومت آنتی‌بیوتیکی</li>
+              <li>تحلیل باورهای عامیانه سلامت و پیامدهای آن (تأخیر در تشخیص و درمان)</li>
+              <li>آشنایی با راهکارهای جامعه‌شناختی مقابله با آسیب‌های باورهای نادرست</li>
+              <li>توانایی طراحی مداخلات آموزش بهداشت حساس به فرهنگ</li>
+            </ul>
+          </div>
+
+          <h4>۱. بیماری‌های غیرواگیر و مقاومت آنتی‌بیوتیکی</h4>
+          <p>طبق آمار سازمان بهداشت جهانی، بیماری‌های غیرواگیر (قلبی-عروقی، سرطان، دیابت، بیماری‌های مزمن تنفسی) اکنون عامل بیش از ۷۰ درصد مرگ‌ومیرهای جهانی هستند که نشان‌دهنده گذار اپیدمیولوژیک جهانی است. سازمان بهداشت جهانی مقاومت آنتی‌بیوتیکی را یکی از ۱۰ تهدید بزرگ سلامت جهانی معرفی کرده است.</p>
+
+          <h4>۲. باورهای عامیانه سلامت</h4>
+          <p>در بسیاری از جوامع، از جمله ایران، برخی بیماری‌ها در چارچوب تبیین‌های عامیانه و فرهنگی تفسیر می‌شوند: نسبت دادن بیماری به «جن‌زدگی»، «چشم‌زخم»، «نظرخوردگی» یا «سردی و گرمی». از منظر جامعه‌شناختی، این باورها را می‌توان به‌عنوان نوعی «کنش سنتی» در برابر «کنش عقلانی-معطوف به هدف» پزشکی مدرن دانست.</p>
+          <p>پیامد اصلی نگران‌کننده این باورها از منظر سلامت عمومی، «تأخیر در تشخیص و درمان» (Delay in Diagnosis and Treatment) است: بیماری که ابتدا به رمال یا دعانویس مراجعه می‌کند، فرصت طلایی درمان زودهنگام را از دست می‌دهد.</p>
+
+          <div class="callout">
+            <span class="callout-title">مثال کاربردی</span>
+            مطالعات موردی متعددی در ایران نشان داده‌اند خانواده‌هایی که فرزند مبتلا به اختلال طیف اوتیسم یا صرع دارند، گاه ابتدا به دلیل تبیین این حالات در چارچوب فرهنگ عامیانه (مانند «جن‌زدگی») به‌جای مراجعه سریع به روان‌پزشک یا نورولوژیست، مدت‌ها را صرف مراجعه به افراد غیرمتخصص می‌کنند که این تأخیر می‌تواند فرصت مداخلات زودهنگام توان‌بخشی را از کودک بگیرد. راهکار جامعه‌شناختی مقابله، نه صرفاً تخطئه و تحقیر باورهای عامیانه، بلکه ارتقای سواد سلامت، افزایش دسترسی و اعتمادپذیری نظام پزشکی رسمی، و طراحی برنامه‌های آموزشی حساس به فرهنگ بومی است.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 17 -->
+    <article class="lesson">
+      <button class="lesson-head" onclick="toggleLesson(this)">
+        <span class="lesson-num">۱۷</span>
+        <div class="lesson-titles">
+          <h3>تغذیه، گذار تغذیه‌ای و کالایی‌شدن بدن</h3>
+          <span class="lesson-meta"><span>فصل یازدهم</span><span class="sep"></span><span>دروس ۴۳ و ۴۴</span></span>
+        </div>
+        <span class="lesson-toggle">+</span>
+      </button>
+      <div class="lesson-body">
+        <div class="lesson-inner">
+          <div class="objectives">
+            <div class="obj-title">اهداف آموزشی جلسه</div>
+            <ul>
+              <li>شناخت ابعاد چهارگانه امنیت غذایی از دیدگاه FAO</li>
+              <li>تحلیل پدیده «گذار تغذیه‌ای» و پیامدهای سلامتی آن در ایران</li>
+              <li>آشنایی با مفهوم «کالایی‌شدن بدن» و نظریه‌های جهانی‌شدن فرهنگی</li>
+              <li>توانایی تحلیل جامعه‌شناختی الگوهای غذایی و جراحی‌های زیبایی</li>
+            </ul>
+          </div>
+
+          <h4>۱. امنیت غذایی و گذار تغذیه‌ای</h4>
+          <p>سازمان خواربار و کشاورزی ملل متحد (FAO) امنیت غذایی را دارای چهار بُعد اصلی می‌داند: دسترسی فیزیکی، دسترسی اقتصادی، بهره‌برداری (Utilization) و پایداری. ناامنی غذایی می‌تواند متناقض‌نما هم به سوءتغذیه و هم به چاقی بینجامد: خانوارهای کم‌درآمد ممکن است به مواد غذایی ارزان اما پرکالری و کم‌ارزش روی آورند که هم‌زمان کمبود ریزمغذی‌ها و افزایش وزن ایجاد می‌کند.</p>
+          <p>«گذار تغذیه‌ای» (Nutrition Transition) به تغییر الگوی غذایی جوامع در حال توسعه از رژیم‌های سنتی به رژیم‌های غربی‌شده با غذاهای فرآوری‌شده اشاره دارد. در ایران، این گذار همراه با کاهش فعالیت بدنی، از عوامل اصلی افزایش چشمگیر چاقی، دیابت نوع دو و بیماری‌های قلبی-عروقی است.</p>
+
+          <h4>۲. کالایی‌شدن بدن</h4>
+          <p>مفهوم «کالایی‌شدن بدن» (Commodification of the Body) به تبدیل بدن و ظاهر انسان به موضوعی برای مصرف و بازار زیبایی اشاره دارد. این پدیده معمولاً در چارچوب نظریه‌های جهانی‌شدن فرهنگی (ورود استانداردهای زیبایی جهانی) و کالایی‌شدن بدن تحلیل می‌شود.</p>
+
+          <div class="callout gold">
+            <span class="callout-title">مثال کاربردی</span>
+            مقایسه الگوی غذایی نسل‌های مختلف در ایران گویاست: نسل پدربزرگ‌ها و مادربزرگ‌ها عمدتاً با نان، برنج، حبوبات، سبزیجات فصلی و لبنیات محلی تغذیه می‌شدند و چاقی نادر بود؛ اما در نسل امروز، با گسترش فست‌فودها، نوشابه‌های قندی و غذاهای فرآوری‌شده در کنار کاهش فعالیت بدنی، شیوع چاقی کودکان و نوجوانان به‌طور چشمگیری افزایش یافته است. در نمونه‌ای دیگر، افزایش آمار جراحی بینی در میان جوانان ایرانی، که در برخی گزارش‌های بین‌المللی ایران را در صدر آمار جهانی این جراحی قرار داده، از منظر جامعه‌شناختی می‌توان هم با فشار رسانه‌های اجتماعی برای همسان‌سازی با استانداردهای زیبایی جهانی و هم با پویایی‌های خاص هویت اجتماعی مرتبط دانست.
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══════════ QUIZ ═══════════ -->
+<section id="quiz">
+  <div class="section-head">
+    <span class="line"></span>
+    <h2><span class="dot crimson"></span> آزمون ارزیابی دانش</h2>
+    <span class="line"></span>
+  </div>
+
+  <div class="quiz-intro">
+    <h3>۴۰ سوال تستی با بازخورد فوری</h3>
+    <p>پس از انتخاب هر گزینه، پاسخ صحیح و توضیح آن نمایش داده می‌شود. با دقت پاسخ دهید و از بازخوردها برای یادگیری عمیق‌تر استفاده کنید.</p>
+    <div class="score-badge">
+      <span>امتیاز شما:</span>
+      <span class="num" id="scoreDisplay">۰</span>
+      <span>از ۴۰</span>
+    </div>
+  </div>
+
+  <div class="quiz-list" id="quizContainer"></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="f-ornament"></div>
+  <p>جزوه درسی <b>جامعه‌شناسی سلامت</b> — ویژه دانشجویان آموزش بهداشت مقطع کارشناسی ارشد</p>
+  <p>دوره آموزشی ۱۷ جلسه‌ای | طراحی با الهام از هنر و معماری ایرانی</p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   LESSON ACCORDION
+   ═══════════════════════════════════════════════════════════════ */
+function toggleLesson(btn){
+  const lesson = btn.closest('.lesson');
+  const body = lesson.querySelector('.lesson-body');
+  const isOpen = lesson.classList.contains('open');
+
+  // close all others for a clean, focused experience (optional)
+  document.querySelectorAll('.lesson.open').forEach(other=>{
+    if(other !== lesson){
+      other.classList.remove('open');
+      other.querySelector('.lesson-body').style.maxHeight = null;
+      other.querySelector('.lesson-toggle').textContent = '+';
+    }
+  });
+
+  if(isOpen){
+    lesson.classList.remove('open');
+    body.style.maxHeight = null;
+    btn.querySelector('.lesson-toggle').textContent = '+';
+  } else {
+    lesson.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
+    btn.querySelector('.lesson-toggle').textContent = '+';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL PROGRESS + NAV
+   ═══════════════════════════════════════════════════════════════ */
+window.addEventListener('scroll',()=>{
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  document.getElementById('scroll-bar').style.width = scrolled + '%';
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   QUIZ DATA — 40 questions
+   ═══════════════════════════════════════════════════════════════ */
+const questions = [
+  {
+    q: "طبق تعریف سازمان بهداشت جهانی (۱۹۴۸)، سلامت چه حالتی است؟",
+    opts: {
+      a: "فقدان بیماری یا نقص عضو",
+      b: "رفاه کامل جسمی، روانی و اجتماعی",
+      c: "توانایی انجام کار بدنی",
+      d: "نبود درد و ناراحتی جسمانی"
+    },
+    correct: "b",
+    fb: "تعریف ۱۹۴۸ سازمان بهداشت جهانی صراحتاً سلامت را فراتر از فقدان بیماری، رفاه کامل جسمی، روانی و اجتماعی می‌داند."
+  },
+  {
+    q: "کدام بُعد در نظریه پنج‌بعدی کییز به «احساس مفید بودن فرد برای جامعه» اشاره دارد؟",
+    opts: {
+      a: "انسجام اجتماعی",
+      b: "پذیرش اجتماعی",
+      c: "مشارکت اجتماعی",
+      d: "انطباق اجتماعی"
+    },
+    correct: "c",
+    fb: "مشارکت اجتماعی (Social Contribution) دقیقاً به احساس فرد مبنی بر مفید و ارزشمند بودن برای جامعه اشاره دارد."
+  },
+  {
+    q: "تفاوت اصلی سلامت اجتماعی با سلامت روانی در چیست؟",
+    opts: {
+      a: "سلامت اجتماعی فقط به بیماری‌های روانی می‌پردازد",
+      b: "سلامت روانی بر تجربه درونی فرد و سلامت اجتماعی بر رابطه فرد-جامعه تمرکز دارد",
+      c: "این دو مفهوم کاملاً یکسان هستند",
+      d: "سلامت اجتماعی فقط قابل اندازه‌گیری نیست"
+    },
+    correct: "b",
+    fb: "سلامت روانی متمرکز بر حالات درونی (اضطراب، شادکامی) است، در حالی که سلامت اجتماعی کیفیت رابطه فرد با ساختار و کارکردهای اجتماعی را می‌سنجد."
+  },
+  {
+    q: "در مدل رنگین‌کمان دالگرن-وایت‌هد، کدام گزینه در هسته مرکزی مدل قرار دارد؟",
+    opts: {
+      a: "سبک زندگی فردی",
+      b: "شبکه‌های اجتماعی",
+      c: "سن، جنس و وراثت",
+      d: "شرایط کلان اقتصادی"
+    },
+    correct: "c",
+    fb: "هسته مرکزی مدل به عوامل زیستی ثابت مانند سن، جنس و ژنتیک اختصاص دارد که سایر لایه‌ها پیرامون آن قرار می‌گیرند."
+  },
+  {
+    q: "کمیسیون عوامل تعیین‌کننده اجتماعی سلامت WHO به ریاست چه کسی برگزار شد؟",
+    opts: {
+      a: "کوربین کییز",
+      b: "مایکل مارموت",
+      c: "دالگرن",
+      d: "تالکوت پارسونز"
+    },
+    correct: "b",
+    fb: "سر مایکل مارموت ریاست این کمیسیون را در سال ۲۰۰۸ بر عهده داشت و گزارش «کاهش شکاف در یک نسل» را منتشر کرد."
+  },
+  {
+    q: "مطالعه شهر گلاسکو در اسکاتلند چه چیزی را نشان داد؟",
+    opts: {
+      a: "برتری ژنتیکی ساکنان محله‌های مرفه",
+      b: "ارتباط مستقیم دسترسی پزشکی با طول عمر",
+      c: "اختلاف ۱۴ ساله امید به زندگی به دلیل تفاوت‌های ساختاری اجتماعی",
+      d: "نقش انحصاری آلودگی هوا در مرگ‌ومیر"
+    },
+    correct: "c",
+    fb: "فاصله چند کیلومتری دو محله فقیرنشین و مرفه با اختلاف نزدیک به ۱۴ سال در امید به زندگی، ریشه در تفاوت شرایط مسکن، اشتغال، تغذیه و انسجام اجتماعی داشت."
+  },
+  {
+    q: "کدام یک جزو «لایه سوم» مدل دالگرن-وایت‌هد (شرایط زندگی و کار) محسوب می‌شود؟",
+    opts: {
+      a: "مصرف دخانیات",
+      b: "مسکن و اشتغال",
+      c: "سن و جنس",
+      d: "دوستان و همسایگان"
+    },
+    correct: "b",
+    fb: "لایه سوم شامل شرایط ساختاری زندگی روزمره از جمله مسکن، اشتغال، آموزش و دسترسی به خدمات بهداشتی است."
+  },
+  {
+    q: "الگوی زیستی-روانی-اجتماعی سلامت در برابر کدام الگو شکل گرفت؟",
+    opts: {
+      a: "الگوی کارکردگرایی",
+      b: "الگوی زیست‌پزشکی سنتی",
+      c: "الگوی تضادگرایی",
+      d: "الگوی ساخت‌گرایی اجتماعی"
+    },
+    correct: "b",
+    fb: "این الگو واکنشی به محدودیت‌های الگوی زیست‌پزشکی بود که سلامت را صرفاً در چارچوب بیولوژیک و فردی تعریف می‌کرد."
+  },
+  {
+    q: "«انسجام اجتماعی» در نظریه کییز به چه معناست؟",
+    opts: {
+      a: "اعتماد به طبیعت انسان‌ها",
+      b: "درک جهان اجتماعی به‌عنوان امری معنادار و قابل‌فهم",
+      c: "تعلق به گروه‌های مرجع",
+      d: "باور به رشد مستمر جامعه"
+    },
+    correct: "b",
+    fb: "انسجام اجتماعی به توانایی فرد در فهم و معنادار دیدن نظم اجتماعی پیرامون خود اشاره دارد، مستقل از پذیرش یا انطباق با آن."
+  },
+  {
+    q: "چرا بررسی نابرابری سلامت با رویکرد صرفاً زیست‌پزشکی ناکافی است؟",
+    opts: {
+      a: "زیرا بیماری‌ها همیشه ژنتیکی هستند",
+      b: "زیرا این رویکرد به تفاوت‌های ساختاری در شرایط زندگی افراد توجه نمی‌کند",
+      c: "زیرا پزشکان نیازی به دانش جامعه‌شناسی ندارند",
+      d: "زیرا آمار بیماری‌ها قابل اعتماد نیست"
+    },
+    correct: "b",
+    fb: "رویکرد زیست‌پزشکی بر عامل بیماری در سطح فرد متمرکز است و از عوامل ساختاری-اجتماعی مولد نابرابری سلامت غافل می‌ماند."
+  },
+  {
+    q: "کدام گزینه نمونه‌ای از «شاخص عینی» سلامت اجتماعی است؟",
+    opts: {
+      a: "احساس تعلق به جامعه",
+      b: "نرخ بیکاری",
+      c: "اعتماد بین فردی",
+      d: "ادراک فرد از پذیرش اجتماعی"
+    },
+    correct: "b",
+    fb: "نرخ بیکاری داده‌ای قابل اندازه‌گیری و مستقل از قضاوت شخصی است، بنابراین در دسته شاخص‌های عینی جای می‌گیرد."
+  },
+  {
+    q: "مقیاس سلامت اجتماعی کییز (SWB Scale) عمدتاً چه نوع شاخصی است؟",
+    opts: {
+      a: "عینی و اقتصادی",
+      b: "ذهنی و مبتنی بر ادراک فرد",
+      c: "صرفاً جمعیت‌شناختی",
+      d: "شاخص محیط‌زیستی"
+    },
+    correct: "b",
+    fb: "این مقیاس از طریق پرسش‌نامه، ادراک ذهنی فرد از پنج بُعد سلامت اجتماعی را می‌سنجد و بنابراین شاخصی ذهنی محسوب می‌شود."
+  },
+  {
+    q: "مفهوم «نقش بیمار» (Sick Role) متعلق به کدام نظریه‌پرداز و رویکرد است؟",
+    opts: {
+      a: "مارکس - تضادگرایی",
+      b: "پارسونز - کارکردگرایی",
+      c: "گافمن - تفسیری",
+      d: "وبر - فهم‌گرایی"
+    },
+    correct: "b",
+    fb: "تالکوت پارسونز این مفهوم را در چارچوب کارکردگرایی ساختاری مطرح کرد تا نشان دهد بیماری چگونه در نظام اجتماعی مدیریت می‌شود."
+  },
+  {
+    q: "رویکرد تضادگرایی، نابرابری سلامت را عمدتاً ناشی از چه چیزی می‌داند؟",
+    opts: {
+      a: "برچسب‌های اجتماعی روزمره",
+      b: "نابرابری در توزیع قدرت و منابع اقتصادی",
+      c: "تفاوت در ادراک ذهنی افراد",
+      d: "اختلال در کارکرد نظام اجتماعی"
+    },
+    correct: "b",
+    fb: "از منظر تضادگرایی، بیماری و سلامت بازتاب ساختار نابرابر طبقاتی و توزیع قدرت در جامعه است."
+  },
+  {
+    q: "کدام رویکرد بیشترین تمرکز را بر «معنای ذهنی بیماری» و برچسب اجتماعی دارد؟",
+    opts: {
+      a: "کارکردگرایی",
+      b: "تضادگرایی",
+      c: "کنش متقابل نمادین",
+      d: "ساخت‌گرایی اقتصادی"
+    },
+    correct: "c",
+    fb: "رویکرد کنش متقابل نمادین بر نحوه ساخت اجتماعی معنای بیماری و تجربه زیسته بیمار در تعاملات روزمره تمرکز دارد."
+  },
+  {
+    q: "ضریب جینی معمولاً برای سنجش کدام مفهوم به کار می‌رود؟",
+    opts: {
+      a: "امید به زندگی",
+      b: "نابرابری درآمد",
+      c: "پوشش واکسیناسیون",
+      d: "سرمایه اجتماعی"
+    },
+    correct: "b",
+    fb: "ضریب جینی معیار استانداردی برای سنجش میزان نابرابری توزیع درآمد در یک جامعه است که ارتباط تنگاتنگی با سلامت اجتماعی دارد."
+  },
+  {
+    q: "چرا در ارزیابی برنامه‌های سلامت جامعه، استفاده هم‌زمان از شاخص‌های عینی و ذهنی توصیه می‌شود؟",
+    opts: {
+      a: "زیرا شاخص‌های عینی همیشه نادرست‌اند",
+      b: "زیرا شاخص‌های ذهنی هزینه کمتری دارند",
+      c: "زیرا بهبود ظاهری/آماری لزوماً با بهبود احساس تعلق و رضایت اجتماعی همراه نیست",
+      d: "زیرا قانون چنین الزامی دارد"
+    },
+    correct: "c",
+    fb: "همان‌طور که مثال بازآفرینی شهری نشان داد، بهبود شاخص‌های عینی می‌تواند با کاهش احساس تعلق و انسجام اجتماعی (شاخص ذهنی) همراه باشد؛ لذا ترکیب هر دو ضروری است."
+  },
+  {
+    q: "شاخص‌های «ساختاری، فرایندی و پیامدی» که WHO به کار می‌برد به ترتیب مثال‌هایی از کدام‌اند؟",
+    opts: {
+      a: "نرخ طلاق - نرخ جرم - ضریب جینی",
+      b: "دسترسی به آب سالم - پوشش واکسیناسیون - مرگ‌ومیر مادران",
+      c: "اعتماد نهادی - مشارکت مدنی - سرمایه اجتماعی",
+      d: "بیکاری - مهاجرت - تورم"
+    },
+    correct: "b",
+    fb: "WHO از این سه‌گانه برای پوشش کامل زنجیره از منابع (ساختاری) تا فعالیت‌ها (فرایندی) تا نتایج نهایی (پیامدی) استفاده می‌کند."
+  },
+  {
+    q: "کدام گزاره درباره رابطه سه رویکرد نظری (کارکردگرایی، تضادگرایی، تفسیری) درست است؟",
+    opts: {
+      a: "فقط یکی از آن‌ها معتبر و بقیه نادرست‌اند",
+      b: "آن‌ها کاملاً متضاد و غیرقابل ترکیب‌اند",
+      c: "می‌توانند مکمل هم باشند و هرکدام بُعدی از واقعیت را روشن کنند",
+      d: "فقط برای جوامع غربی کاربرد دارند"
+    },
+    correct: "c",
+    fb: "ترکیب سه رویکرد (نظم، قدرت، معنا) تحلیل جامع‌تری از پدیده‌های سلامت اجتماعی ارائه می‌دهد."
+  },
+  {
+    q: "در طرح فرضی «شهر سالم»، مشاهده افزایش اجاره مسکن و مهاجرت اجباری ساکنان قدیمی، بیشتر مؤید کدام رویکرد است؟",
+    opts: {
+      a: "کارکردگرایی",
+      b: "تضادگرایی",
+      c: "کنش متقابل نمادین",
+      d: "زیست‌پزشکی"
+    },
+    correct: "b",
+    fb: "این پدیده نمونه‌ای از اثرات نابرابری توسعه بر گروه‌های کم‌درآمد است که رویکرد تضادگرایی به‌خوبی آن را تبیین می‌کند."
+  },
+  {
+    q: "در جوامع سنتی، تبیین غالب برای بیماری معمولاً چه بود؟",
+    opts: {
+      a: "ژنتیک و وراثت",
+      b: "عوامل ماوراءالطبیعی و اعتقادی",
+      c: "آلودگی محیط زیست",
+      d: "نظام بیمه سلامت"
+    },
+    correct: "b",
+    fb: "در جوامع سنتی بیماری اغلب با تبیین‌های مذهبی و ماوراءالطبیعی مانند خشم ارواح یا نفرین توضیح داده می‌شد."
+  },
+  {
+    q: "مفهوم «پزشکی‌شدن» (Medicalization) به چه فرایندی اشاره دارد؟",
+    opts: {
+      a: "افزایش تعداد پزشکان در یک کشور",
+      b: "انتقال تبیین و کنترل رفتارهای انسانی از حوزه دین/اخلاق به حوزه پزشکی",
+      c: "کاهش هزینه‌های درمانی",
+      d: "گسترش بیمه‌های خصوصی"
+    },
+    correct: "b",
+    fb: "پزشکی‌شدن یعنی موضوعاتی مانند زایمان، اعتیاد یا مرگ که پیش‌تر در چارچوب دین یا اخلاق تعریف می‌شدند، اکنون در قالب مسائل پزشکی صورت‌بندی و مدیریت می‌شوند."
+  },
+  {
+    q: "نخستین نظام بیمه اجتماعی رسمی در کدام کشور و توسط چه کسی شکل گرفت؟",
+    opts: {
+      a: "بریتانیا - چرچیل",
+      b: "آلمان - بیسمارک",
+      c: "فرانسه - ناپلئون",
+      d: "آمریکا - روزولت"
+    },
+    correct: "b",
+    fb: "اتو فون بیسمارک در دهه ۱۸۸۰ در آلمان نخستین نظام بیمه اجتماعی دولتی را بنیان نهاد که الگویی برای بسیاری از کشورهای دیگر شد."
+  },
+  {
+    q: "نظام سلامت ملی بریتانیا (NHS) در چه سالی تأسیس شد؟",
+    opts: {
+      a: "۱۹۱۸",
+      b: "۱۹۳۰",
+      c: "۱۹۴۸",
+      d: "۱۹۶۰"
+    },
+    correct: "c",
+    fb: "NHS در سال ۱۹۴۸ پس از جنگ جهانی دوم، همزمان با اوج‌گیری دولت رفاه در بریتانیا تأسیس شد."
+  },
+  {
+    q: "ادغام طب سنتی چینی (TCM) در نظام سلامت رسمی چین نمونه‌ای از کدام پدیده است؟",
+    opts: {
+      a: "حذف کامل فرهنگ بومی توسط پزشکی مدرن",
+      b: "تأثیرگذاری فرهنگ بومی بر شکل‌گیری نظام سلامت ملی",
+      c: "نبود هیچ نظام سلامت رسمی در چین",
+      d: "کپی‌برداری کامل از نظام سلامت آمریکا"
+    },
+    correct: "b",
+    fb: "این نمونه به‌روشنی نشان می‌دهد چگونه فرهنگ و سنت بومی می‌تواند در کنار پزشکی مدرن، در ساختار رسمی نظام سلامت یک کشور جای بگیرد."
+  },
+  {
+    q: "فرهنگ فردگرایی و بازار آزاد در آمریکا بیشتر به کدام نوع نظام سلامت انجامیده است؟",
+    opts: {
+      a: "نظام سلامت همگانی دولتی",
+      b: "نظام مبتنی بر بیمه خصوصی",
+      c: "نظام مبتنی بر طب سنتی",
+      d: "نظام بدون بیمه"
+    },
+    correct: "b",
+    fb: "فرهنگ فردگرا و بازارمحور آمریکا زمینه‌ساز شکل‌گیری نظام سلامتی شده که عمدتاً بر پایه بیمه‌های خصوصی استوار است."
+  },
+  {
+    q: "کدام یک از پیامدهای زیر از پیامدهای شهرنشینی و ورود اینترنت بر رفتار سلامت جامعه است؟",
+    opts: {
+      a: "افزایش کامل اتکا به شفاهندگان سنتی",
+      b: "افزایش خوددرمانی اینترنتی و کاهش اتکا به شفاهندگان سنتی",
+      c: "حذف کامل پزشکی مدرن",
+      d: "ثابت ماندن الگوهای مراجعه به درمان"
+    },
+    correct: "b",
+    fb: "شهرنشینی، رسانه‌های جمعی و اینترنت الگوی مراجعه به درمان را تغییر داده و خوددرمانی و جست‌وجوی اطلاعات آنلاین را افزایش داده است."
+  },
+  {
+    q: "بازگشت بخشی از جامعه مدرن به طب مکمل و جایگزین را می‌توان واکنشی به چه چیزی دانست؟",
+    opts: {
+      a: "ارزان بودن طب مکمل",
+      b: "کیفیت پایین پزشکی سنتی",
+      c: "ماشینی و غیرشخصی شدن پزشکی مدرن",
+      d: "نبود پزشک متخصص"
+    },
+    correct: "c",
+    fb: "بسیاری از پژوهش‌ها این بازگشت را واکنشی فرهنگی به سرد و ماشینی شدن روابط پزشک-بیمار در پزشکی مدرن تفسیر می‌کنند."
+  },
+  {
+    q: "روند تغییر الگوی زایمان در ایران (از منزل به بیمارستان و سپس بازگشت نسبی به نقش ماما) نمونه‌ای از چیست؟",
+    opts: {
+      a: "رابطه یک‌طرفه و ثابت فرهنگ و نهاد درمان",
+      b: "رابطه پویا و دوسویه فرهنگ و نهاد درمان در طول زمان",
+      c: "نبود هیچ تغییری در الگوی زایمان",
+      d: "تأثیر صرف قوانین دولتی بدون نقش فرهنگ"
+    },
+    correct: "b",
+    fb: "این مثال نشان می‌دهد فرهنگ نهاد درمان را شکل می‌دهد و سپس از پیامدهای آن (پزشکی‌شدن افراطی) بازخورد گرفته و دوباره آن را تغییر می‌دهد: رابطه‌ای پویا و دوسویه."
+  },
+  {
+    q: "مطالعه تطبیقی نظام‌های سلامت در کشورهای مختلف عمدتاً چه هدفی را دنبال می‌کند؟",
+    opts: {
+      a: "اثبات برتری یک نظام خاص بر همه دیگران",
+      b: "شناخت تأثیر بستر فرهنگی-اجتماعی هر جامعه بر شکل نظام سلامت آن",
+      c: "حذف تفاوت‌های فرهنگی میان کشورها",
+      d: "کاهش هزینه‌های پژوهش پزشکی"
+    },
+    correct: "b",
+    fb: "هدف اصلی رویکرد تطبیقی، فهم این نکته است که هیچ نظام سلامتی در خلأ شکل نمی‌گیرد و بستر فرهنگی-اجتماعی هر جامعه در طراحی آن نقش کلیدی دارد."
+  },
+  {
+    q: "در الگوی بیوریج، تأمین مالی نظام سلامت عمدتاً از چه محلی صورت می‌گیرد؟",
+    opts: {
+      a: "حق بیمه پرداختی کارفرما و کارگر",
+      b: "مالیات عمومی",
+      c: "پرداخت مستقیم از جیب بیمار",
+      d: "کمک‌های خیریه بین‌المللی"
+    },
+    correct: "b",
+    fb: "الگوی بیوریج مانند NHS بریتانیا عمدتاً از محل مالیات عمومی دولت تأمین مالی می‌شود."
+  },
+  {
+    q: "کدام کشور نمونه بارز الگوی بیسمارک در نظام سلامت است؟",
+    opts: {
+      a: "بریتانیا",
+      b: "کانادا",
+      c: "آلمان",
+      d: "سومالی"
+    },
+    correct: "c",
+    fb: "آلمان زادگاه و نمونه کلاسیک الگوی بیسمارک است که بر پایه بیمه اجتماعی اجباری با مشارکت کارفرما و کارگر استوار است."
+  },
+  {
+    q: "ویژگی اصلی الگوی بیمه ملی (National Health Insurance) مانند کانادا چیست؟",
+    opts: {
+      a: "بیمه‌گر واحد دولتی و ارائه‌دهندگان خصوصی",
+      b: "نبود هیچ گونه بیمه",
+      c: "تأمین مالی کاملاً خصوصی و چندپاره",
+      d: "ارائه‌دهندگان صرفاً دولتی"
+    },
+    correct: "a",
+    fb: "در این الگو دولت به‌عنوان بیمه‌گر واحد عمل می‌کند اما پزشکان و بیمارستان‌ها می‌توانند خصوصی باشند."
+  },
+  {
+    q: "در الگوی «از جیب مردم»، مهم‌ترین پیامد منفی برای عدالت در سلامت چیست؟",
+    opts: {
+      a: "افزایش کیفیت خدمات",
+      b: "تشدید نابرابری دسترسی به خدمات درمانی",
+      c: "کاهش نقش دولت در سیاست‌گذاری",
+      d: "افزایش رضایت بیماران کم‌درآمد"
+    },
+    correct: "b",
+    fb: "در نبود پوشش بیمه‌ای فراگیر، افراد کم‌درآمد توان پرداخت مستقیم هزینه‌های درمانی را ندارند که به نابرابری شدید دسترسی می‌انجامد."
+  },
+  {
+    q: "چارچوب WHO نظام سلامت را متشکل از چند «بلوک ساختمانی» می‌داند؟",
+    opts: {
+      a: "چهار بلوک",
+      b: "پنج بلوک",
+      c: "شش بلوک",
+      d: "هشت بلوک"
+    },
+    correct: "c",
+    fb: "چارچوب WHO شامل شش بلوک است: ارائه خدمات، نیروی انسانی، اطلاعات سلامت، داروها و فناوری، تأمین مالی، و رهبری/حکمرانی."
+  },
+  {
+    q: "هدف نهایی عملکرد مطلوب شش بلوک ساختمانی نظام سلامت، دستیابی به چیست؟",
+    opts: {
+      a: "حذف کامل بخش خصوصی",
+      b: "پوشش همگانی سلامت (UHC)",
+      c: "افزایش صرف تعداد بیمارستان‌ها",
+      d: "کاهش تعداد پزشکان"
+    },
+    correct: "b",
+    fb: "هدف غایی این چارچوب، دستیابی به پوشش همگانی سلامت است؛ یعنی دسترسی همه افراد به خدمات ضروری سلامت بدون سختی مالی."
+  },
+  {
+    q: "نظام سلامت ایران را می‌توان ترکیبی از کدام دو عنصر دانست؟",
+    opts: {
+      a: "بازار آزاد و بیمه ملی",
+      b: "بیسمارکی (بیمه اجتماعی) و بیوریجی (شبکه بهداشتی دولتی)",
+      c: "صرفاً بیمه خصوصی",
+      d: "صرفاً پرداخت از جیب"
+    },
+    correct: "b",
+    fb: "نظام سلامت ایران هم شامل بیمه‌های اجتماعی (عنصر بیسمارکی) و هم شبکه بهداشتی-درمانی دولتی به‌ویژه در مناطق روستایی (عنصر بیوریجی) است."
+  },
+  {
+    q: "طرح تحول نظام سلامت در ایران (از ۱۳۹۳) عمداً با چه هدفی اجرا شد؟",
+    opts: {
+      a: "افزایش پرداخت از جیب مردم",
+      b: "کاهش پرداخت از جیب مردم و افزایش پوشش بیمه‌ای",
+      c: "حذف کامل بیمارستان‌های دولتی",
+      d: "کاهش تعداد پزشکان متخصص"
+    },
+    correct: "b",
+    fb: "هدف اصلی این طرح کاهش سهم پرداخت مستقیم از جیب بیماران و ارتقای پوشش بیمه‌ای و دسترسی به خدمات بود."
+  },
+  {
+    q: "«هزینه فاجعه‌بار سلامت» (Catastrophic Health Expenditure) به چه وضعیتی اشاره دارد؟",
+    opts: {
+      a: "هزینه‌ای که دولت برای واکسیناسیون می‌پردازد",
+      b: "هزینه درمانی چنان بالا که خانوار را به فقر می‌کشاند",
+      c: "هزینه ساخت بیمارستان جدید",
+      d: "هزینه آموزش پزشکی"
+    },
+    correct: "b",
+    fb: "این مفهوم به وضعیتی اشاره دارد که هزینه‌های درمانی سهم بسیار بالایی از درآمد خانوار را می‌بلعد و می‌تواند خانوار را به ورطه فقر بکشاند."
+  },
+  {
+    q: "پارسونز بیماری را در چارچوب کارکردگرایی چگونه تعریف کرد؟",
+    opts: {
+      a: "نوعی موفقیت اجتماعی",
+      b: "نوعی انحراف اجتماعی که کارکرد نظام را مختل می‌کند",
+      c: "پدیده‌ای کاملاً فردی و بدون تأثیر اجتماعی",
+      d: "نتیجه مستقیم فقر"
+    },
+    correct: "b",
+    fb: "پارسونز بیماری را انحرافی می‌دانست که در صورت عدم کنترل، ایفای نقش‌های اجتماعی فرد و در نتیجه کارکرد کلی نظام اجتماعی را مختل می‌کند."
+  },
+  {
+    q: "کدام گزینه جزو چهار مؤلفه «نقش بیمار» پارسونز نیست؟",
+    opts: {
+      a: "معافیت از مسئولیت‌های عادی",
+      b: "عدم مسئولیت فرد در ابتلا به بیماری",
+      c: "الزام به پنهان‌کردن بیماری از پزشک",
+      d: "الزام به جست‌وجوی کمک تخصصی"
+    },
+    correct: "c",
+    fb: "پنهان‌کردن بیماری از پزشک هیچ‌گاه جزو مؤلفه‌های نقش بیمار نبوده؛ برعکس، همکاری با پزشک و طلب کمک تخصصی یکی از چهار الزام اصلی است."
+  },
+  {
+    q: "محدودیت اصلی نظریه نقش بیمار پارسونز در کدام نوع بیماری بیشتر آشکار می‌شود؟",
+    opts: {
+      a: "بیماری‌های حاد کوتاه‌مدت",
+      b: "بیماری‌های مزمن و معلولیت‌های پایدار",
+      c: "سرماخوردگی ساده",
+      d: "آنفلوانزای فصلی"
+    },
+    correct: "b",
+    fb: "در بیماری‌های مزمن، فرد هرگز کاملاً به نقش‌های عادی بازنمی‌گردد و الگوی موقتی‌بودن نقش بیمار پارسونز کارایی کمتری دارد."
+  },
+  {
+    q: "ارونگ گافمن مفهوم «انگ اجتماعی» (Stigma) را چگونه تعریف کرد؟",
+    opts: {
+      a: "ویژگی مثبت افزاینده منزلت اجتماعی",
+      b: "ویژگی بی‌اعتبارکننده‌ای که هویت اجتماعی فرد را خدشه‌دار می‌کند",
+      c: "نوعی بیماری جسمی خاص",
+      d: "سیاست رسمی دولت در قبال بیماران"
+    },
+    correct: "b",
+    fb: "گافمن (۱۹۶۳) انگ را ویژگی‌ای می‌داند که اعتبار اجتماعی فرد را در نگاه دیگران کاهش می‌دهد و هویت او را خدشه‌دار می‌کند."
+  },
+  {
+    q: "نظریه «برچسب‌زنی» (Labeling Theory) در حوزه سلامت روان بیشتر با نام کدام نظریه‌پرداز شناخته می‌شود؟",
+    opts: {
+      a: "تالکوت پارسونز",
+      b: "تامس شف",
+      c: "کارل مارکس",
+      d: "کوربین کییز"
+    },
+    correct: "b",
+    fb: "تامس شف از پیشگامان به‌کارگیری نظریه برچسب‌زنی در تحلیل بیماری‌های روانی بود."
+  },
+  {
+    q: "«نبوت خودمحقق‌کننده» در بستر برچسب‌زنی بیماری به چه معناست؟",
+    opts: {
+      a: "پیش‌بینی پزشک درباره سیر بیماری",
+      b: "تشدید یا بروز رفتار بیمارگونه به‌دلیل پذیرش برچسب اجتماعی توسط فرد",
+      c: "بهبود خودبه‌خودی بیماری بدون درمان",
+      d: "تشخیص زودهنگام بیماری با آزمایش"
+    },
+    correct: "b",
+    fb: "وقتی فرد برچسب «بیمار» یا «منحرف» را می‌پذیرد و طبق آن رفتار می‌کند، همان پیش‌بینی اجتماعی محقق می‌شود. این هسته مفهوم نبوت خودمحقق‌کننده است."
+  },
+  {
+    q: "چرا رویکرد کنش متقابل نمادین برای طراحی برنامه‌های آموزش بهداشت اهمیت دارد؟",
+    opts: {
+      a: "زیرا فقط به آمار بیماری‌ها توجه دارد",
+      b: "زیرا نشان می‌دهد پیام‌های آموزشی نادرست می‌توانند خود موجب انگ‌زنی شوند",
+      c: "زیرا صرفاً جنبه تاریخی دارد",
+      d: "زیرا رابطه‌ای با ارتباطات سلامت ندارد"
+    },
+    correct: "b",
+    fb: "این رویکرد به متخصصان آموزش بهداشت هشدار می‌دهد که طراحی نادرست پیام‌های سلامت می‌تواند ناخواسته انگ اجتماعی بیماران را تشدید کند."
+  },
+  {
+    q: "در مثال بیمار مبتلا به سل که توسط همکاران طرد می‌شود، کدام مفهوم نظری بهتر این پدیده را توضیح می‌دهد؟",
+    opts: {
+      a: "نقش بیمار پارسونز",
+      b: "انگ اجتماعی گافمن",
+      c: "نظریه تضاد مارکسیستی",
+      d: "الگوی بیمه ملی"
+    },
+    correct: "b",
+    fb: "طرد اجتماعی فرد بیمار توسط اطرافیان بر اساس ترس یا تصورات نادرست، نمونه بارز مکانیسم انگ‌زنی گافمنی است."
+  },
+  {
+    q: "تجربه بیماران HIV/AIDS با وجود کنترل پزشکی موفق بیماری، چه چیزی را برجسته می‌کند؟",
+    opts: {
+      a: "کافی بودن صرف مداخله پزشکی",
+      b: "نیاز هم‌زمان به مداخله جامعه‌شناختی برای کاهش انگ اجتماعی",
+      c: "بی‌اهمیت بودن انگ اجتماعی در پیامدهای بیماری",
+      d: "عدم نیاز به آموزش عمومی"
+    },
+    correct: "b",
+    fb: "این نمونه نشان می‌دهد کنترل زیست‌پزشکی بیماری به‌تنهایی کافی نیست و بدون کاهش انگ اجتماعی، کیفیت زندگی بیمار همچنان آسیب می‌بیند."
+  },
+  {
+    q: "تفاوت اصلی رویکرد کارکردگرایی و کنش متقابل نمادین در تحلیل بیماری چیست؟",
+    opts: {
+      a: "کارکردگرایی بر نظم و نقش اجتماعی و کنش متقابل نمادین بر معنا و برچسب تمرکز دارد",
+      b: "هر دو رویکرد دقیقاً یک چیز را بررسی می‌کنند",
+      c: "کارکردگرایی فقط به اقتصاد می‌پردازد",
+      d: "کنش متقابل نمادین فقط برای بیماری‌های جسمی کاربرد دارد"
+    },
+    correct: "a",
+    fb: "کارکردگرایی بر حفظ نظم اجتماعی از طریق مدیریت نقش بیمار تمرکز دارد، در حالی‌که کنش متقابل نمادین بر معنای ذهنی، هویت و برچسب اجتماعی بیماری متمرکز است."
+  },
+  {
+    q: "ایوان ایلیچ در کتاب «نمسیس پزشکی» چه مفهومی را مطرح کرد؟",
+    opts: {
+      a: "پوشش همگانی سلامت",
+      b: "پزشکی‌زدگی جامعه (Iatrogenesis)",
+      c: "الگوی بیوریج",
+      d: "نقش بیمار"
+    },
+    correct: "b",
+    fb: "ایلیچ با مفهوم Iatrogenesis نشان داد که نهاد پزشکی مدرن می‌تواند در سطوح بالینی، اجتماعی و فرهنگی آسیب‌زا باشد."
+  },
+  {
+    q: "کدام یک از انواع سه‌گانه ایاتروژنیک ایلیچ به «کاهش توان خودمدیریتی جوامع» اشاره دارد؟",
+    opts: {
+      a: "ایاتروژنیک بالینی",
+      b: "ایاتروژنیک اجتماعی",
+      c: "ایاتروژنیک فرهنگی",
+      d: "ایاتروژنیک اقتصادی"
+    },
+    correct: "c",
+    fb: "ایاتروژنیک فرهنگی به تضعیف توانایی جوامع در خوددرمانی و خودمدیریتی سلامت به دلیل وابستگی فزاینده به نظام پزشکی اشاره دارد."
+  },
+  {
+    q: "رویکرد ساخت‌گرایی اجتماعی درباره مفهوم بیماری چه ادعایی دارد؟",
+    opts: {
+      a: "بیماری صرفاً واقعیتی زیستی و ثابت است",
+      b: "تعریف بیماری در فرایندهای اجتماعی، فرهنگی و تاریخی شکل می‌گیرد",
+      c: "بیماری هیچ رابطه‌ای با جامعه ندارد",
+      d: "فقط پزشکان حق تعریف بیماری را دارند"
+    },
+    correct: "b",
+    fb: "ساخت‌گرایی اجتماعی نشان می‌دهد مرز سلامت/بیماری ثابت نیست و در بستر مذاکرات اجتماعی و علمی هر دوره تاریخی بازتعریف می‌شود."
+  },
+  {
+    q: "حذف همجنس‌گرایی از فهرست اختلالات روانی DSM در سال ۱۹۷۳ نمونه‌ای از کدام رویکرد است؟",
+    opts: {
+      a: "کارکردگرایی",
+      b: "تضادگرایی اقتصادی",
+      c: "ساخت‌گرایی اجتماعی",
+      d: "الگوی بیمه ملی"
+    },
+    correct: "c",
+    fb: "این تغییر بدون هیچ تغییری در واقعیت زیستی رخ داد و صرفاً بازتعریف اجتماعی-علمی مفهوم بیماری بود: نمونه کلاسیک ساخت‌گرایی اجتماعی."
+  },
+  {
+    q: "مفهوم «بیماری‌سازی» (Disease Mongering) بیشتر با کدام رویکرد نظری در پیوند است؟",
+    opts: {
+      a: "کارکردگرایی ساده",
+      b: "تضادگرایی و نقد منافع اقتصادی صنعت دارو",
+      c: "دیدگاه زیست پزشکی خالص",
+      d: "کنش متقابل نمادین به تنهایی"
+    },
+    correct: "b",
+    fb: "بیماری‌سازی به گسترش مصنوعی مرزهای بیماری برای افزایش بازار دارو اشاره دارد که عمدتاً با نقد تضادگرایانه از منافع اقتصادی صنعت دارو تحلیل می‌شود."
+  },
+  {
+    q: "عبارت «الوقایة خیر من العلاج» بر کدام اصل در دیدگاه اسلامی سلامت تأکید دارد؟",
+    opts: {
+      a: "برتری پیشگیری بر درمان",
+      b: "اولویت دارو بر جراحی",
+      c: "لزوم بیمه اجباری",
+      d: "برتری طب سنتی بر مدرن"
+    },
+    correct: "a",
+    fb: "این عبارت به صراحت بر اهمیت پیشگیری از بیماری پیش از نیاز به درمان تأکید دارد، اصلی که امروزه نیز محور برنامه‌های سلامت عمومی است."
+  },
+  {
+    q: "توصیه نبوی درباره طاعون («اگر در سرزمینی طاعون بود وارد نشوید و اگر در آن جا بودید خارج نشوید») امروزه معادل کدام اصل بهداشت عمومی است؟",
+    opts: {
+      a: "واکسیناسیون گروهی",
+      b: "قرنطینه و کنترل بیماری‌های واگیر",
+      c: "درمان دارویی فردی",
+      d: "جراحی پیشگیرانه"
+    },
+    correct: "b",
+    fb: "این توصیه اصل قرنطینه برای جلوگیری از انتشار بیماری واگیردار را چهارده قرن پیش از نظریه میکروبی بیماری بیان می‌کند."
+  },
+  {
+    q: "نگاه اسلامی به سلامت را چگونه می‌توان توصیف کرد؟",
+    opts: {
+      a: "نگاهی صرفاً زیست‌پزشکی و فردی",
+      b: "نگاهی جامع (هولیستیک) شامل جسم، روان، معنویت و روابط اجتماعی",
+      c: "نگاهی که فقط به درمان دارویی توجه دارد",
+      d: "نگاهی که مسئولیت اجتماعی سلامت را نادیده می‌گیرد"
+    },
+    correct: "b",
+    fb: "دیدگاه اسلامی سلامت را در پیوند میان ابعاد جسمی، روانی، معنوی و اجتماعی می‌بیند که با الگوی زیستی-روانی-اجتماعی مدرن هم‌سویی زیادی دارد."
+  },
+  {
+    q: "سازمان بهداشت جهانی در چه سالی و کجا تأسیس شد؟",
+    opts: {
+      a: "۱۹۴۵ - نیویورک",
+      b: "۱۹۴۸ - ژنو",
+      c: "۱۹۶۰ - پاریس",
+      d: "۱۹۵۰ - لندن"
+    },
+    correct: "b",
+    fb: "WHO در تاریخ ۷ آوریل ۱۹۴۸ با مقر اصلی در ژنو سوئیس تأسیس شد و این تاریخ هرساله روز جهانی بهداشت نامیده می‌شود."
+  },
+  {
+    q: "رکن اصلی تصمیم‌گیری در سازمان بهداشت جهانی چه نام دارد؟",
+    opts: {
+      a: "هیئت اجرایی",
+      b: "مجمع جهانی بهداشت",
+      c: "دبیرخانه منطقه‌ای",
+      d: "شورای امنیت سلامت"
+    },
+    correct: "b",
+    fb: "مجمع جهانی بهداشت (World Health Assembly) متشکل از نمایندگان همه کشورهای عضو، رکن اصلی تصمیم‌گیری WHO است."
+  },
+  {
+    q: "ایران عضو کدام دفتر منطقه‌ای سازمان بهداشت جهانی است؟",
+    opts: {
+      a: "دفتر منطقه اروپا",
+      b: "دفتر منطقه مدیترانه شرقی",
+      c: "دفتر منطقه آفریقا",
+      d: "دفتر منطقه آمریکا"
+    },
+    correct: "b",
+    fb: "ایران در دفتر منطقه‌ای مدیترانه شرقی (EMRO) سازمان بهداشت جهانی عضویت دارد."
+  },
+  {
+    q: "کدام یک از مهم‌ترین دستاوردهای تاریخی WHO است؟",
+    opts: {
+      a: "ریشه‌کنی سرطان",
+      b: "ریشه‌کنی آبله در ۱۹۸۰",
+      c: "حذف کامل مالاریا",
+      d: "کشف پنی‌سیلین"
+    },
+    correct: "b",
+    fb: "ریشه‌کنی جهانی آبله در سال ۱۹۸۰ یکی از بزرگ‌ترین موفقیت‌های تاریخ سلامت عمومی و WHO محسوب می‌شود."
+  },
+  {
+    q: "هدف سوم از اهداف توسعه پایدار سازمان ملل (SDG3) به چه چیزی اختصاص دارد؟",
+    opts: {
+      a: "حذف فقر مطلق",
+      b: "زندگی سالم و ارتقای رفاه برای همه در تمام سنین",
+      c: "آموزش با کیفیت",
+      d: "برابری جنسیتی"
+    },
+    correct: "b",
+    fb: "SDG3 مشخصاً به تضمین زندگی سالم و ارتقای رفاه برای همه افراد در تمام سنین تا سال ۲۰۳۰ می‌پردازد."
+  },
+  {
+    q: "در ایران، کدام نهاد مسئولیت اصلی سیاست‌گذاری کلان سلامت را بر عهده دارد؟",
+    opts: {
+      a: "وزارت رفاه و تأمین اجتماعی",
+      b: "وزارت بهداشت، درمان و آموزش پزشکی",
+      c: "سازمان برنامه و بودجه",
+      d: "وزارت کشور"
+    },
+    correct: "b",
+    fb: "وزارت بهداشت، درمان و آموزش پزشکی متولی اصلی سیاست‌گذاری، مدیریت و نظارت بر نظام سلامت کشور است."
+  },
+  {
+    q: "ویژگی منحصربه‌فرد وزارت بهداشت ایران نسبت به بسیاری کشورهای دیگر چیست؟",
+    opts: {
+      a: "نبود هیچ معاونت",
+      b: "ادغام کارکردهای ارائه خدمت، آموزش پزشکی و پژوهش در یک وزارتخانه",
+      c: "تمرکز صرف بر پژوهش",
+      d: "نداشتن ارتباط با دانشگاه‌های علوم پزشکی"
+    },
+    correct: "b",
+    fb: "ادغام سه کارکرد خدمت، آموزش پزشکی و پژوهش تحت یک وزارتخانه از سال ۱۳۶۴، ویژگی خاص نظام اداری سلامت ایران است."
+  },
+  {
+    q: "PHEIC چیست و چه کاربردی دارد؟",
+    opts: {
+      a: "نام یک داروی ضدویروسی",
+      b: "وضعیت اضطراری بهداشت عمومی با نگرانی بین‌المللی که توسط WHO اعلام می‌شود",
+      c: "نام یک نهاد غیردولتی",
+      d: "نوعی واکسن ترکیبی"
+    },
+    correct: "b",
+    fb: "PHEIC (Public Health Emergency of International Concern) وضعیت اضطراری بهداشت عمومی با نگرانی بین‌المللی است که توسط WHO اعلام می‌شود."
+  },
+  {
+    q: "برنامه COVAX با چه هدفی طراحی شد؟",
+    opts: {
+      a: "افزایش سود شرکت‌های دارویی",
+      b: "توزیع عادلانه واکسن کووید-۱۹ میان کشورها به‌ویژه کشورهای کم‌درآمد",
+      c: "حذف کامل بیماری‌های واگیر",
+      d: "محدود کردن پژوهش‌های واکسن"
+    },
+    correct: "b",
+    fb: "COVAX ابتکاری بین‌المللی با هماهنگی WHO برای دسترسی عادلانه‌تر کشورهای کم‌درآمد به واکسن کووید-۱۹ بود."
+  },
+  {
+    q: "مثال ستاد ملی مقابله با کرونا در ایران، نمونه‌ای از چه رابطه‌ای است؟",
+    opts: {
+      a: "استقلال کامل سیاست‌های ملی از نهادهای جهانی",
+      b: "هماهنگی سلسله‌مراتبی از سطح جهانی (WHO) تا سطح ملی (وزارت بهداشت)",
+      c: "تعارض دائمی میان سیاست ملی و جهانی",
+      d: "نبود هیچ ارتباطی با سازمان‌های بین‌المللی"
+    },
+    correct: "b",
+    fb: "این نمونه نشان داد چگونه اعلام‌های جهانی WHO با اقدامات هماهنگ‌شده در سطح ملی (نظیر ستاد ملی مقابله با کرونا) تکمیل می‌شود."
+  },
+  {
+    q: "کدام سازمان در ایران مسئول اصلی نظارت بر ثبت، کیفیت و قیمت‌گذاری دارو است؟",
+    opts: {
+      a: "سازمان تأمین اجتماعی",
+      b: "سازمان غذا و دارو",
+      c: "سازمان نظام پزشکی",
+      d: "سازمان بهزیستی"
+    },
+    correct: "b",
+    fb: "سازمان غذا و دارو، وابسته به وزارت بهداشت، متولی نظارت بر کیفیت، ثبت و قیمت‌گذاری داروها و مواد غذایی کشور است."
+  },
+  {
+    q: "سازمان نظام پزشکی عمدتاً چه نقشی دارد؟",
+    opts: {
+      a: "تأمین مالی بیمه سلامت",
+      b: "نظارت صنفی-حرفه‌ای بر اخلاق و صلاحیت پزشکان",
+      c: "تولید داروهای ژنریک",
+      d: "مدیریت بیمارستان‌های دولتی"
+    },
+    correct: "b",
+    fb: "سازمان نظام پزشکی نهادی صنفی-حرفه‌ای است که بر اخلاق حرفه‌ای، صلاحیت و رفتار پزشکان نظارت می‌کند."
+  },
+  {
+    q: "«پزشکان بدون مرز» (MSF) عمدتاً در کدام نوع مناطق فعالیت می‌کند؟",
+    opts: {
+      a: "مناطق مرفه شهری",
+      b: "مناطق جنگی و بحران‌های انسانی",
+      c: "صرفاً آزمایشگاه‌های تحقیقاتی",
+      d: "دفاتر مرکزی سازمان ملل"
+    },
+    correct: "b",
+    fb: "MSF یکی از شناخته‌شده‌ترین NGOهای پزشکی است که در مناطق جنگی، بحرانی و بلایای طبیعی خدمات اورژانسی درمانی ارائه می‌دهد."
+  },
+  {
+    q: "بنیاد گیتس (Gates Foundation) عمدتاً در کدام حوزه سلامت جهانی شناخته شده است؟",
+    opts: {
+      a: "تولید تجهیزات نظامی",
+      b: "حمایت مالی از برنامه‌های واکسیناسیون و ریشه‌کنی بیماری‌های گرمسیری",
+      c: "مدیریت بیمه‌های خصوصی آمریکا",
+      d: "ساخت بیمارستان‌های لوکس"
+    },
+    correct: "b",
+    fb: "بنیاد گیتس یکی از بزرگ‌ترین حامیان مالی جهانی در زمینه واکسیناسیون و مبارزه با بیماری‌های گرمسیری فراموش‌شده است."
+  },
+  {
+    q: "مزیت اصلی سازمان‌های غیردولتی (NGO) نسبت به نهادهای دولتی در حوزه سلامت چیست؟",
+    opts: {
+      a: "بودجه نامحدود و پایدار",
+      b: "انعطاف‌پذیری، سرعت واکنش و نزدیکی به جامعه هدف",
+      c: "اختیارات قانونی الزام‌آور",
+      d: "پوشش جغرافیایی کامل کشور"
+    },
+    correct: "b",
+    fb: "NGOها به دلیل ساختار کوچک‌تر و غیربوروکراتیک، معمولاً سریع‌تر و نزدیک‌تر به جامعه هدف عمل می‌کنند، هر چند از نظر بودجه و پوشش محدودیت دارند."
+  },
+  {
+    q: "کدام مورد از محدودیت‌های اصلی سازمان‌های غیردولتی در حوزه سلامت است؟",
+    opts: {
+      a: "اختیار قانونی نامحدود",
+      b: "وابستگی به کمک‌های مالی نامنظم و پوشش جغرافیایی محدود",
+      c: "نبود هیچ محدودیتی",
+      d: "تخصص بیش از حد در همه حوزه‌ها"
+    },
+    correct: "b",
+    fb: "وابستگی به منابع مالی خیریه یا کمک‌های بین‌المللی که می‌تواند بی‌ثبات باشد، و پوشش جغرافیایی محدود، از چالش‌های اصلی NGOهای سلامت است."
+  },
+  {
+    q: "مراکز گذری کاهش آسیب اعتیاد در ایران عمدتاً توسط چه نهادهایی اداره می‌شوند؟",
+    opts: {
+      a: "صرفاً توسط ارتش",
+      b: "عمدتاً توسط سمن‌ها با حمایت وزارت بهداشت",
+      c: "صرفاً توسط بخش خصوصی سودآور",
+      d: "توسط سازمان ملل به‌صورت مستقیم"
+    },
+    correct: "b",
+    fb: "این مراکز عمدتاً توسط سازمان‌های مردم نهاد (سمن) با نظارت و همکاری وزارت بهداشت اداره می‌شوند و خدماتی مانند سرنگ سالم و آموزش به معتادان تزریقی ارائه می‌دهند."
+  },
+  {
+    q: "در مثال برنامه کنترل تالاسمی، نقش وزارت بهداشت (بخش دولتی) عمدتاً چه بود؟",
+    opts: {
+      a: "حمایت روانی-اجتماعی خانواده‌ها",
+      b: "اجرای غربالگری ژنتیکی اجباری پیش از ازدواج",
+      c: "تأمین مالی کامل انجمن بیماران",
+      d: "آموزش عمومی به تنهایی"
+    },
+    correct: "b",
+    fb: "وزارت بهداشت مسئولیت غربالگری ژنتیکی پیش از ازدواج را بر عهده دارد، در حالی که انجمن تالاسمی (NGO) نقش تکمیلی حمایت روانی-اجتماعی را ایفا می‌کند."
+  },
+  {
+    q: "ائتلاف گاوی (GAVI) چه نوع نهادی محسوب می‌شود؟",
+    opts: {
+      a: "نهادی صرفاً دولتی",
+      b: "ائتلافی از دولت‌ها، WHO، یونیسف و بخش خصوصی",
+      c: "شرکتی تجاری خصوصی",
+      d: "دانشگاهی پژوهشی"
+    },
+    correct: "b",
+    fb: "گاوی نمونه‌ای از همکاری چندجانبه میان دولت‌ها، سازمان‌های بین‌المللی و بخش خصوصی برای تأمین واکسن کودکان کشورهای کم‌درآمد است."
+  },
+  {
+    q: "مهم‌ترین چالش هماهنگی میان نهادهای متعدد داخلی سلامت (بیمه، دارو، نظام پزشکی و...) چیست؟",
+    opts: {
+      a: "نبود اصلاً هیچ نهادی",
+      b: "احتمال موازی‌کاری و عدم یکپارچگی جریان خدمات",
+      c: "کمبود کارکنان اداری",
+      d: "نبود قوانین مرتبط"
+    },
+    correct: "b",
+    fb: "با وجود تعدد نهادهای متولی، خطر موازی‌کاری و ناهماهنگی در ارائه یکپارچه خدمات یکی از چالش‌های همیشگی حکمرانی سلامت است."
+  },
+  {
+    q: "مهم‌ترین ویژگی سلول‌های بنیادی که آن‌ها را برای درمان بیماری‌ها ارزشمند می‌کند چیست؟",
+    opts: {
+      a: "مقاومت در برابر همه داروها",
+      b: "توانایی خودبازآفرینی و تمایز به انواع سلول‌ها",
+      c: "عدم نیاز به هیچ نظارت پزشکی",
+      d: "تولید خودکار آنتی‌بیوتیک"
+    },
+    correct: "b",
+    fb: "توانایی سلول‌های بنیادی در تکثیر خود و تبدیل‌شدن به انواع سلول‌های تخصصی، پایه اصلی کاربرد درمانی آن‌هاست."
+  },
+  {
+    q: "کدام پژوهشگاه ایرانی در حوزه سلول‌های بنیادی و علوم رویانی جایگاه شاخصی دارد؟",
+    opts: {
+      a: "پژوهشگاه رویان",
+      b: "پژوهشگاه پاستور",
+      c: "دانشگاه صنعتی شریف",
+      d: "سازمان انرژی اتمی"
+    },
+    correct: "a",
+    fb: "پژوهشگاه رویان یکی از مراکز پیشرو منطقه در پژوهش‌های سلول‌های بنیادی و علوم تولیدمثل است."
+  },
+  {
+    q: "کدام یک از دغدغه‌های اخلاقی-اجتماعی مرتبط با فناوری سلول‌های بنیادی است؟",
+    opts: {
+      a: "نبود هیچ هزینه درمانی",
+      b: "استفاده از جنین‌های اهدایی و نابرابری دسترسی به دلیل هزینه بالا",
+      c: "کاهش نیاز به پژوهش علمی",
+      d: "عدم کاربرد بالینی این فناوری"
+    },
+    correct: "b",
+    fb: "استفاده از جنین‌های اهدایی و نابرابری دسترسی به دلیل هزینه بالا، از مهم‌ترین دغدغه‌های اخلاقی-اجتماعی این حوزه است."
+  },
+  {
+    q: "واکسن‌های مبتنی بر mRNA در کدام بحران سلامت جهانی به سرعت توسعه یافتند؟",
+    opts: {
+      a: "آنفلوانزای ۱۹۱۸",
+      b: "کووید-۱۹",
+      c: "طاعون سیاه",
+      d: "آبله در دهه ۱۹۷۰"
+    },
+    correct: "b",
+    fb: "واکسن‌های mRNA (مانند فایزر-بیوان‌تک و مدرنا) در پاسخ به همه‌گیری کووید-۱۹ در کمتر از یک سال توسعه و تولید انبوه شدند."
+  },
+  {
+    q: "چرا هزینه داروهای نوآورانه معمولاً بسیار بالاست؟",
+    opts: {
+      a: "زیرا مواد اولیه آن‌ها همیشه کمیاب است",
+      b: "به دلیل فرایند طولانی و پرهزینه تحقیق و توسعه (۱۰ تا ۱۵ سال)",
+      c: "زیرا دولت‌ها همیشه مالیات بالایی وضع می‌کنند",
+      d: "زیرا شرکت‌های دارویی سود نمی‌برند"
+    },
+    correct: "b",
+    fb: "فرایند طولانی و پرهزینه کشف، آزمایش بالینی و تأیید نظارتی دارو (اغلب میلیاردها دلار) دلیل اصلی قیمت بالای داروهای نوآورانه است."
+  },
+  {
+    q: "محمد بن زکریای رازی بیشتر به خاطر کدام کشف علمی شناخته می‌شود؟",
+    opts: {
+      a: "کشف پنی‌سیلین",
+      b: "تفکیک سرخک از آبله و پیشگامی در روش بالینی تجربی",
+      c: "کشف واکسن آبله",
+      d: "اختراع میکروسکوپ"
+    },
+    correct: "b",
+    fb: "رازی نخستین کسی بود که تفاوت بالینی میان سرخک و آبله را به دقت مستند کرد و روش‌های مشاهده تجربی را در طب پیشرفت داد."
+  },
+  {
+    q: "کتاب «قانون در طب» اثر کدام دانشمند است و چه اهمیتی داشت؟",
+    opts: {
+      a: "رازی - پایه پزشکی مدرن ایران",
+      b: "ابن‌سینا - قرن‌ها متن درسی دانشگاه‌های اروپا",
+      c: "ابوریحان بیرونی - نجوم پزشکی",
+      d: "خوارزمی - ریاضیات پزشکی"
+    },
+    correct: "b",
+    fb: "«قانون در طب» ابن‌سینا یکی از مهم‌ترین متون مرجع پزشکی بود که قرن‌ها در دانشگاه‌های اروپایی تدریس می‌شد."
+  },
+  {
+    q: "تفاوت اصلی «طب مکمل مبتنی بر شواهد» با «طب جایگزین غیرعلمی» در چیست؟",
+    opts: {
+      a: "اولی هیچ ارتباطی با گیاهان دارویی ندارد",
+      b: "اولی بر پژوهش علمی و شواهد بالینی استوار است، دومی فاقد شواهد کافی است",
+      c: "هر دو کاملاً یکسان هستند",
+      d: "دومی همیشه مؤثرتر از پزشکی مدرن است"
+    },
+    correct: "b",
+    fb: "طب مکمل مبتنی بر شواهد بر پژوهش علمی و شواهد بالینی استوار است، در حالی که طب جایگزین غیرعلمی فاقد شواهد کافی و قابل اعتماد است."
+  },
+  {
+    q: "نابرابری در توزیع جهانی واکسن کووید-۱۹ میان کشورهای ثروتمند و فقیر چه نکته‌ای را نشان داد؟",
+    opts: {
+      a: "پیشرفت علمی به خودی خود عدالت در سلامت را تضمین می‌کند",
+      b: "پیشرفت علمی به‌تنهایی کافی نیست و نیازمند سیاست‌گذاری فعال برای عدالت است",
+      c: "کشورهای فقیر نیازی به واکسن نداشتند",
+      d: "توزیع واکسن هیچ ارتباطی با سیاست‌گذاری ندارد"
+    },
+    correct: "b",
+    fb: "این تجربه نشان داد که بدون سیاست‌گذاری هدفمند (مانند COVAX)، دستاوردهای علمی می‌توانند به‌طور نابرابر در دسترس جوامع مختلف قرار گیرند."
+  },
+  {
+    q: "چرا تحلیل جامعه‌شناختی فناوری‌های نوین پزشکی (مانند سلول‌های بنیادی) ضروری است؟",
+    opts: {
+      a: "زیرا این فناوری‌ها هیچ کاربرد پزشکی ندارند",
+      b: "زیرا پذیرش اجتماعی، دسترسی عادلانه و ملاحظات اخلاقی این فناوری‌ها فراتر از جنبه فنی صرف است",
+      c: "زیرا جامعه‌شناسان باید جایگزین پزشکان شوند",
+      d: "زیرا این فناوری‌ها فقط در آزمایشگاه کاربرد دارند"
+    },
+    correct: "b",
+    fb: "موفقیت فناوری‌های پزشکی نوین منوط به پذیرش اجتماعی، توزیع عادلانه و مدیریت ملاحظات اخلاقی است که همگی موضوعاتی جامعه‌شناختی-سیاستی‌اند."
+  },
+  {
+    q: "«هزار روز اول زندگی» به چه بازه زمانی اشاره دارد و چرا اهمیت دارد؟",
+    opts: {
+      a: "از تولد تا ۵ سالگی؛ دوره یادگیری زبان",
+      b: "از بارداری تا دو سالگی؛ دوره حساس و برگشت‌ناپذیر رشد مغزی و جسمی",
+      c: "از ۲ تا ۵ سالگی؛ دوره اجتماعی‌شدن",
+      d: "کل دوران کودکی تا نوجوانی"
+    },
+    correct: "b",
+    fb: "این بازه از آغاز بارداری تا دو سالگی کودک، حیاتی‌ترین دوره رشد مغزی و جسمی است که آسیب در آن اغلب جبران‌ناپذیر است."
+  },
+  {
+    q: "«کوتاه‌قدی» (Stunting) در کودکان عمدتاً نتیجه چیست؟",
+    opts: {
+      a: "ژنتیک خانوادگی صرف",
+      b: "سوءتغذیه مزمن در دوران رشد",
+      c: "ورزش بیش از حد",
+      d: "واکسیناسیون نامناسب"
+    },
+    correct: "b",
+    fb: "کوتاه‌قدی شاخصی کلیدی از سوءتغذیه مزمن است که عمدتاً ریشه در فقر و کمبود تغذیه کافی در دوران حساس رشد دارد."
+  },
+  {
+    q: "فرضیه بارکر (Barker Hypothesis) چه رابطه‌ای را نشان داد؟",
+    opts: {
+      a: "رابطه ورزش بزرگسالی با طول عمر",
+      b: "رابطه وزن پایین هنگام تولد با افزایش خطر دیابت و بیماری قلبی در بزرگسالی",
+      c: "رابطه تحصیلات با درآمد",
+      d: "رابطه تغذیه با هوش"
+    },
+    correct: "b",
+    fb: "فرضیه بارکر نشان داد کودکانی که با وزن پایین متولد می‌شوند، در بزرگسالی خطر بیشتری برای دیابت نوع دو و بیماری‌های قلبی-عروقی دارند."
+  },
+  {
+    q: "نظریه «مسیر زندگی» (Life Course Theory) در جامعه‌شناسی سلامت به چه موضوعی می‌پردازد؟",
+    opts: {
+      a: "اثرات کوتاه‌مدت و گذرای بیماری",
+      b: "اثرات بلندمدت و انباشتی محرومیت‌های اولیه زندگی بر سلامت بزرگسالی",
+      c: "صرفاً عوامل ژنتیکی بیماری",
+      d: "تأثیر آب‌وهوا بر بیماری‌های عفونی"
+    },
+    correct: "b",
+    fb: "این نظریه نشان می‌دهد محرومیت‌های دوران کودکی می‌توانند از طریق مکانیسم برنامه‌ریزی زیستی، اثرات بلندمدتی بر سلامت بزرگسالی بگذارند."
+  },
+  {
+    q: "کدام مورد نمونه‌ای از سیاست حمایتی برای کاهش فقر سالمندی است؟",
+    opts: {
+      a: "حذف کامل بیمه سالمندان",
+      b: "مستمری پایه سالمندی و مراقبت در منزل",
+      c: "افزایش سن بازنشستگی بدون هیچ حمایت مالی",
+      d: "کاهش خدمات بهداشتی سالمندان"
+    },
+    correct: "b",
+    fb: "مستمری پایه و برنامه‌های مراقبت در منزل از جمله راهکارهای اصلی سیاستی برای کاهش آسیب فقر بر سلامت سالمندان است."
+  },
+  {
+    q: "مطالعه کوهورت تولد ۱۹۴۶ بریتانیا چه یافته‌ای داشت؟",
+    opts: {
+      a: "فقر کودکی هیچ اثری بر سلامت بزرگسالی ندارد",
+      b: "کودکان کم‌درآمد در سن ۶۰ سالگی نرخ بالاتری از بیماری قلبی و افت شناختی داشتند",
+      c: "همه کودکان صرف‌نظر از وضعیت اقتصادی سلامت یکسانی داشتند",
+      d: "این مطالعه فقط بر سالمندان متمرکز بود"
+    },
+    correct: "b",
+    fb: "این کوهورت طولانی‌مدت شاهد تجربی مهمی برای نظریه مسیر زندگی فراهم کرد که نشان داد فقر کودکی می‌تواند تا ده‌ها سال بعد اثرات سلامتی داشته باشد."
+  },
+  {
+    q: "برنامه غذای گرم مدارس در مناطق محروم ایران با چه هدفی طراحی شده است؟",
+    opts: {
+      a: "افزایش تنوع غذایی خانواده‌های مرفه",
+      b: "کاهش سوءتغذیه کودکان و اثرات بلندمدت آن بر رشد و یادگیری",
+      c: "کاهش نیاز به مدرسه‌رفتن",
+      d: "افزایش درآمد کشاورزان"
+    },
+    correct: "b",
+    fb: "این برنامه با هدف پیشگیری از سوءتغذیه مزمن و کاهش پیامدهای بلندمدت آن مانند کوتاه‌قدی و افت یادگیری در کودکان مناطق کم‌برخوردار طراحی شده است."
+  },
+  {
+    q: "اصطلاح «بیماران خاص» در نظام سلامت ایران عمدتاً به کدام گروه اشاره دارد؟",
+    opts: {
+      a: "بیماران با سرماخوردگی فصلی",
+      b: "بیماران نیازمند درمان‌های پرهزینه، مستمر و طولانی‌مدت مانند دیالیزی و تالاسمی",
+      c: "بیماران با بیماری‌های خودمحدودشونده",
+      d: "افراد سالم در معرض خطر پایین"
+    },
+    correct: "b",
+    fb: "بیماران خاص به کسانی گفته می‌شود که به دلیل بیماری‌های صعب‌العلاج نیازمند درمان‌های پرهزینه و مستمر مانند دیالیز، پیوند یا تالاسمی هستند."
+  },
+  {
+    q: "مفهوم «فقر ناشی از بیماری» (Medical Impoverishment) به چه معناست؟",
+    opts: {
+      a: "بیماری‌ای که فقط در جوامع فقیر رخ می‌دهد",
+      b: "سقوط خانواده به فقر به‌دلیل هزینه‌های سنگین و مستمر درمان",
+      c: "نوعی بیمه رایگان دولتی",
+      d: "سیاستی برای افزایش درآمد بیماران"
+    },
+    correct: "b",
+    fb: "این مفهوم به فرایندی اشاره دارد که در آن هزینه‌های بالای درمان یک بیماری مزمن، خانواده را به‌تدریج به سمت فقر سوق می‌دهد."
+  },
+  {
+    q: "کتاب «سطح روح» (The Spirit Level) اثر کدام پژوهشگران است؟",
+    opts: {
+      a: "پارسونز و مرتون",
+      b: "ویلکینسون و پیکت",
+      c: "مارکس و انگلس",
+      d: "گافمن و مید"
+    },
+    correct: "b",
+    fb: "ریچارد ویلکینسون و کیت پیکت در این کتاب با تحلیل داده‌های کشورهای توسعه‌یافته نشان دادند جوامع با نابرابری درآمدی بالاتر در بسیاری از شاخص‌های سلامت و اجتماعی عملکرد بدتری دارند."
+  },
+  {
+    q: "یافته اصلی «فرضیه درآمد نسبی» چیست؟",
+    opts: {
+      a: "فقط سطح مطلق درآمد بر سلامت اثر دارد",
+      b: "شکاف نسبی میان طبقات (نابرابری) حتی مستقل از سطح مطلق ثروت، بر سلامت جامعه اثر منفی دارد",
+      c: "نابرابری هیچ اثری بر سلامت ندارد",
+      d: "درآمد بالا همیشه تضمین‌کننده سلامت است"
+    },
+    correct: "b",
+    fb: "این فرضیه نشان می‌دهد جوامعی با نابرابری بالاتر، حتی اگر ثروتمندتر باشند، می‌توانند شاخص‌های سلامت ضعیف‌تری نسبت به جوامع با توزیع عادلانه‌تر داشته باشند."
+  },
+  {
+    q: "«فرضیه محیط روان‌اجتماعی» چه مکانیسمی را برای تبیین اثر نابرابری بر سلامت پیشنهاد می‌کند؟",
+    opts: {
+      a: "اثر مستقیم ویروس‌ها بر بدن",
+      b: "استرس مزمن ناشی از مقایسه اجتماعی و رتبه اجتماعی پایین",
+      c: "افزایش مستقیم دما در مناطق نابرابر",
+      d: "کاهش جمعیت در مناطق نابرابر"
+    },
+    correct: "b",
+    fb: "این فرضیه نشان می‌دهد در جوامع نابرابر، استرس مزمن ناشی از مقایسه اجتماعی مسیرهای زیستی و رفتاری آسیب‌زا را فعال می‌کند."
+  },
+  {
+    q: "در مقایسه ژاپن و آمریکا در متن درس، چه نتیجه‌ای گرفته شد؟",
+    opts: {
+      a: "آمریکا با ثروت بیشتر همیشه سلامت بهتری دارد",
+      b: "ژاپن با نابرابری کمتر، در بسیاری شاخص‌های سلامت اجتماعی عملکرد بهتری دارد",
+      c: "دو کشور در همه شاخص‌ها یکسان‌اند",
+      d: "ثروت ملی تنها عامل مؤثر بر سلامت است"
+    },
+    correct: "b",
+    fb: "این مقایسه مصداق تجربی روشنی از فرضیه ویلکینسون است: نابرابری کمتر می‌تواند حتی با ثروت ملی کمتر، به سلامت جمعی بهتر بینجامد."
+  },
+  {
+    q: "طرح تأمین دارو و درمان بیماران خاص در ایران با چه هدفی طراحی شده است؟",
+    opts: {
+      a: "افزایش هزینه درمان برای بیماران",
+      b: "کاهش بار مالی مضاعف درمان‌های پرهزینه بر بیماران خاص",
+      c: "حذف کامل بیمه سلامت",
+      d: "محدود کردن دسترسی به داروهای وارداتی"
+    },
+    correct: "b",
+    fb: "هدف این طرح‌ها کاهش هزینه‌های سرسام‌آور درمان بیماران خاص و کاهش خطر فقر ناشی از بیماری است."
+  },
+  {
+    q: "مثال بیمار دیالیزی روستایی در متن درس چه نکته‌ای را نشان می‌دهد؟",
+    opts: {
+      a: "دیالیز فقط در روستاها انجام می‌شود",
+      b: "تقاطع نابرابری جغرافیایی و بار بیماری خاص می‌تواند مشکلات را مضاعف کند",
+      c: "بیماران روستایی هزینه کمتری می‌پردازند",
+      d: "دسترسی به دیالیز در همه مناطق یکسان است"
+    },
+    correct: "b",
+    fb: "این مثال نشان می‌دهد بیمار روستایی علاوه بر هزینه درمان، بار اضافی سفر و دسترسی محدود را نیز تحمل می‌کند که وضعیت او را دشوارتر از بیمار شهری مشابه می‌کند."
+  },
+  {
+    q: "از منظر ویلکینسون و پیکت، کدام شاخص‌ها با نابرابری بالا در جوامع همبستگی نشان می‌دهند؟",
+    opts: {
+      a: "فقط بیماری‌های قلبی",
+      b: "طیف وسیعی از شاخص‌ها شامل امید به زندگی، سلامت روان، خشونت و اعتماد اجتماعی",
+      c: "فقط نرخ تورم اقتصادی",
+      d: "فقط تعداد پزشکان"
+    },
+    correct: "b",
+    fb: "مطالعه آن‌ها نشان داد نابرابری بالا با طیف گسترده‌ای از شاخص‌های نامطلوب اجتماعی و سلامتی همبستگی دارد، نه فقط یک بیماری خاص."
+  },
+  {
+    q: "چرا سیاست‌گذاران سلامت باید علاوه بر «سطح فقر»، به «میزان نابرابری» نیز توجه کنند؟",
+    opts: {
+      a: "زیرا نابرابری هیچ ارتباطی با سلامت ندارد",
+      b: "زیرا شواهد نشان می‌دهد نابرابری مستقل از سطح مطلق فقر می‌تواند سلامت جمعی را تحت تأثیر قرار دهد",
+      c: "زیرا فقر مطلق مهم‌تر از هر عامل دیگری است",
+      d: "زیرا اندازه‌گیری نابرابری غیرممکن است"
+    },
+    correct: "b",
+    fb: "فرضیه درآمد نسبی و شواهد تجربی متعدد نشان می‌دهند که کاهش شکاف طبقاتی، فراتر از صرف کاهش فقر مطلق، برای ارتقای سلامت جامعه ضروری است."
+  },
+  {
+    q: "طبق برآوردهای WHO، در برخی کشورهای کم‌درآمد چند درصد داروهای موجود در بازار تقلبی یا زیراستاندارد هستند؟",
+    opts: {
+      a: "حدود یک درصد",
+      b: "حدود ۱۰ درصد",
+      c: "حدود ۵۰ درصد",
+      d: "حدود ۹۰ درصد"
+    },
+    correct: "b",
+    fb: "طبق برآوردهای WHO، در برخی کشورهای کم‌درآمد تا ۱۰ درصد داروهای موجود در بازار می‌توانند تقلبی یا زیراستاندارد باشند."
+  },
+  {
+    q: "کدام یک از عوامل زمینه‌ساز اصلی شکل‌گیری مافیای دارو نیست؟",
+    opts: {
+      a: "کمبود دارو در بازار رسمی",
+      b: "سود بسیار بالای دارو نسبت به هزینه تولید تقلبی",
+      c: "نظارت بسیار دقیق و بی‌نقص در تمام زنجیره توزیع",
+      d: "تقاضای فوری بیماران در شرایط کمبود"
+    },
+    correct: "c",
+    fb: "برعکس، ضعف نظارتی در بخشی از زنجیره توزیع (نه نظارت بی‌نقص) یکی از مهم‌ترین عوامل زمینه‌ساز شکل‌گیری بازار سیاه دارو است."
+  },
+  {
+    q: "مصرف آنتی‌بیوتیک‌های تقلبی با دوز نادرست می‌تواند به چه پیامدی منجر شود؟",
+    opts: {
+      a: "افزایش اثربخشی درمان",
+      b: "مقاومت دارویی و شکست درمان عفونت‌ها",
+      c: "کاهش قیمت داروهای اصلی",
+      d: "افزایش تولید داخلی دارو"
+    },
+    correct: "b",
+    fb: "آنتی‌بیوتیک‌های تقلبی با دوز نادرست یا فاقد ماده مؤثره می‌توانند به شکل‌گیری مقاومت میکروبی و شکست درمان عفونت‌ها بینجامند."
+  },
+  {
+    q: "«پزشکی تجارتی» (Commercialized Medicine) به چه روندی اشاره دارد؟",
+    opts: {
+      a: "افزایش خدمات رایگان دولتی",
+      b: "تبدیل سلامت و درمان به کالایی برای کسب سود در بازار",
+      c: "افزایش نظارت دولتی بر درمان",
+      d: "کاهش تعداد بیمارستان‌های خصوصی"
+    },
+    correct: "b",
+    fb: "پزشکی تجارتی به روندی گفته می‌شود که در آن منطق بازار و سودآوری، به‌جای نیاز واقعی بیمار، محرک اصلی ارائه خدمات درمانی می‌شود."
+  },
+  {
+    q: "از منظر جامعه‌شناسی تضادگرایی، پزشکی تجارتی نمونه بارز کدام فرایند است؟",
+    opts: {
+      a: "دموکراتیزه‌شدن سلامت",
+      b: "کالایی‌شدن (Commodification) یک حق اجتماعی",
+      c: "افزایش عدالت در دسترسی به درمان",
+      d: "تقویت خدمات پیشگیرانه"
+    },
+    correct: "b",
+    fb: "وقتی درمان بر اساس توان مالی و نه نیاز واقعی تخصیص می‌یابد، سلامت به‌عنوان یک حق اجتماعی به کالا تبدیل می‌شود؛ این هسته نقد تضادگرایانه پزشکی تجارتی است."
+  },
+  {
+    q: "کدام یک نمونه‌ای از تجلی پزشکی تجارتی در عمل است؟",
+    opts: {
+      a: "افزایش خدمات پیشگیرانه رایگان",
+      b: "افزایش ویزیت‌ها و آزمایش‌های غیرضروری برای افزایش درآمد",
+      c: "کاهش تبلیغات پزشکی گمراه‌کننده",
+      d: "توزیع متوازن پزشکان متخصص در سراسر کشور"
+    },
+    correct: "b",
+    fb: "تجویز آزمایش یا ویزیت غیرضروری با انگیزه افزایش درآمد، یکی از مصادیق شناخته‌شده پزشکی تجارتی است."
+  },
+  {
+    q: "رشد بی‌رویه کلینیک‌های زیبایی در کنار کمبود پزشک متخصص در تخصص‌های ضروری، نشان‌دهنده چیست؟",
+    opts: {
+      a: "توزیع متوازن منابع پزشکی در کشور",
+      b: "توزیع نامتوازن منابع پزشکی به سمت خدمات پرسود به‌جای خدمات ضروری",
+      c: "کاهش تقاضا برای خدمات زیبایی",
+      d: "نبود هیچ مشکلی در نظام سلامت"
+    },
+    correct: "b",
+    fb: "این پدیده نمونه‌ای عینی از اولویت‌یافتن خدمات پرسود (مانند جراحی زیبایی) بر خدمات ضروری اما کم‌سودتر در نظام سلامت است."
+  },
+  {
+    q: "شرایط تحریم و کمبود ارزی چگونه می‌تواند زمینه‌ساز فعالیت مافیای دارو شود؟",
+    opts: {
+      a: "با افزایش تولید داخلی دارو",
+      b: "با ایجاد کمبود در بازار رسمی و انگیزه سودجویی در بازار غیررسمی",
+      c: "با کاهش تقاضای دارو",
+      d: "با افزایش نظارت دولتی"
+    },
+    correct: "b",
+    fb: "کمبود دارو در بازار رسمی به دلیل تحریم یا مشکلات ارزی، فضایی برای سودجویی و ورود دارو از کانال‌های غیررسمی و گاه تقلبی فراهم می‌کند."
+  },
+  {
+    q: "چرا بیماران خاص و صعب‌العلاج بیشتر در معرض خطر مافیای دارو قرار دارند؟",
+    opts: {
+      a: "زیرا نیاز فوری و مستمر به دارو دارند و در شرایط کمبود به بازار سیاه پناه می‌برند",
+      b: "زیرا این بیماران معمولاً ثروتمند هستند",
+      c: "زیرا هیچ نیازی به دارو ندارند",
+      d: "زیرا بیمه کامل دارند و نیازی به خرید ندارند"
+    },
+    correct: "a",
+    fb: "وابستگی حیاتی این بیماران به داروهای خاص و مستمر، آن‌ها را در شرایط کمبود بازار رسمی، آسیب‌پذیرتر در برابر بازار سیاه می‌کند."
+  },
+  {
+    q: "مبارزه مؤثر با مافیای دارو و پزشکی تجارتی عمدتاً نیازمند چه رویکردی است؟",
+    opts: {
+      a: "واگذاری کامل نظارت به بازار آزاد",
+      b: "تقویت نظارت نهادی، شفافیت زنجیره توزیع و سیاست‌گذاری فعال دولتی",
+      c: "حذف کامل بخش خصوصی درمانی",
+      d: "نادیده‌گرفتن مسئله به‌عنوان امری فردی"
+    },
+    correct: "b",
+    fb: "مقابله با این پدیده‌ها نیازمند تقویت نظام نظارتی، شفافیت در زنجیره تأمین دارو و سیاست‌گذاری فعال برای بازگرداندن اولویت به نیاز واقعی بیمار است."
+  },
+  {
+    q: "تبلیغات مستقیم دارو به مصرف‌کننده (DTC Advertising) در کدام کشور به‌طور گسترده قانونی است؟",
+    opts: {
+      a: "آلمان",
+      b: "ایالات متحده آمریکا",
+      c: "ژاپن",
+      d: "کانادا"
+    },
+    correct: "b",
+    fb: "آمریکا و نیوزیلند از معدود کشورهایی هستند که تبلیغات مستقیم دارو به مصرف‌کننده در آن‌ها به‌طور گسترده مجاز است."
+  },
+  {
+    q: "«تعارض منافع» (Conflict of Interest) در حوزه پزشکی به چه وضعیتی اشاره دارد؟",
+    opts: {
+      a: "اختلاف علمی میان دو پزشک",
+      b: "تأثیر احتمالی منافع مالی/شخصی بر قضاوت حرفه‌ای بی‌طرفانه پزشک",
+      c: "نبود هیچ ارتباطی میان پزشک و بیمار",
+      d: "افزایش دستمزد پزشکان دولتی"
+    },
+    correct: "b",
+    fb: "تعارض منافع زمانی رخ می‌دهد که منافع مالی یا شخصی، مانند دریافت هدیه یا سفر از یک شرکت دارویی، بتواند بر تصمیم حرفه‌ای پزشک اثر بگذارد."
+  },
+  {
+    q: "«تشخیص بیش‌ازحد» (Overdiagnosis) به چه معناست؟",
+    opts: {
+      a: "تشخیص سریع و دقیق بیماری",
+      b: "شناسایی حالتی به‌عنوان بیماری که هرگز موجب علامت یا آسیبی نمی‌شد",
+      c: "عدم توانایی تشخیص بیماری",
+      d: "تشخیص همزمان چند بیماری"
+    },
+    correct: "b",
+    fb: "در تشخیص بیش‌ازحد، حالتی به‌عنوان بیماری برچسب می‌خورد که در طول عمر فرد هرگز علامت‌دار یا آسیب‌زا نمی‌شد، اما درمان آن عوارض و هزینه به همراه دارد."
+  },
+  {
+    q: "«پزشکی تدافعی» (Defensive Medicine) چه رفتاری را در پزشکان توصیف می‌کند؟",
+    opts: {
+      a: "امتناع کامل از تجویز آزمایش",
+      b: "تجویز آزمایش‌ها یا مداخلات اضافی برای پرهیز از شکایت قضایی",
+      c: "تمرکز صرف بر پیشگیری",
+      d: "کاهش هزینه‌های درمانی بیمار"
+    },
+    correct: "b",
+    fb: "در پزشکی تدافعی، پزشک به‌جای صرفاً نیاز بالینی، از ترس شکایت احتمالی، آزمایش یا مداخله اضافی تجویز می‌کند."
+  },
+  {
+    q: "نظام پرداخت «کارانه» (Fee-for-Service) چگونه می‌تواند به درمان غیرضروری دامن بزند؟",
+    opts: {
+      a: "با کاهش انگیزه پزشک برای ارائه خدمت بیشتر",
+      b: "با ایجاد انگیزه مالی برای افزایش تعداد خدمات ارائه‌شده",
+      c: "با حذف کامل نقش پزشک در تصمیم‌گیری",
+      d: "با افزایش زمان ویزیت هر بیمار"
+    },
+    correct: "b",
+    fb: "در نظام کارانه، هرچه خدمات بیشتری ارائه شود درآمد پزشک بیشتر می‌شود، که می‌تواند انگیزه‌ای برای افزایش خدمات غیرضروری ایجاد کند."
+  },
+  {
+    q: "جنبش «Choosing Wisely» با چه هدفی راه‌اندازی شد؟",
+    opts: {
+      a: "افزایش تجویز دارو",
+      b: "کاهش مداخلات پزشکی غیرضروری از طریق آموزش پزشکان و بیماران",
+      c: "افزایش تبلیغات دارویی",
+      d: "حذف کامل بیمه سلامت"
+    },
+    correct: "b",
+    fb: "این جنبش توسط انجمن‌های تخصصی پزشکی برای کاهش آزمایش‌ها و درمان‌های غیرضروری از طریق آگاهی‌بخشی به پزشکان و بیماران شکل گرفت."
+  },
+  {
+    q: "چرا بسیاری از راهنماهای بالینی جدید، غربالگری همگانی PSA برای سرطان پروستات را دیگر توصیه نمی‌کنند؟",
+    opts: {
+      a: "زیرا آزمایش PSA بسیار گران است",
+      b: "زیرا این غربالگری منجر به تشخیص و درمان بیش‌ازحد تومورهای کندرشد بدون فایده واقعی می‌شود",
+      c: "زیرا سرطان پروستات دیگر وجود ندارد",
+      d: "زیرا این آزمایش دقت بسیار بالایی دارد"
+    },
+    correct: "b",
+    fb: "شواهد نشان داد بسیاری از موارد کشف‌شده با این غربالگری هرگز علامت‌دار نمی‌شدند، در حالی‌که درمان آن‌ها عوارض جدی به همراه داشت؛ نمونه کلاسیک تشخیص بیش‌ازحد."
+  },
+  {
+    q: "چگونه گسترش تعریف بالینی «افسردگی» می‌تواند با پزشکی تجارتی و تبلیغات دارویی مرتبط باشد؟",
+    opts: {
+      a: "هیچ ارتباطی وجود ندارد",
+      b: "گسترده کردن مرز بیماری می‌تواند بازار مصرف داروهای ضدافسردگی را افزایش دهد",
+      c: "افسردگی هرگز قابل درمان دارویی نیست",
+      d: "این فقط یک موضوع کاملاً زیستی است"
+    },
+    correct: "b",
+    fb: "برخی پژوهشگران معتقدند گسترش تعریف بالینی افسردگی به تجربیات طبیعی غم، می‌تواند با انگیزه‌های تجاری صنعت دارو در پیوند باشد."
+  },
+  {
+    q: "کدام یک از راهکارهای مدیریت تعارض منافع در نظام‌های سلامت مدرن است؟",
+    opts: {
+      a: "ممنوعیت کامل هرگونه پژوهش دارویی",
+      b: "قوانین شفافیت برای افشای پرداخت‌های صنعت دارو به پزشکان",
+      c: "حذف کامل صنعت داروسازی",
+      d: "عدم نظارت بر تبلیغات دارویی"
+    },
+    correct: "b",
+    fb: "بسیاری از کشورها با الزام به افشای عمومی پرداخت‌ها و هدایای صنعت دارو به پزشکان، تلاش می‌کنند شفافیت و پاسخگویی را افزایش دهند."
+  },
+  {
+    q: "نقش یک متخصص آموزش بهداشت در مواجهه با تبلیغات دارویی گمراه‌کننده و تشخیص غیرضروری چیست؟",
+    opts: {
+      a: "ترویج بدون نقد تمام پیام‌های تبلیغاتی صنعت دارو",
+      b: "تقویت سواد سلامت عمومی برای ارزیابی نقادانه اطلاعات پزشکی و دارویی",
+      c: "نادیده گرفتن این موضوع به‌عنوان امری خارج از حوزه کاری",
+      d: "تشویق بیماران به درخواست هر آزمایش ممکن"
+    },
+    correct: "b",
+    fb: "یکی از نقش‌های کلیدی آموزش بهداشت، توانمندسازی عموم برای ارزیابی نقادانه اطلاعات سلامت و کاهش آسیب‌پذیری در برابر تبلیغات گمراه‌کننده است."
+  },
+  {
+    q: "کدام نهاد در ایران ماهیتی فرابخشی داشته و مسئول هماهنگی سیاست‌های اثرگذار بر سلامت در سایر وزارتخانه‌هاست؟",
+    opts: {
+      a: "سازمان نظام پزشکی",
+      b: "شورای عالی سلامت و امنیت غذایی",
+      c: "سازمان تأمین اجتماعی",
+      d: "سازمان غذا و دارو"
+    },
+    correct: "b",
+    fb: "شورای عالی سلامت و امنیت غذایی با ریاست رئیس‌جمهور، نهادی فرابخشی برای هماهنگی اثرات سیاست‌های سایر وزارتخانه‌ها بر سلامت است."
+  },
+  {
+    q: "رویکرد «سلامت در همه سیاست‌ها» (Health in All Policies) به چه معناست؟",
+    opts: {
+      a: "فقط وزارت بهداشت مسئول سلامت جامعه است",
+      b: "تصمیمات همه بخش‌ها (مسکن، حمل‌ونقل، اقتصاد) باید با اهداف سلامت هماهنگ باشند",
+      c: "سیاست‌گذاری سلامت باید صرفاً محلی باشد",
+      d: "سلامت هیچ ارتباطی با سایر سیاست‌ها ندارد"
+    },
+    correct: "b",
+    fb: "این رویکرد تأکید می‌کند که تصمیمات بسیاری از بخش‌های غیر از بهداشت نیز می‌توانند اثرات مهمی بر سلامت جامعه داشته باشند و باید هماهنگ شوند."
+  },
+  {
+    q: "مقررات بهداشتی بین‌المللی (IHR 2005) کشورهای عضو را به چه چیزی ملزم می‌کند؟",
+    opts: {
+      a: "پرداخت مالیات به WHO",
+      b: "توسعه ظرفیت شناسایی و گزارش‌دهی رویدادهای سلامت عمومی بین‌المللی",
+      c: "حذف کامل مرزهای کشوری",
+      d: "تولید اجباری واکسن داخلی"
+    },
+    correct: "b",
+    fb: "IHR چارچوبی حقوقی الزام‌آور است که کشورها را موظف به توسعه ظرفیت پایش، شناسایی و گزارش سریع رویدادهای سلامت عمومی با پتانسیل بین‌المللی می‌کند."
+  },
+  {
+    q: "صندوق جهانی مبارزه با ایدز/سل/مالاریا (Global Fund) چه نوع نهادی است؟",
+    opts: {
+      a: "نهادی صرفاً تحقیقاتی دانشگاهی",
+      b: "سازوکار مالی چندجانبه بین‌المللی برای مبارزه با این سه بیماری",
+      c: "شرکتی خصوصی تولید دارو",
+      d: "نهاد نظامی سازمان ملل"
+    },
+    correct: "b",
+    fb: "Global Fund یک سازوکار مالی چندجانبه بین‌المللی است که منابع قابل‌توجهی برای مبارزه با ایدز، سل و مالاریا در کشورهای نیازمند فراهم می‌کند."
+  },
+  {
+    q: "چرا دفتر منطقه‌ای مدیترانه شرقی WHO اولویت‌های ویژه‌ای در حوزه بیماری‌های غیرواگیر و بحران‌های انسانی تدوین کرده است؟",
+    opts: {
+      a: "زیرا این منطقه هیچ چالشی ندارد",
+      b: "به دلیل بار بالای بیماری‌های غیرواگیر و بحران‌های انسانی ناشی از درگیری‌های منطقه‌ای",
+      c: "زیرا این منطقه ثروتمندترین منطقه جهان است",
+      d: "زیرا جمعیت این منطقه رو به کاهش است"
+    },
+    correct: "b",
+    fb: "شرایط خاص این منطقه از جمله درگیری‌ها، آوارگی جمعیت و شیوع بالای بیماری‌های غیرواگیر، دلیل تدوین اولویت‌های بومی این دفتر منطقه‌ای است."
+  },
+  {
+    q: "در ارائه خدمات بهداشتی به پناهندگان افغان و عراقی در ایران، کدام نهاد بین‌المللی معمولاً همکاری می‌کند؟",
+    opts: {
+      a: "سازمان تجارت جهانی",
+      b: "کمیساریای عالی پناهندگان سازمان ملل (UNHCR)",
+      c: "بانک جهانی به‌تنهایی",
+      d: "ناتو"
+    },
+    correct: "b",
+    fb: "UNHCR نهاد اصلی سازمان ملل برای هماهنگی امور پناهندگان از جمله دسترسی آن‌ها به خدمات بهداشتی پایه است."
+  },
+  {
+    q: "اجرای غربالگری مسافران فرودگاه‌ها طی کووید-۱۹ و گزارش موارد مشکوک به WHO، نمونه‌ای از اجرای کدام سازوکار است؟",
+    opts: {
+      a: "بیمه سلامت همگانی",
+      b: "مقررات بهداشتی بین‌المللی (IHR)",
+      c: "الگوی بیوریج",
+      d: "نقش بیمار پارسونز"
+    },
+    correct: "b",
+    fb: "این اقدامات دقیقاً بخشی از الزامات IHR برای شناسایی و گزارش سریع رویدادهای سلامت با پتانسیل انتشار بین‌المللی است."
+  },
+  {
+    q: "کدام نهاد در ایران مسئول تخصیص منابع مالی کلان به بخش سلامت است؟",
+    opts: {
+      a: "سازمان نظام پزشکی",
+      b: "سازمان برنامه و بودجه کشور",
+      c: "هلال‌احمر",
+      d: "کمیته امداد امام خمینی"
+    },
+    correct: "b",
+    fb: "سازمان برنامه و بودجه کشور نقش کلیدی در تخصیص بودجه سالانه به بخش سلامت و سایر بخش‌های دولتی دارد."
+  },
+  {
+    q: "سازمان همکاری اسلامی و اتحادیه عرب در حوزه سلامت چه نقشی می‌توانند ایفا کنند؟",
+    opts: {
+      a: "جایگزینی کامل نقش WHO",
+      b: "تدوین بیانیه‌ها و برنامه‌های مشترک منطقه‌ای در زمینه بیماری‌های غیرواگیر",
+      c: "حذف نهادهای ملی سلامت",
+      d: "تحریم کشورهای عضو خود"
+    },
+    correct: "b",
+    fb: "این سازمان‌های منطقه‌ای گاه در قالب برنامه‌های مشترک، به هماهنگی سیاست‌های سلامت میان کشورهای عضو کمک می‌کنند، هر چند نقش اصلی هماهنگی جهانی همچنان با WHO است."
+  },
+  {
+    q: "تعامل سه‌سطحی ملی-منطقه‌ای-جهانی در سیاست‌گذاری سلامت چرا اهمیت دارد؟",
+    opts: {
+      a: "زیرا سطوح مختلف همیشه باید مستقل از هم عمل کنند",
+      b: "زیرا بسیاری از تهدیدات سلامت (بیماری‌های واگیر، بحران آوارگان) ماهیت فرامرزی دارند و نیازمند هماهنگی چندسطحی‌اند",
+      c: "زیرا سطح ملی هیچ اهمیتی ندارد",
+      d: "زیرا فقط سطح جهانی معتبر است"
+    },
+    correct: "b",
+    fb: "از آنجا که بسیاری از چالش‌های سلامت مرزهای ملی را نمی‌شناسند، هماهنگی مؤثر میان سطوح جهانی، منطقه‌ای و ملی برای پاسخ کارآمد ضروری است."
+  },
+  {
+    q: "مراحل کلی چرخه سیاست‌گذاری سلامت به ترتیب کدام‌اند؟",
+    opts: {
+      a: "اجرا، تصویب، شناسایی مسئله",
+      b: "شناسایی مسئله، تدوین دستور کار، تدوین گزینه‌ها، تصمیم‌گیری، اجرا، پایش و ارزیابی",
+      c: "فقط تصویب قانون توسط مجلس",
+      d: "فقط پایش نهایی بدون اجرا"
+    },
+    correct: "b",
+    fb: "این چرخه استاندارد سیاست‌گذاری عمومی، از شناسایی مسئله تا ارزیابی نهایی سیاست را در بر می‌گیرد و می‌تواند تکرار و بازنگری شود."
+  },
+  {
+    q: "«سیاست‌گذاری مبتنی بر شواهد» (Evidence-Based Policy Making) بر چه چیزی تأکید دارد؟",
+    opts: {
+      a: "تصمیم‌گیری صرفاً بر اساس فشار سیاسی",
+      b: "اتخاذ تصمیمات سیاستی بر پایه داده‌ها و شواهد علمی معتبر",
+      c: "نادیده گرفتن کامل نظر متخصصان",
+      d: "تصمیم‌گیری بدون هیچ‌گونه ارزیابی"
+    },
+    correct: "b",
+    fb: "این رویکرد تلاش می‌کند سیاست‌های سلامت را بر مبنای شواهد پژوهشی معتبر به‌جای صرفاً منافع سیاسی یا فشار گروه‌های خاص طراحی کند."
+  },
+  {
+    q: "سند تحول نظام سلامت ایران از چه سالی اجرا شد و یکی از اهداف اصلی آن چه بود؟",
+    opts: {
+      a: "از ۱۳۸۰ - افزایش پرداخت از جیب مردم",
+      b: "از ۱۳۹۳ - کاهش پرداخت از جیب مردم و ارتقای کیفیت خدمات بستری",
+      c: "از ۱۴۰۰ - حذف کامل بیمه سلامت",
+      d: "از ۱۳۷۰ - افزایش تعداد پزشکان زیبایی"
+    },
+    correct: "b",
+    fb: "سند تحول نظام سلامت از سال ۱۳۹۳ با اهدافی نظیر کاهش پرداخت از جیب مردم، ارتقای کیفیت بستری و توسعه پزشک خانواده اجرا شد."
+  },
+  {
+    q: "یکی از چالش‌های شناسایی‌شده در ارزیابی طرح تحول نظام سلامت چه بود؟",
+    opts: {
+      a: "کاهش کامل هزینه‌های دولت",
+      b: "فشار مالی سنگین بر بودجه دولت و پایداری ناکافی منابع",
+      c: "نبود هیچ تغییری در مراجعه به بیمارستان‌ها",
+      d: "افزایش پرداخت از جیب مردم"
+    },
+    correct: "b",
+    fb: "با وجود موفقیت‌های اولیه، فشار مالی زیاد بر بودجه دولتی و چالش پایداری منابع، از محدودیت‌های اصلی این طرح در ارزیابی‌ها بود."
+  },
+  {
+    q: "هدف اصلی طرح پزشک خانواده و نظام ارجاع در ایران چه بود؟",
+    opts: {
+      a: "افزایش مراجعه مستقیم بیماران به متخصصان بدون ارجاع",
+      b: "بهبود دسترسی به خدمات اولیه سلامت و کاهش مراجعات غیرضروری به سطوح تخصصی",
+      c: "حذف کامل مراکز بهداشتی روستایی",
+      d: "افزایش هزینه خدمات سلامت"
+    },
+    correct: "b",
+    fb: "این طرح با هدف تقویت مراقبت‌های اولیه سلامت و مدیریت منطقی مسیر ارجاع بیمار از سطح اول به سطوح تخصصی‌تر طراحی شد."
+  },
+  {
+    q: "طبق ارزیابی‌های میدانی، موفقیت طرح پزشک خانواده در مناطق مختلف به چه چیزی وابسته بود؟",
+    opts: {
+      a: "فقط به تصویب قانون در مجلس",
+      b: "به کیفیت اجرا و تخصیص منابع در سطح محلی",
+      c: "به آب‌وهوای منطقه",
+      d: "به تعداد جمعیت شهری کشور"
+    },
+    correct: "b",
+    fb: "این نمونه نشان داد صرف تصویب یک سیاست کافی نیست؛ کیفیت اجرا و کفایت منابع تخصیص‌یافته در سطح محلی، تعیین‌کننده میزان موفقیت واقعی آن است."
+  },
+  {
+    q: "چرا لابی‌گری بخش خصوصی درمانی و دارویی می‌تواند در فرایند سیاست‌گذاری سلامت اهمیت داشته باشد؟",
+    opts: {
+      a: "زیرا هیچ تأثیری بر تصمیمات ندارد",
+      b: "زیرا می‌تواند بر تدوین سیاست به نفع منافع اقتصادی خاص اثر بگذارد",
+      c: "زیرا فقط دولت تصمیم‌گیرنده نهایی است",
+      d: "زیرا بخش خصوصی هرگز در سیاست‌گذاری مشارکت نمی‌کند"
+    },
+    correct: "b",
+    fb: "بخش خصوصی می‌تواند از طریق کانال‌های لابی‌گری بر شکل‌گیری سیاست‌های سلامت اثرگذار باشد که لزوماً هم‌راستا با منافع عمومی نیست؛ این یکی از دلایل اهمیت شفافیت در فرایند سیاست‌گذاری است."
+  },
+  {
+    q: "چرا سیاست‌گذاری سلامت باید فرایندی «پویا و قابل بازنگری» تلقی شود؟",
+    opts: {
+      a: "زیرا یک سیاست، پس از تصویب هرگز نباید تغییر کند",
+      b: "زیرا شرایط اجرا و پیامدهای بلندمدت می‌توانند نیاز به اصلاح سیاست را آشکار کنند",
+      c: "زیرا سیاست‌های سلامت هیچ‌گاه ارزیابی نمی‌شوند",
+      d: "زیرا فقط سیاست‌های اقتصادی نیاز به بازنگری دارند"
+    },
+    correct: "b",
+    fb: "همان‌طور که تجربه سند تحول نظام سلامت نشان داد، موفقیت اولیه یک سیاست تضمین‌کننده کارایی بلندمدت آن نیست و ارزیابی مستمر برای اصلاح ضروری است."
+  },
+  {
+    q: "استفاده از شاخص‌های پیش و پس از اجرای یک سیاست سلامت به چه منظوری ضروری است؟",
+    opts: {
+      a: "افزایش حجم گزارش‌های اداری",
+      b: "اندازه‌گیری اثر واقعی مداخله فراتر از روندهای طبیعی زمانی",
+      c: "کاهش شفافیت در ارزیابی",
+      d: "حذف نیاز به پژوهش علمی"
+    },
+    correct: "b",
+    fb: "بدون مقایسه وضعیت پیش و پس از سیاست، نمی‌توان اثر واقعی مداخله را از تغییرات طبیعی یا سایر عوامل مداخله‌گر تفکیک کرد."
+  },
+  {
+    q: "بیماری‌های غیرواگیر (قلبی-عروقی، سرطان، دیابت) در حال حاضر مسئول چند درصد از مرگ‌ومیرهای جهانی هستند؟",
+    opts: {
+      a: "حدود ۱۰ درصد",
+      b: "حدود ۳۰ درصد",
+      c: "بیش از ۷۰ درصد",
+      d: "حدود ۵۰ درصد"
+    },
+    correct: "c",
+    fb: "طبق آمار سازمان بهداشت جهانی، بیماری‌های غیرواگیر اکنون عامل بیش از ۷۰ درصد مرگ‌ومیرهای جهانی هستند که نشان‌دهنده گذار اپیدمیولوژیک جهانی است."
+  },
+  {
+    q: "WHO مقاومت آنتی‌بیوتیکی را چگونه توصیف می‌کند؟",
+    opts: {
+      a: "مشکلی جزئی و بدون اهمیت جهانی",
+      b: "یکی از ۱۰ تهدید بزرگ سلامت جهانی",
+      c: "پدیده‌ای محدود به یک کشور خاص",
+      d: "مشکلی که به‌طور کامل حل شده است"
+    },
+    correct: "b",
+    fb: "سازمان بهداشت جهانی مقاومت آنتی‌بیوتیکی رو به رشد را یکی از مهم‌ترین و جدی‌ترین تهدیدهای سلامت جهانی معرفی کرده است."
+  },
+  {
+    q: "چرا رویکرد جامعه‌شناختی به باورهای عامیانه سلامت، به‌جای تحقیر این باورها، بر ارتقای سواد سلامت تأکید می‌کند؟",
+    opts: {
+      a: "زیرا باورهای عامیانه همیشه درست هستند",
+      b: "زیرا رویکرد جامعه‌شناختی توصیه می‌کند به‌جای تحقیر، سواد سلامت و اعتماد به نظام رسمی تقویت شود",
+      c: "زیرا این باورها هیچ‌گاه قابل تغییر نیستند",
+      d: "زیرا این باورها هیچ خطری ندارند"
+    },
+    correct: "b",
+    fb: "رویکرد مؤثرتر، افزایش سواد سلامت، دسترسی و اعتمادپذیری نظام رسمی است تا صرف تحقیر باورهای فرهنگی که می‌تواند واکنش دفاعی و کاهش همکاری ایجاد کند."
+  },
+  {
+    q: "در مثال تأخیر تشخیص اوتیسم یا صرع، مهم‌ترین آسیب ناشی از تأخیر چیست؟",
+    opts: {
+      a: "افزایش هزینه بیمه",
+      b: "از دست رفتن فرصت مداخلات زودهنگام و مؤثر توان‌بخشی",
+      c: "بهبود سریع‌تر کودک",
+      d: "کاهش نیاز به مراجعه پزشکی"
+    },
+    correct: "b",
+    fb: "در این اختلالات، مداخله زودهنگام تأثیر بسیار زیادی بر پیش‌آگهی دارد و تأخیر ناشی از مراجعه به شفاهنده غیرعلمی می‌تواند این فرصت طلایی را از بین ببرد."
+  },
+  {
+    q: "زردی شدید نوزادی در صورت عدم درمان به‌موقع چه خطری برای نوزاد دارد؟",
+    opts: {
+      a: "هیچ خطری ندارد",
+      b: "خطر آسیب مغزی",
+      c: "افزایش قد نوزاد",
+      d: "بهبود خودبه‌خودی سریع‌تر"
+    },
+    correct: "b",
+    fb: "زردی شدید نوزادی در صورت عدم تشخیص و درمان به‌موقع می‌تواند منجر به آسیب مغزی جدی و ماندگار شود؛ به همین دلیل تأخیر ناشی از باورهای عامیانه بسیار خطرناک است."
+  },
+  {
+    q: "کدام یک از راهکارهای اصلی اجتماعی مقابله با آسیب‌های سلامت در سطح ملی است؟",
+    opts: {
+      a: "حذف کامل مراقبت‌های اولیه سلامت",
+      b: "سیاست‌های پیشگیری اولیه و تقویت آموزش بهداشت مبتنی بر جامعه",
+      c: "نادیده گرفتن نابرابری‌های منطقه‌ای",
+      d: "کاهش سرمایه‌گذاری در پیشگیری"
+    },
+    correct: "b",
+    fb: "راهکارهای مؤثر شامل پیشگیری اولیه (مانند کنترل دخانیات و اصلاح تغذیه)، تقویت مراقبت‌های اولیه سلامت و آموزش بهداشت مبتنی بر جامعه است."
+  },
+  {
+    q: "سازمان خواربار و کشاورزی ملل متحد (FAO) امنیت غذایی را دارای چند بُعد اصلی می‌داند؟",
+    opts: {
+      a: "دو بُعد",
+      b: "سه بُعد",
+      c: "چهار بُعد",
+      d: "شش بُعد"
+    },
+    correct: "c",
+    fb: "FAO امنیت غذایی را در چهار بُعد دسترسی فیزیکی، دسترسی اقتصادی، بهره‌برداری و پایداری تعریف می‌کند."
+  },
+  {
+    q: "بُعد «بهره‌برداری» (Utilization) در تعریف امنیت غذایی به چه چیزی اشاره دارد؟",
+    opts: {
+      a: "وجود فیزیکی غذا در بازار",
+      b: "توان مالی خرید غذا",
+      c: "کیفیت تغذیه‌ای و ایمنی غذایی که فرد مصرف می‌کند",
+      d: "ثبات قیمت غذا در طول سال"
+    },
+    correct: "c",
+    fb: "بهره‌برداری به کیفیت واقعی تغذیه و ایمنی غذایی که فرد مصرف می‌کند اشاره دارد، فراتر از صرف در دسترس بودن آن."
+  },
+  {
+    q: "چرا ناامنی غذایی می‌تواند متناقض‌نما هم به سوءتغذیه و هم به چاقی بینجامد؟",
+    opts: {
+      a: "زیرا این دو وضعیت هرگز هم‌زمان رخ نمی‌دهند",
+      b: "زیرا خانوارهای کم‌درآمد ممکن است به مواد غذایی ارزان اما پرکالری و کم‌ارزش روی آورند",
+      c: "زیرا چاقی همیشه نشانه ثروت است",
+      d: "زیرا سوءتغذیه فقط در کودکان رخ می‌دهد"
+    },
+    correct: "b",
+    fb: "محدودیت مالی می‌تواند خانوار را به سمت غذاهای ارزان قیمت اما با کالری بالا و ارزش تغذیه‌ای پایین سوق دهد که هم‌زمان کمبود ریزمغذی‌ها و افزایش وزن ایجاد می‌کند."
+  },
+  {
+    q: "«گذار تغذیه‌ای» (Nutrition Transition) به چه فرایندی اشاره دارد؟",
+    opts: {
+      a: "بازگشت به رژیم‌های سنتی",
+      b: "تغییر الگوی غذایی از رژیم سنتی به رژیم غربی‌شده با غذاهای فرآوری‌شده",
+      c: "افزایش مصرف حبوبات و غلات کامل",
+      d: "کاهش شهرنشینی"
+    },
+    correct: "b",
+    fb: "گذار تغذیه‌ای توصیف‌کننده تغییر تدریجی رژیم غذایی جوامع در حال توسعه از الگوهای سنتی به الگوهای غربی‌شده پرکالری و فرآوری‌شده است."
+  },
+  {
+    q: "کدام یک از پیامدهای سلامتی اصلی گذار تغذیه‌ای در ایران است؟",
+    opts: {
+      a: "کاهش شیوع چاقی",
+      b: "افزایش چشمگیر چاقی، دیابت نوع دو و بیماری‌های قلبی-عروقی",
+      c: "کاهش نیاز به فعالیت بدنی",
+      d: "بهبود خودکار سلامت جامعه"
+    },
+    correct: "b",
+    fb: "گذار تغذیه‌ای همراه با کاهش فعالیت بدنی، از عوامل اصلی افزایش بیماری‌های غیرواگیر مرتبط با تغذیه در ایران است."
+  },
+  {
+    q: "مفهوم «کالایی‌شدن بدن» (Commodification of the Body) به چه چیزی اشاره دارد؟",
+    opts: {
+      a: "افزایش ارزش غذایی بدن",
+      b: "تبدیل بدن و ظاهر انسان به موضوعی برای مصرف و بازار زیبایی",
+      c: "حذف کامل صنعت زیبایی",
+      d: "افزایش سلامت جسمی افراد"
+    },
+    correct: "b",
+    fb: "این مفهوم نشان می‌دهد چگونه استانداردهای زیبایی رسانه‌ای، بدن انسان را به کالایی برای تولید و مصرف در بازار تبدیل می‌کنند."
+  },
+  {
+    q: "طبق برخی گزارش‌های بین‌المللی، ایران در آمار جهانی کدام نوع جراحی زیبایی رتبه بالایی دارد؟",
+    opts: {
+      a: "جراحی قلب باز",
+      b: "جراحی بینی",
+      c: "جراحی مغز و اعصاب",
+      d: "پیوند کلیه"
+    },
+    correct: "b",
+    fb: "برخی گزارش‌های بین‌المللی ایران را در صدر آمار جهانی جراحی بینی قرار داده‌اند که از منظر جامعه‌شناختی با فشار رسانه‌ای و کالایی‌شدن بدن تحلیل می‌شود."
+  },
+  {
+    q: "کدام یک از عوارض احتمالی رژیم‌های غذایی افراطی و مخرب برای رسیدن به اندام «ایده‌آل» رسانه‌ای است؟",
+    opts: {
+      a: "بهبود کامل سلامت گوارشی",
+      b: "مشکلات گوارشی و در موارد حاد اختلالات خوردن",
+      c: "افزایش قد فرد",
+      d: "تقویت عزت‌نفس در همه موارد"
+    },
+    correct: "b",
+    fb: "رژیم‌های نامتوازن و افراطی می‌توانند به مشکلات گوارشی، کمبودهای تغذیه‌ای و در موارد شدید به اختلالات خوردن مانند بی‌اشتهایی یا پراشتهایی روانی بینجامند."
+  },
+  {
+    q: "چرا غذا در بسیاری فرهنگ‌ها فراتر از نیاز زیستی صرف اهمیت دارد؟",
+    opts: {
+      a: "زیرا غذا هیچ نقش اجتماعی ندارد",
+      b: "زیرا غذا نقش نمادین در انسجام خانواده، مناسک و هویت جمعی ایفا می‌کند",
+      c: "زیرا فقط ارزش اقتصادی دارد",
+      d: "زیرا فقط در جوامع فقیر اهمیت دارد"
+    },
+    correct: "b",
+    fb: "غذا در بسیاری فرهنگ‌ها، از جمله ایران، در سفره‌های آیینی و مناسبت‌ها نقش نمادین مهمی در تقویت پیوندهای خانوادگی و هویت جمعی ایفا می‌کند."
+  },
+  {
+    q: "همانندسازی بدن با الگوهای غربی را از منظر جامعه‌شناختی می‌توان در چه چارچوبی تحلیل کرد؟",
+    opts: {
+      a: "صرفاً یک انتخاب کاملاً فردی و بدون زمینه اجتماعی",
+      b: "نظریه‌های جهانی‌شدن فرهنگی و کالایی‌شدن بدن",
+      c: "نظریه کارکردگرایی پارسونز به‌تنهایی",
+      d: "نظریه‌های اقتصاد کشاورزی"
+    },
+    correct: "b",
+    fb: "این پدیده معمولاً در چارچوب نظریه‌های جهانی‌شدن فرهنگی (ورود استانداردهای زیبایی جهانی) و کالایی‌شدن بدن تحلیل می‌شود که نشان می‌دهد این پدیده ریشه‌ای اجتماعی-فرهنگی دارد نه صرفاً فردی."
+  }
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER QUIZ
+   ═══════════════════════════════════════════════════════════════ */
+let score = 0;
+const answered = new Set();
+const faDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+function toFa(n){ return String(n).split('').map(d=>faDigits[+d]||d).join(''); }
+
+const container = document.getElementById('quizContainer');
+
+questions.forEach((item, idx) => {
+  const card = document.createElement('div');
+  card.className = 'q-card';
+  card.dataset.index = idx;
+
+  let optHtml = '';
+  const letters = {a:'الف', b:'ب', c:'ج', d:'د'};
+  Object.keys(item.opts).forEach(key => {
+    optHtml += `
+      <label class="q-opt" data-key="${key}">
+        <input type="radio" name="q${idx}" value="${key}">
+        <span class="marker">${letters[key]}</span>
+        <span class="opt-text">${item.opts[key]}</span>
+      </label>`;
+  });
+
+  card.innerHTML = `
+    <div class="q-text">
+      <span class="q-num">${toFa(idx+1)}</span>
+      <span>${item.q}</span>
+    </div>
+    <div class="q-options">${optHtml}</div>
+    <div class="q-feedback" id="fb-${idx}"></div>
+  `;
+
+  card.querySelectorAll('.q-opt').forEach(opt => {
+    opt.addEventListener('click', () => handleAnswer(card, opt, item, idx));
+  });
+
+  container.appendChild(card);
+});
+
+function handleAnswer(card, opt, item, idx){
+  if(answered.has(idx)) return;
+  answered.add(idx);
+
+  const selected = opt.dataset.key;
+  const correct = item.correct;
+  const isCorrect = selected === correct;
+
+  // mark all options disabled
+  card.querySelectorAll('.q-opt').forEach(o => {
+    o.classList.add('disabled');
+    const k = o.dataset.key;
+    if(k === correct) o.classList.add('correct-ans');
+    if(k === selected && !isCorrect) o.classList.add('wrong-ans');
+    if(k === selected && isCorrect) o.classList.add('selected');
+  });
+
+  card.classList.add('answered');
+  card.classList.add(isCorrect ? 'correct' : 'wrong');
+
+  const fb = card.querySelector('.q-feedback');
+  const letters = {a:'الف', b:'ب', c:'ج', d:'د'};
+  if(isCorrect){
+    score++;
+    fb.className = 'q-feedback ok show';
+    fb.innerHTML = `<span class="fb-title">✔ پاسخ صحیح — ${letters[correct]}</span>${item.fb}`;
+  } else {
+    fb.className = 'q-feedback no show';
+    fb.innerHTML = `<span class="fb-title">✘ پاسخ نادرست — پاسخ درست: ${letters[correct]}</span>${item.fb}`;
+  }
+
+  document.getElementById('scoreDisplay').textContent = toFa(score);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INIT — open first lesson
+   ═══════════════════════════════════════════════════════════════ */
+window.addEventListener('load', () => {
+  const first = document.querySelector('.lesson');
+  if(first){
+    first.classList.add('open');
+    const body = first.querySelector('.lesson-body');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  }
+});
+
+/* recalc max-height on resize for open lesson */
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.lesson.open .lesson-body').forEach(b => {
+    b.style.maxHeight = b.scrollHeight + 'px';
+  });
+});
+</script>
+
+</body>
+</html>
