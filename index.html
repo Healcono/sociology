@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>جامعه‌شناسی سلامت | پلتفرم آموزشی</title>
+<title>جامعه‌شناسی سلامت | دانشگاه تربیت مدرس</title>
+<meta name="description" content="پلتفرم آموزشی جامع جامعه‌شناسی سلامت شامل ۱۷ جلسه آموزشی و آزمون ارزیابی ۴۰ سوالی | مدرس: دکتر فاطمه زارعی، دانشگاه تربیت مدرس">
+<meta property="og:title" content="جامعه‌شناسی سلامت | دانشگاه تربیت مدرس">
+<meta property="og:description" content="پلتفرم آموزشی جامع جامعه‌شناسی سلامت شامل ۱۷ جلسه آموزشی و آزمون ارزیابی ۴۰ سوالی | مدرس: دکتر فاطمه زارعی، دانشگاه تربیت مدرس">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -45,6 +48,15 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+html, body{
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+::-webkit-scrollbar{
+  display:none;
+  width:0;
+  height:0;
+}
 body{
   font-family:var(--font);
   background:var(--navy);
@@ -85,14 +97,6 @@ body{
   position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23c9a227' stroke-width='.7' opacity='.14'%3E%3Cpath d='M120 12 L128 40 L156 48 L128 56 L120 84 L112 56 L84 48 L112 40 Z'/%3E%3Cpath d='M120 156 L128 184 L156 192 L128 200 L120 228 L112 200 L84 192 L112 184 Z'/%3E%3Cpath d='M12 120 L40 128 L48 156 L56 128 L84 120 L56 112 L48 84 L40 112 Z'/%3E%3Cpath d='M156 120 L184 128 L192 156 L200 128 L228 120 L200 112 L192 84 L184 112 Z'/%3E%3Ccircle cx='120' cy='120' r='26'/%3E%3Ccircle cx='120' cy='120' r='38' stroke-dasharray='4 7'/%3E%3Cpath d='M120 82 C132 96 132 108 120 120 C108 108 108 96 120 82 Z'/%3E%3Cpath d='M120 158 C132 144 132 132 120 120 C108 132 108 144 120 158 Z'/%3E%3Cpath d='M82 120 C96 108 108 108 120 120 C108 132 96 132 82 120 Z'/%3E%3Cpath d='M158 120 C144 108 132 108 120 120 C132 132 144 132 158 120 Z'/%3E%3C/g%3E%3C/svg%3E");
   background-size:240px 240px;
-}
-
-/* ═══════════ SCROLL PROGRESS ═══════════ */
-#scroll-bar{
-  position:fixed;top:0;right:0;height:3px;width:0%;z-index:999;
-  background:linear-gradient(90deg,var(--crimson),var(--gold),var(--turquoise));
-  box-shadow:0 0 12px rgba(201,162,39,.6);
-  transition:width .12s linear;
 }
 
 /* ═══════════ HEADER ═══════════ */
@@ -618,10 +622,70 @@ footer .f-ornament{
 footer p{font-size:.78rem;color:rgba(246,239,221,.4);line-height:2}
 footer p b{color:var(--gold-2);font-weight:600}
 
+/* ═══════════ PRINT CONTROLS (SCREEN) ═══════════ */
+.btn-print-lesson{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(52,211,153,.12);
+  border:1px solid rgba(52,211,153,.35);
+  color:var(--emerald-accent);
+  font-family:var(--font);
+  font-size:.76rem;font-weight:600;
+  padding:5px 12px;border-radius:100px;
+  cursor:pointer;
+  transition:.25s;
+  flex-shrink:0;
+  margin-right:auto;
+  white-space:nowrap;
+}
+.btn-print-lesson:hover{
+  background:rgba(52,211,153,.26);
+  border-color:var(--emerald-accent);
+  color:#fff;
+  transform:scale(1.04);
+}
+.lesson-print-banner{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(13,40,35,.35));
+  border:1px solid rgba(52,211,153,.28);
+  border-radius:12px;
+  padding:10px 16px;
+  margin-bottom:22px;
+  font-size:.82rem;
+  flex-wrap:wrap;
+}
+.lpb-text{
+  color:rgba(244,249,246,.8);
+  display:flex;align-items:center;gap:8px;
+}
+.lpb-text svg{color:var(--emerald-accent);flex-shrink:0}
+.btn-print-action{
+  display:inline-flex;align-items:center;gap:7px;
+  background:linear-gradient(135deg,var(--emerald-accent),var(--turquoise-2));
+  color:#061814;
+  border:none;outline:none;
+  font-family:var(--font);
+  font-size:.82rem;font-weight:700;
+  padding:7px 16px;border-radius:100px;
+  cursor:pointer;
+  transition:.25s;
+  white-space:nowrap;
+  box-shadow:0 4px 14px rgba(16,185,129,.3);
+}
+.btn-print-action:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(16,185,129,.5);
+  background:linear-gradient(135deg,#5eead4,var(--emerald-accent));
+}
+
+.print-only-header, .print-only-footer{
+  display:none;
+}
+
 /* ═══════════ RESPONSIVE ═══════════ */
 @media(max-width:640px){
   header{padding:56px 18px 40px}
-  .lesson-head{padding:18px 18px 18px 16px;gap:14px}
+  .lesson-head{padding:18px 18px 18px 16px;gap:14px;flex-wrap:wrap}
+  .btn-print-lesson{order:3;margin-right:0}
   .lesson-num{width:44px;height:44px;border-radius:13px;font-size:.9rem}
   .lesson-titles h3{font-size:.92rem}
   .lesson-inner{padding:0 18px 24px 16px;padding-top:20px}
@@ -630,13 +694,229 @@ footer p b{color:var(--gold-2);font-weight:600}
   nav{padding:10px 12px;gap:4px}
   nav a{font-size:.72rem;padding:6px 11px}
 }
+
+/* ═══════════ PRINTER-FRIENDLY STYLES (@media print) ═══════════ */
+@media print{
+  @page {
+    size: A4 portrait;
+    margin: 16mm 14mm 18mm 14mm;
+  }
+
+  /* Hide web-only / interactive components */
+  nav, header, footer, #quiz, .search-wrapper, .section-head,
+  .bg-layer, .persian-pattern, #scroll-bar,
+  .btn-pdf, .btn-print-lesson, .lesson-print-banner, .lesson-toggle, .header-actions {
+    display: none !important;
+  }
+
+  /* When printing single active lesson, hide other lessons */
+  body.printing-active .lesson:not(.print-target) {
+    display: none !important;
+  }
+
+  /* Page base reset for clean ink printing */
+  html, body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-size: 11pt !important;
+    line-height: 1.85 !important;
+    font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: static !important;
+  }
+
+  /* Printable Academic Header */
+  .print-only-header {
+    display: block !important;
+    border-bottom: 2px solid #059669 !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 22px !important;
+  }
+  .print-only-header * {
+    color: #111827 !important;
+  }
+
+  /* Lesson card reset */
+  .lessons {
+    gap: 0 !important;
+  }
+  .lesson {
+    display: block !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+    margin-bottom: 20px !important;
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+  .lesson::before {
+    display: none !important;
+  }
+
+  .lesson-head {
+    display: block !important;
+    width: 100% !important;
+    border: none !important;
+    background: none !important;
+    padding: 0 0 12px 0 !important;
+    border-bottom: 1.5px solid #d1d5db !important;
+    margin-bottom: 18px !important;
+    cursor: default !important;
+  }
+
+  .lesson-num {
+    display: inline-block !important;
+    width: auto !important;
+    height: auto !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 14pt !important;
+    font-weight: 800 !important;
+    color: #047857 !important;
+    margin-left: 8px !important;
+    padding: 0 !important;
+  }
+
+  .lesson-titles {
+    display: inline-block !important;
+  }
+  .lesson-titles h3 {
+    font-size: 15pt !important;
+    font-weight: 800 !important;
+    color: #111827 !important;
+    margin: 0 0 4px 0 !important;
+  }
+  .lesson-meta {
+    font-size: 9.5pt !important;
+    color: #4b5563 !important;
+  }
+
+  .lesson-body {
+    max-height: none !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  .lesson-inner {
+    padding: 0 !important;
+    border: none !important;
+    color: #1f2937 !important;
+  }
+
+  .lesson-inner h4 {
+    font-size: 12.5pt !important;
+    font-weight: 700 !important;
+    color: #064e3b !important;
+    margin: 18px 0 8px 0 !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .lesson-inner p {
+    color: #1f2937 !important;
+    font-size: 10.8pt !important;
+    line-height: 1.85 !important;
+    margin-bottom: 12px !important;
+    text-align: justify !important;
+    orphans: 3;
+    widows: 3;
+  }
+
+  .lesson-inner ul, .lesson-inner ol {
+    color: #1f2937 !important;
+    margin: 10px 24px 14px 0 !important;
+    padding-right: 18px !important;
+  }
+
+  .lesson-inner li {
+    margin-bottom: 6px !important;
+    line-height: 1.75 !important;
+    color: #1f2937 !important;
+  }
+
+  /* Educational Objectives box in print */
+  .objectives {
+    background: #f0fdf4 !important;
+    border: 1px solid #bbf7d0 !important;
+    border-right: 4px solid #10b981 !important;
+    border-radius: 6px !important;
+    padding: 12px 16px !important;
+    margin: 14px 0 20px 0 !important;
+    color: #14532d !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .obj-title {
+    color: #166534 !important;
+    font-weight: 700 !important;
+    font-size: 11pt !important;
+    margin-bottom: 6px !important;
+  }
+  .objectives li {
+    color: #15803d !important;
+  }
+
+  /* Case study and callout boxes in print */
+  .callout {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    border-right: 4px solid #059669 !important;
+    border-radius: 6px !important;
+    padding: 12px 16px !important;
+    margin: 16px 0 !important;
+    color: #1e293b !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .callout.gold {
+    background: #fefce8 !important;
+    border: 1px solid #fde047 !important;
+    border-right: 4px solid #ca8a04 !important;
+    color: #713f12 !important;
+  }
+  .callout-title {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    display: block !important;
+    margin-bottom: 5px !important;
+  }
+
+  /* Printable Academic Footer */
+  .print-only-footer {
+    display: block !important;
+    border-top: 1px solid #d1d5db !important;
+    margin-top: 28px !important;
+    padding-top: 8px !important;
+    font-size: 8.5pt !important;
+    color: #6b7280 !important;
+    text-align: center !important;
+    page-break-before: avoid;
+  }
+}
 </style>
 </head>
 <body>
 
 <div class="bg-layer"></div>
 <div class="persian-pattern"></div>
-<div id="scroll-bar"></div>
 
 <!-- ═══════════ HEADER ═══════════ -->
 <header>
@@ -682,7 +962,6 @@ footer p b{color:var(--gold-2);font-weight:600}
   <div class="meta-pills">
     <span class="pill">۱۷ جلسه آموزشی</span>
     <span class="pill tq">۴۰ سوال تستی با بازخورد</span>
-    <span class="pill">رویکرد دانشگاهی و تحلیلی</span>
   </div>
 
   <!-- Instructor Info Card -->
@@ -727,10 +1006,27 @@ footer p b{color:var(--gold-2);font-weight:600}
   <a href="#lessons">مفهوم سلامت اجتماعی</a>
   <a href="#lessons">نظریه‌ها</a>
   <a href="#lessons">نظام سلامت</a>
+  <a href="javascript:void(0)" onclick="printCurrentLessonGlobal()" class="tq" title="چاپ جلسه باز شده در قالب استاندارد کاغذ" style="border-color:rgba(52,211,153,.45);color:var(--emerald-accent);">چاپ جلسه 🖨️</a>
   <a href="https://abrehamrahi.ir/o/public/wZqZiVo5/" target="_blank" rel="noopener noreferrer" style="color:var(--gold-2);border-color:rgba(212,175,55,.3);">دانلود PDF 📥</a>
 </nav>
 
 <main>
+
+<!-- PRINT-ONLY HEADER FOR PAPER EXPORT -->
+<div class="print-only-header">
+  <div style="display:flex;justify-content:space-between;align-items:center;direction:rtl;">
+    <div>
+      <div style="font-size:15pt;font-weight:800;color:#064e3b;">دانشگاه تربیت مدرس — دانشکده علوم پزشکی</div>
+      <div style="font-size:12pt;font-weight:700;color:#111827;margin-top:4px;">دوره آموزشی جامعه‌شناسی سلامت (کارشناسی ارشد آموزش بهداشت)</div>
+      <div style="font-size:9.5pt;color:#374151;margin-top:2px;">مدرس: دکتر فاطمه زارعی &bull; f.zarei@modares.ac.ir</div>
+    </div>
+    <div style="text-align:left;font-size:8.5pt;color:#4b5563;direction:ltr;line-height:1.4;">
+      <strong>Tarbiat Modares University</strong><br>
+      Faculty of Medical Sciences<br>
+      Health Education Dept.
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════ SEARCH SECTION ═══════════ -->
 <div class="search-wrapper">
@@ -1461,6 +1757,11 @@ footer p b{color:var(--gold-2);font-weight:600}
   <div class="quiz-list" id="quizContainer"></div>
 </section>
 
+<!-- PRINT-ONLY FOOTER FOR PAPER EXPORT -->
+<div class="print-only-footer">
+  پلتفرم جامعه‌شناسی سلامت &bull; دانشگاه تربیت مدرس (دانشکده علوم پزشکی) &bull; مدرس: دکتر فاطمه زارعی &bull; @healthcono
+</div>
+
 </main>
 
 <footer>
@@ -1504,13 +1805,108 @@ function toggleLesson(btn){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SCROLL PROGRESS + NAV
+   PRINTER-FRIENDLY PRINT ENGINE (window.print())
    ═══════════════════════════════════════════════════════════════ */
-window.addEventListener('scroll',()=>{
-  const h = document.documentElement;
-  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-  document.getElementById('scroll-bar').style.width = scrolled + '%';
-});
+function printLesson(event, el){
+  if(event){
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  const lesson = el.closest('.lesson');
+  if(!lesson) return;
+
+  // Ensure target lesson is open
+  lesson.classList.add('open');
+  const body = lesson.querySelector('.lesson-body');
+  const toggle = lesson.querySelector('.lesson-toggle');
+  if(toggle) toggle.textContent = '−';
+  const prevMaxHeight = body ? body.style.maxHeight : '';
+  if(body) body.style.maxHeight = 'none';
+
+  // Mark print target and active printing state on body
+  document.querySelectorAll('.lesson').forEach(l => l.classList.remove('print-target'));
+  lesson.classList.add('print-target');
+  document.body.classList.add('printing-active');
+
+  // Trigger browser print dialog
+  window.print();
+
+  // Reset state after printing finishes
+  const cleanup = () => {
+    document.body.classList.remove('printing-active');
+    lesson.classList.remove('print-target');
+    if(body){
+      body.style.maxHeight = prevMaxHeight || (body.scrollHeight + 'px');
+    }
+    window.removeEventListener('afterprint', cleanup);
+  };
+  window.addEventListener('afterprint', cleanup);
+  setTimeout(cleanup, 2500);
+}
+
+function printCurrentLessonGlobal(){
+  const openLesson = document.querySelector('.lesson.open');
+  if(openLesson){
+    printLesson(null, openLesson);
+    return;
+  }
+  // Otherwise open first lesson and print it
+  const firstLesson = document.querySelector('.lesson');
+  if(firstLesson){
+    firstLesson.classList.add('open');
+    const body = firstLesson.querySelector('.lesson-body');
+    if(body) body.style.maxHeight = body.scrollHeight + 'px';
+    firstLesson.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    printLesson(null, firstLesson);
+  }
+}
+
+function initLessonPrintButtons(){
+  document.querySelectorAll('.lesson').forEach((lesson) => {
+    const head = lesson.querySelector('.lesson-head');
+    const toggle = lesson.querySelector('.lesson-toggle');
+    if(head && toggle && !head.querySelector('.btn-print-lesson')){
+      const pBtn = document.createElement('button');
+      pBtn.type = 'button';
+      pBtn.className = 'btn-print-lesson';
+      pBtn.title = 'چاپ این جلسه';
+      pBtn.setAttribute('aria-label', 'چاپ جلسه');
+      pBtn.innerHTML = `
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        <span>چاپ جلسه</span>
+      `;
+      pBtn.onclick = function(e){
+        printLesson(e, this);
+      };
+      head.insertBefore(pBtn, toggle);
+    }
+
+    const inner = lesson.querySelector('.lesson-inner');
+    if(inner && !inner.querySelector('.lesson-print-banner')){
+      const banner = document.createElement('div');
+      banner.className = 'lesson-print-banner';
+      banner.innerHTML = `
+        <span class="lpb-text">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          قالب استاندارد دانشگاهی بهینه شده برای پرینت و مطالعه روی کاغذ (مصرف بهینه جوهر)
+        </span>
+        <button type="button" class="btn-print-action" onclick="printLesson(event, this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span>چاپ این جلسه (نسخه کاغذی)</span>
+        </button>
+      `;
+      inner.insertBefore(banner, inner.firstChild);
+    }
+  });
+}
 
 /* ═══════════════════════════════════════════════════════════════
    QUIZ DATA — 40 questions
@@ -3456,6 +3852,13 @@ function clearSearch(){
     handleSearch('');
     input.focus();
   }
+}
+
+// Initialize print buttons across all 17 lessons
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initLessonPrintButtons);
+} else {
+  initLessonPrintButtons();
 }
 </script>
 
