@@ -1,0 +1,6 @@
+{
+  "name": "جامعه‌شناسی سلامت",
+  "description": "پلتفرم آموزشی جامع جامعه‌شناسی سلامت با ۱۷ جلسه درسی و آزمون ارزیابی ۴۰ سوالی",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
