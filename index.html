@@ -9,32 +9,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════════
-   PALETTE — Deep Persian Navy · Crimson · Turquoise · Gold · Ivory
+   PALETTE — Academic Deep Emerald & Sage Green · Gold · Ivory
    ═══════════════════════════════════════════════════════════════ */
 :root{
-  --navy:#0b1425;
-  --navy-2:#111f38;
-  --navy-3:#1a2b4a;
+  --navy:#071b18;
+  --navy-2:#0d2823;
+  --navy-3:#143831;
   --crimson:#a81f34;
   --crimson-2:#7d1526;
   --crimson-soft:rgba(168,31,52,.18);
-  --turquoise:#2eb8b0;
-  --turquoise-2:#1d8a84;
-  --turquoise-soft:rgba(46,184,176,.15);
-  --ivory:#f6efdd;
-  --ivory-2:#efe6cf;
-  --gold:#c9a227;
-  --gold-2:#e3c25a;
-  --gold-soft:rgba(201,162,39,.16);
-  --plaster:#e8dfc8;
-  --plaster-dark:#cfc4a8;
+  --turquoise:#10b981;
+  --turquoise-2:#059669;
+  --turquoise-soft:rgba(16,185,129,.16);
+  --emerald-accent:#34d399;
+  --ivory:#f4f9f6;
+  --ivory-2:#e6f0eb;
+  --gold:#d4af37;
+  --gold-2:#f3d267;
+  --gold-soft:rgba(212,175,55,.16);
+  --plaster:#d8e5df;
+  --plaster-dark:#b3c7be;
 
-  --glass-bg:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
-  --glass-brd:1px solid rgba(201,162,39,.28);
-  --glass-brd-2:1px solid rgba(46,184,176,.22);
+  --glass-bg:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.02));
+  --glass-brd:1px solid rgba(52,211,153,.22);
+  --glass-brd-2:1px solid rgba(212,175,55,.24);
 
   --shadow-deep:0 24px 60px -20px rgba(0,0,0,.75);
-  --shadow-gold:0 0 0 1px rgba(201,162,39,.18),0 18px 50px -22px rgba(201,162,39,.35);
+  --shadow-gold:0 0 0 1px rgba(52,211,153,.2),0 18px 50px -22px rgba(16,185,129,.3);
 
   --radius:22px;
   --radius-sm:14px;
@@ -442,6 +443,130 @@ main{position:relative;z-index:5;max-width:1080px;margin:0 auto;padding:0 20px 1
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
+/* ═══════════ INSTRUCTOR CARD & ACTIONS ═══════════ */
+.instructor-card{
+  max-width:760px;margin:24px auto 0;
+  padding:20px 26px;border-radius:18px;
+  background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(13,40,35,.45));
+  border:1px solid rgba(52,211,153,.3);
+  backdrop-filter:blur(20px);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  flex-wrap:wrap;
+  box-shadow:0 12px 36px -12px rgba(0,0,0,.5);
+  transition:border-color .3s, transform .3s;
+}
+.instructor-card:hover{
+  border-color:rgba(52,211,153,.5);
+  transform:translateY(-2px);
+}
+.inst-right{display:flex;align-items:center;gap:16px;text-align:right}
+.inst-avatar{
+  width:54px;height:54px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(52,211,153,.25),rgba(212,175,55,.2));
+  border:1.5px solid rgba(52,211,153,.5);
+  display:grid;place-items:center;flex-shrink:0;
+  color:var(--emerald-accent);
+}
+.inst-name{font-size:1.02rem;font-weight:700;color:var(--ivory);margin-bottom:3px}
+.inst-dept{font-size:.82rem;color:rgba(244,249,246,.75);line-height:1.6}
+.inst-dept b{color:var(--emerald-accent);font-weight:600}
+.inst-left{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.inst-email{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--emerald-accent);text-decoration:none;
+  font-size:.84rem;font-weight:500;
+  padding:6px 14px;border-radius:100px;
+  background:rgba(16,185,129,.12);border:1px solid rgba(52,211,153,.3);
+  transition:.25s;direction:ltr;
+}
+.inst-email:hover{
+  background:rgba(16,185,129,.24);
+  border-color:var(--emerald-accent);
+  color:#fff;
+  transform:scale(1.02);
+}
+.btn-pdf{
+  display:inline-flex;align-items:center;gap:9px;
+  background:linear-gradient(135deg,var(--gold),#c29924);
+  color:#061411;font-weight:700;font-size:.86rem;
+  padding:10px 22px;border-radius:100px;
+  text-decoration:none;
+  box-shadow:0 8px 24px -6px rgba(212,175,55,.5);
+  transition:transform .25s, box-shadow .25s;
+}
+.btn-pdf:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px -6px rgba(212,175,55,.7);
+  background:linear-gradient(135deg,var(--gold-2),var(--gold));
+}
+.header-actions{
+  display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:22px;
+}
+
+/* ═══════════ SEARCH COMPONENT ═══════════ */
+.search-wrapper{
+  max-width:720px;margin:10px auto 36px;
+  position:relative;z-index:10;
+}
+.search-box{
+  position:relative;display:flex;align-items:center;
+  background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.03));
+  border:1px solid rgba(52,211,153,.3);
+  border-radius:100px;padding:6px 12px 6px 20px;
+  backdrop-filter:blur(24px);
+  box-shadow:0 12px 36px -12px rgba(0,0,0,.6), 0 0 0 1px rgba(52,211,153,.15);
+  transition:border-color .3s, box-shadow .3s;
+}
+.search-box:focus-within{
+  border-color:var(--emerald-accent);
+  box-shadow:0 16px 40px -10px rgba(0,0,0,.7), 0 0 24px rgba(52,211,153,.35);
+}
+.search-icon{
+  color:var(--emerald-accent);margin-left:12px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.search-input{
+  flex:1;background:none;border:none;outline:none;
+  font-family:var(--font);font-size:.96rem;
+  color:var(--ivory);padding:10px 0;
+  direction:rtl;
+}
+.search-input::placeholder{color:rgba(244,249,246,.45)}
+.search-clear{
+  background:none;border:none;cursor:pointer;
+  color:rgba(244,249,246,.5);padding:6px 10px;
+  font-size:1.1rem;display:none;align-items:center;
+  transition:color .2s;
+}
+.search-clear:hover{color:var(--gold-2)}
+.search-badge{
+  font-size:.76rem;font-weight:600;
+  padding:5px 14px;border-radius:100px;
+  background:rgba(16,185,129,.18);color:var(--emerald-accent);
+  border:1px solid rgba(52,211,153,.35);
+  white-space:nowrap;
+}
+.search-status{
+  text-align:center;font-size:.82rem;
+  color:rgba(244,249,246,.75);margin-top:10px;
+  display:none;
+}
+.search-status b{color:var(--emerald-accent)}
+
+mark.search-hl{
+  background:rgba(212,175,55,.45);
+  color:#fff;
+  border-radius:4px;
+  padding:0 3px;
+  box-shadow:0 0 8px rgba(212,175,55,.5);
+}
+.lesson.search-hidden{display:none!important}
+.lesson.search-match{
+  border-color:var(--emerald-accent)!important;
+  box-shadow:0 0 24px rgba(16,185,129,.35)!important;
+}
+
 /* ═══════════ FOOTER ═══════════ */
 footer{
   position:relative;z-index:5;
@@ -502,13 +627,47 @@ footer p b{color:var(--gold-2);font-weight:600}
   </div>
   <div class="ornament-line"></div>
   <h1>جامعه‌شناسی سلامت</h1>
-  <p class="subtitle">جزوه درسی ویژه دانشجویان <b>آموزش بهداشت</b> — مقطع کارشناسی ارشد</p>
+  <p class="subtitle">ویژه دانشجویان <b>آموزش بهداشت</b> — مقطع کارشناسی ارشد</p>
   <p class="subtitle">دوره آموزشی <b>۱۷ جلسه‌ای</b> شامل اهداف آموزشی، متن علمی-کاربردی، مثال‌های واقعی و آزمون خودارزیابی</p>
+  
   <div class="meta-pills">
-    <span class="pill">۱۷ جلسه</span>
-    <span class="pill tq">۴۰ سوال تستی</span>
-    <span class="pill cr">بازخورد فوری</span>
-    <span class="pill">طراحی ایرانی</span>
+    <span class="pill">۱۷ جلسه آموزشی</span>
+    <span class="pill tq">۴۰ سوال تستی با بازخورد</span>
+    <span class="pill">رویکرد دانشگاهی و تحلیلی</span>
+  </div>
+
+  <!-- Instructor Info Card -->
+  <div class="instructor-card">
+    <div class="inst-right">
+      <div class="inst-avatar">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <div>
+        <div class="inst-name">مدرس: دکتر فاطمه زارعی</div>
+        <div class="inst-dept">دانشکده علوم پزشکی، <b>دانشگاه تربیت مدرس</b></div>
+      </div>
+    </div>
+    <div class="inst-left">
+      <a href="mailto:f.zarei@modares.ac.ir" class="inst-email">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <span>f.zarei@modares.ac.ir</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Action buttons including PDF download -->
+  <div class="header-actions">
+    <a href="https://abrehamrahi.ir/o/public/wZqZiVo5/" target="_blank" rel="noopener noreferrer" class="btn-pdf" title="دانلود نسخه کامل PDF">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      <span>دانلود فایل PDF</span>
+    </a>
   </div>
 </header>
 
@@ -519,9 +678,26 @@ footer p b{color:var(--gold-2);font-weight:600}
   <a href="#lessons">مفهوم سلامت اجتماعی</a>
   <a href="#lessons">نظریه‌ها</a>
   <a href="#lessons">نظام سلامت</a>
+  <a href="https://abrehamrahi.ir/o/public/wZqZiVo5/" target="_blank" rel="noopener noreferrer" style="color:var(--gold-2);border-color:rgba(212,175,55,.3);">دانلود PDF 📥</a>
 </nav>
 
 <main>
+
+<!-- ═══════════ SEARCH SECTION ═══════════ -->
+<div class="search-wrapper">
+  <div class="search-box">
+    <div class="search-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </div>
+    <input type="text" id="lessonSearchInput" class="search-input" placeholder="جستجوی واژه در متن و عناوین ۱۷ جلسه (مثال: کییز، SDH، نابرابری، تالکوت پارسونز، فوکو...)" oninput="handleSearch(this.value)">
+    <button type="button" id="searchClearBtn" class="search-clear" onclick="clearSearch()" title="پاک کردن جستجو">✕</button>
+    <div class="search-badge" id="searchBadge">۱۷ جلسه</div>
+  </div>
+  <div class="search-status" id="searchStatus"></div>
+</div>
 
 <!-- ═══════════ LESSONS ═══════════ -->
 <section id="lessons">
@@ -1240,8 +1416,13 @@ footer p b{color:var(--gold-2);font-weight:600}
 
 <footer>
   <div class="f-ornament"></div>
-  <p>جزوه درسی <b>جامعه‌شناسی سلامت</b> — ویژه دانشجویان آموزش بهداشت مقطع کارشناسی ارشد</p>
-  <p>دوره آموزشی ۱۷ جلسه‌ای | طراحی با الهام از هنر و معماری ایرانی</p>
+  <p><b>جامعه‌شناسی سلامت</b> — ویژه دانشجویان آموزش بهداشت مقطع کارشناسی ارشد</p>
+  <p>مدرس: دکتر فاطمه زارعی | دانشکده علوم پزشکی، دانشگاه تربیت مدرس | <a href="mailto:f.zarei@modares.ac.ir" style="color:var(--emerald-accent);text-decoration:none;">f.zarei@modares.ac.ir</a></p>
+  <p style="margin-top:8px;font-size:0.8rem;color:rgba(244,249,246,0.65);">
+    <span style="color:var(--emerald-accent);font-weight:600;">@healthcono</span> &bull; 
+    تماس با ما: <a href="mailto:healcono@gmail.com" style="color:var(--gold-2);text-decoration:none;">healcono@gmail.com</a> &bull; 
+    <a href="https://abrehamrahi.ir/o/public/wZqZiVo5/" target="_blank" rel="noopener noreferrer" style="color:var(--emerald-accent);text-decoration:none;margin-right:6px;">دریافت فایل PDF 📥</a>
+  </p>
 </footer>
 
 <script>
@@ -3131,6 +3312,102 @@ window.addEventListener('resize', () => {
     b.style.maxHeight = b.scrollHeight + 'px';
   });
 });
+
+/* ═══════════════════════════════════════════════════════════════
+   SEARCH SYSTEM — Lessons & Keywords
+   ═══════════════════════════════════════════════════════════════ */
+let originalLessonContents = new Map();
+
+function getLessonOriginalHTML(lesson){
+  if(!originalLessonContents.has(lesson)){
+    const inner = lesson.querySelector('.lesson-inner');
+    originalLessonContents.set(lesson, inner ? inner.innerHTML : '');
+  }
+  return originalLessonContents.get(lesson);
+}
+
+function handleSearch(query){
+  const cleanQ = (query || '').trim();
+  const lessons = document.querySelectorAll('.lesson');
+  const clearBtn = document.getElementById('searchClearBtn');
+  const badge = document.getElementById('searchBadge');
+  const status = document.getElementById('searchStatus');
+
+  if(cleanQ.length > 0){
+    clearBtn.style.display = 'inline-flex';
+  } else {
+    clearBtn.style.display = 'none';
+  }
+
+  if(!cleanQ){
+    // Reset all
+    lessons.forEach(l => {
+      l.classList.remove('search-hidden', 'search-match');
+      const inner = l.querySelector('.lesson-inner');
+      if(inner && originalLessonContents.has(l)){
+        inner.innerHTML = originalLessonContents.get(l);
+      }
+    });
+    badge.textContent = '۱۷ جلسه';
+    status.style.display = 'none';
+    return;
+  }
+
+  let matchCount = 0;
+  const regex = new RegExp(`(${cleanQ.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+
+  lessons.forEach((l, idx) => {
+    const head = l.querySelector('.lesson-titles');
+    const inner = l.querySelector('.lesson-inner');
+    const originalText = (head ? head.innerText : '') + ' ' + (inner ? inner.innerText : '');
+    const isMatch = originalText.toLowerCase().includes(cleanQ.toLowerCase());
+
+    if(isMatch){
+      matchCount++;
+      l.classList.remove('search-hidden');
+      l.classList.add('search-match');
+
+      // Expand matching lesson
+      l.classList.add('open');
+      const body = l.querySelector('.lesson-body');
+      
+      // Highlight in inner content safely
+      if(inner){
+        const baseHTML = getLessonOriginalHTML(l);
+        // Highlight matches in text nodes while preserving tags
+        inner.innerHTML = baseHTML.replace(regex, '<mark class="search-hl">$1</mark>');
+        setTimeout(() => {
+          body.style.maxHeight = body.scrollHeight + 50 + 'px';
+        }, 10);
+      }
+    } else {
+      l.classList.add('search-hidden');
+      l.classList.remove('search-match', 'open');
+      const body = l.querySelector('.lesson-body');
+      if(body) body.style.maxHeight = null;
+      if(inner && originalLessonContents.has(l)){
+        inner.innerHTML = originalLessonContents.get(l);
+      }
+    }
+  });
+
+  badge.textContent = matchCount > 0 ? `${toFa(matchCount)} جلسه منطبق` : 'بدون نتیجه';
+  status.style.display = 'block';
+  if(matchCount > 0){
+    status.innerHTML = `تعداد <b>${toFa(matchCount)}</b> جلسه آموزشی حاوی عبارت «<b>${cleanQ}</b>» یافت شد.`;
+  } else {
+    status.innerHTML = `موردی با عبارت «<b>${cleanQ}</b>» در محتوای دروس یافت نشد. عبارت دیگری را جستجو کنید.`;
+  }
+}
+
+function clearSearch(){
+  const input = document.getElementById('lessonSearchInput');
+  if(input){
+    input.value = '';
+    handleSearch('');
+    input.focus();
+  }
+}
 </script>
 
 </body>
